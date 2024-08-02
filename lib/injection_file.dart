@@ -1,17 +1,19 @@
 
-import 'package:dio/dio.dart';
-import 'package:get_it/get_it.dart';
+// import 'package:dio/dio.dart';
+// import 'package:get_it/get_it.dart';
 
-final sl = GetIt.instance;
+// import 'features/Auth/data/datasource/remote/register_service.dart';
 
-Future<void> initializeDependencies() async {
+// final sl = GetIt.instance;
+
+// Future<void> initializeDependencies() async {
 
 
   
-  sl.registerSingleton<Dio>(Dio());
+//   sl.registerSingleton<Dio>(Dio());
 
-
-//   sl.registerSingleton<NewsApiService>(NewsApiService(sl()));
+//   // Dependencies
+//   sl.registerSingleton<AuthServiceImp>(AuthServiceImp(sl()));
 
 //   sl.registerSingleton<ArticleRepository>(
 //     ArticleRepositoryImpl(sl(),sl())
@@ -39,10 +41,4 @@ Future<void> initializeDependencies() async {
 //   sl.registerFactory<RemoteArticlesBloc>(
 //     ()=> RemoteArticlesBloc(sl())
 //   );
-
-//   sl.registerFactory<LocalArticleBloc>(
-//     ()=> LocalArticleBloc(sl(),sl(),sl())
-//   );
-
-
- }
+// }

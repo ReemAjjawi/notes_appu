@@ -1,15 +1,14 @@
 class AppUrl {
-  static const String baseUrl = "https://newsapi.org/v2";
-  static const String endPoint = "top-headlines";
+   static const String baseUrl = "https://rideshare.devscape.online/api/v1";
+  static const String signUp = "auth/register";
 }
 
-
-// class AppUrl {
-//   static const String baseUrl = "https://rideshare.devscape.online/api/v1/";
-
-
-
-
-
-//   static const String endPoint = "top-headlines";
+// {
+//   "firstName": "string",
+//   "lastName": "string",
+//   "phone": "stringstri",
+//   "username": "string",
+//   "birthDate": "2024-08-02",
+//   "password": "string",
+//   "confirmPassword": "string"
 // }
