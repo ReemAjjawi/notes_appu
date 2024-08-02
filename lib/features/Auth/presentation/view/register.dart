@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:ride_application/core/helper/build_app_bar.dart';
 import 'package:ride_application/core/resources/managers/assets_manager.dart';
@@ -14,7 +15,9 @@ import '../../../../core/widgets/secondary_text_field.dart';
 
 class Sin_up extends StatelessWidget {
   Sin_up({super.key});
-
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController EMAILController = TextEditingController();
+  final TextEditingController NUMBERController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,12 +47,14 @@ class Sin_up extends StatelessWidget {
                 ),
               ),
               CustomTextFormField(
+                  controller: nameController,
                   hintText: StringsManager.NAME,
                   colorborder: ColorManager.subLineColor,
                   width: screenWidth * 0.92,
                   height: screenHeight / 14),
               SizedBox(height: screenHeight / 50),
               CustomTextFormField(
+                  controller: EMAILController,
                   hintText: StringsManager.EMAIL,
                   colorborder: ColorManager.subLineColor,
                   width: screenWidth * 0.92,
@@ -59,6 +64,7 @@ class Sin_up extends StatelessWidget {
                 width: screenWidth * 0.92,
                 height: screenHeight / 10,
                 child: IntlPhoneField(
+                  controller: NUMBERController,
                   decoration: InputDecoration(
                     hintText: StringsManager.YOURMOBILENUMBER,
                     hintStyle: const TextStyle(
@@ -144,7 +150,9 @@ class Sin_up extends StatelessWidget {
                     color: ColorManager.whiteColor,
                   ),
                   text: StringsManager.SIGNUP,
-                  onPressed: gt,
+                  onPressed: () {
+                    context.go('/WelcomeView/Sin_up/SetPasswordView');
+                  },
                   backgroundColor: ColorManager.primaryColor,
                   width: screenWidth * 0.88,
                   height: screenHeight / 13,
@@ -154,7 +162,6 @@ class Sin_up extends StatelessWidget {
                 style: TextStyle(
                   // fontWeight: FontWeight.w400,
                   fontSize: screenWidth * 0.04,
-                  height: 23 / 16,
                   color: ColorManager.subTitleColor,
                 ),
               ),

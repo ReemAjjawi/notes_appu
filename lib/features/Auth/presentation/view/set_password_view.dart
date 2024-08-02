@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ride_application/core/helper/build_app_bar.dart';
 import 'package:ride_application/core/resources/managers/colors_manager.dart';
 import 'package:ride_application/core/resources/managers/strings_manager.dart';
@@ -14,7 +15,8 @@ class SetPasswordView extends StatefulWidget {
 
 class _SetPasswordViewState extends State<SetPasswordView> {
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   bool obscureTextPassword = true;
   bool obscureTextConfirmPassword = true;
 
@@ -29,19 +31,19 @@ class _SetPasswordViewState extends State<SetPasswordView> {
             StringsManager.SETPASSWORD,
             style: TextStyle(
               color: ColorManager.headLineColor,
-              fontSize: screenHeight * 0.03, 
+              fontSize: screenHeight * 0.03,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: screenHeight * 0.01), 
+          SizedBox(height: screenHeight * 0.01),
           Text(
             StringsManager.SETYOURPASSWORD,
             style: TextStyle(
               color: ColorManager.subLineColor,
-              fontSize: screenHeight * 0.02, 
+              fontSize: screenHeight * 0.02,
             ),
           ),
-          SizedBox(height: screenHeight * 0.12), 
+          SizedBox(height: screenHeight * 0.12),
           Center(
             child: SizedBox(
               width: screenWidth * 0.92,
@@ -53,11 +55,13 @@ class _SetPasswordViewState extends State<SetPasswordView> {
                   hintText: StringsManager.ENTERYOURPASSWORD,
                   hintStyle: TextStyle(
                     color: ColorManager.hintTextColor,
-                    fontSize: screenHeight * 0.02,  
+                    fontSize: screenHeight * 0.02,
                   ),
                   suffixIcon: IconButton(
                     icon: Icon(
-                      obscureTextPassword ? Icons.visibility : Icons.visibility_off,
+                      obscureTextPassword
+                          ? Icons.visibility
+                          : Icons.visibility_off,
                       color: ColorManager.hintTextColor,
                     ),
                     onPressed: () {
@@ -78,12 +82,12 @@ class _SetPasswordViewState extends State<SetPasswordView> {
                 ),
                 style: TextStyle(
                   color: ColorManager.hintTextColor,
-                  fontSize: screenHeight * 0.02, 
+                  fontSize: screenHeight * 0.02,
                 ),
               ),
             ),
           ),
-          SizedBox(height: screenHeight * 0.02),  
+          SizedBox(height: screenHeight * 0.02),
           Center(
             child: SizedBox(
               width: screenWidth * 0.92,
@@ -95,16 +99,19 @@ class _SetPasswordViewState extends State<SetPasswordView> {
                   hintText: StringsManager.CONFIRMPASSWORD,
                   hintStyle: TextStyle(
                     color: ColorManager.hintTextColor,
-                    fontSize: screenHeight * 0.02, 
+                    fontSize: screenHeight * 0.02,
                   ),
                   suffixIcon: IconButton(
                     icon: Icon(
-                      obscureTextConfirmPassword ? Icons.visibility : Icons.visibility_off,
+                      obscureTextConfirmPassword
+                          ? Icons.visibility
+                          : Icons.visibility_off,
                       color: ColorManager.hintTextColor,
                     ),
                     onPressed: () {
                       setState(() {
-                        obscureTextConfirmPassword = !obscureTextConfirmPassword;
+                        obscureTextConfirmPassword =
+                            !obscureTextConfirmPassword;
                       });
                     },
                   ),
@@ -120,7 +127,7 @@ class _SetPasswordViewState extends State<SetPasswordView> {
                 ),
                 style: TextStyle(
                   color: ColorManager.hintTextColor,
-                  fontSize: screenHeight * 0.02, 
+                  fontSize: screenHeight * 0.02,
                 ),
               ),
             ),
@@ -140,13 +147,15 @@ class _SetPasswordViewState extends State<SetPasswordView> {
           Center(
             child: AppButton(
               text: StringsManager.REGISTER,
-              onPressed: gt,
+              onPressed: () {
+                context.go('/WelcomeView/Sin_up/SetPasswordView/Register');
+              },
               backgroundColor: ColorManager.primaryColor,
               width: screenWidth * 0.88,
               height: screenHeight / 16.5,
               textStyle: TextStyle(
                 color: ColorManager.whiteColor,
-                fontSize: screenHeight * 0.02, 
+                fontSize: screenHeight * 0.02,
               ),
               hasicon: false,
             ),
@@ -156,7 +165,5 @@ class _SetPasswordViewState extends State<SetPasswordView> {
     );
   }
 
-  void gt() {
-    
-  }
+  void gt() {}
 }

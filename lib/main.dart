@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:ride_application/core/resources/routes/config_router.dart';
 import 'package:ride_application/injection_file.dart';
 
 import 'features/Auth/presentation/view/news_view.dart';
@@ -7,9 +10,12 @@ import 'responsive/adaptive_layout.dart';
 import 'responsive/desktop_layout.dart';
 import 'responsive/mobile_layout.dart';
 
-void main()  {
- // WidgetsFlutterBinding.ensureInitialized();
- // await initializeDependencies();
+void main() async {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await initializeDependencies();
+  await Hive.initFlutter();
+  await Hive.openBox('projectBox');
+
   runApp(const MyApp());
 }
 
@@ -28,29 +34,8 @@ class MyApp extends StatelessWidget {
     orientation = MediaQuery.orientationOf(context);
     isPortrait = orientation == Orientation.portrait;
     isMobile = screenWidth < 600;
-    return MaterialApp(
-      home: Register(),
+    return MaterialApp.router(
+      routerConfig: router,
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

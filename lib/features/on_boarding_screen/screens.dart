@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -10,8 +8,8 @@ import 'on_borarding_view.dart';
 PageController onBoardingContoller = PageController();
 
 class HomePage extends StatelessWidget {
-   HomePage({super.key});
-TextStyle gg=TextStyle();
+  HomePage({super.key});
+  TextStyle gg = TextStyle();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,30 +20,25 @@ TextStyle gg=TextStyle();
         // },
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
-        children:  [
+        children: [
           OnBoardingView(
-            
-
-           image:AssetsManager.taxiStartImage,
- progress:AssetsManager.startImage,
-   headLine:StringsManager.ANYWHEREYOUARE,
- titleText:StringsManager.SELLHOUSES,
- index:0
-),
-
+              image: AssetsManager.taxiStartImage,
+              progress: AssetsManager.startImage,
+              headLine: StringsManager.ANYWHEREYOUARE,
+              titleText: StringsManager.SELLHOUSES,
+              index: 0),
           OnBoardingView(
-           image:AssetsManager.orderImage,
- progress:AssetsManager.middleImage,
-   headLine:StringsManager.ATANYTIME,
- titleText:StringsManager.SELLHOUSES,
- index: 1),
-         OnBoardingView(
-           image:AssetsManager.mapImage,
- progress:AssetsManager.completeImage,
-   headLine:StringsManager.BOOKYOURCAR,
- titleText:StringsManager.SELLHOUSES,
- index: 2),
-    
+              image: AssetsManager.orderImage,
+              progress: AssetsManager.middleImage,
+              headLine: StringsManager.ATANYTIME,
+              titleText: StringsManager.SELLHOUSES,
+              index: 1),
+          OnBoardingView(
+              image: AssetsManager.mapImage,
+              progress: AssetsManager.completeImage,
+              headLine: StringsManager.BOOKYOURCAR,
+              titleText: StringsManager.SELLHOUSES,
+              index: 2),
         ],
       ),
     );
