@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ride_application/core/resources/managers/colors_manager.dart';
+import 'package:ride_application/main.dart';
 
 class GendertextField extends StatefulWidget {
   final double width;
@@ -40,7 +42,15 @@ class _GendertextFieldState extends State<GendertextField> {
         items: widget.options.map((String option) {
           return DropdownMenuItem<String>(
             value: option,
-            child: Text(option),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 18.0),
+              child: Text(
+                option,
+                style: TextStyle(
+                  fontSize: screenWidth * 0.03,
+                ),
+              ),
+            ),
           );
         }).toList(),
         onChanged: (String? newValue) {

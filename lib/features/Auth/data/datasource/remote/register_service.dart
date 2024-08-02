@@ -23,7 +23,7 @@ class AuthServiceImp {
      print('${AppUrl.baseUrl}/${AppUrl.signUp}');
         final _data =user.toMap();
   Response  response = await dio.post(
-      '${AppUrl.baseUrl}/${AppUrl.signUp}',data: user.toMap()
+      '${AppUrl.baseUrl}/${AppUrl.signUp}',data: user.toJson()
     );
       print('${AppUrl.baseUrl}/${AppUrl.signUp}');
       print(response.statusCode);

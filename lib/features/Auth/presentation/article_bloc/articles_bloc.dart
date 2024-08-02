@@ -15,7 +15,7 @@ class AuthBloc extends Bloc<RegisterClassEvent, RegisterClassState> {
   AuthBloc(this.signUpUseCase) : super(InitialState()) {
     on<RegisterEvent>((event, emit) async {
       emit(LoadingState());
-      final failureOrEntity = await signUpUseCase.call(UserModel(firstName: "firstName", lastName: "lastName", phone: "0936104912", username: "reem", birthDate: "2024-08-02", password: "123**yttrgghjhhhjhjhh", confirmPassword: "confirmPassword"));
+      final failureOrEntity = await signUpUseCase.call(UserModel(firstName: "firstName", lastName: "lastName", phone: "0998198912", username: "rjhtfddffg", birthDate: "2024-08-02", password: "123**hcfdtATThh", confirmPassword: "confirmPassword"));
 
       failureOrEntity.fold((failure) {
         String message = '';

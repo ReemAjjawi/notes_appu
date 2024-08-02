@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ride_application/main.dart';
 
 class AppButton extends StatelessWidget {
   final String text;
@@ -9,7 +10,7 @@ class AppButton extends StatelessWidget {
   final double width;
   final double height;
   final TextStyle textStyle;
-  final IconData? icon;
+  final String? img;
 
   const AppButton({
     super.key,
@@ -21,7 +22,7 @@ class AppButton extends StatelessWidget {
     required this.height,
     required this.textStyle,
     required this.hasicon,
-    this.icon,
+    this.img,
   });
 
   @override
@@ -38,7 +39,6 @@ class AppButton extends StatelessWidget {
               ),
               side: BorderSide(
                 color: bordergroundColor ?? const Color(0xff008955),
-                width: 2.0,
               ),
             ),
           ),
@@ -48,8 +48,12 @@ class AppButton extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(icon),
+                      padding: EdgeInsets.all(8.0),
+                      child: Image.asset(
+                        img!,
+                        width: screenWidth * 0.05,
+                        height: screenHeight * 0.05,
+                      ),
                     ),
                     Text(
                       text,

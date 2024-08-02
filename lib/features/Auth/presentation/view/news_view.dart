@@ -25,6 +25,7 @@ class Register extends StatelessWidget {
           builder: (context, state) {
             if (state is SuccessState) {
               return Container(
+                color: Colors.amber,
                 child: Text("hiiiiii"),
               );
             } else if (state is FailureState) {
@@ -42,3 +43,25 @@ class Register extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
