@@ -3,7 +3,7 @@ import 'package:ride_application/main.dart';
 
 class AppButton extends StatelessWidget {
   final String text;
-  final bool hasicon;
+  final bool hasIcon;
   final Function() onPressed;
   final Color backgroundColor;
   final Color? bordergroundColor;
@@ -21,7 +21,7 @@ class AppButton extends StatelessWidget {
     required this.width,
     required this.height,
     required this.textStyle,
-    required this.hasicon,
+    required this.hasIcon,
     this.img,
   });
 
@@ -43,7 +43,7 @@ class AppButton extends StatelessWidget {
             ),
           ),
           onPressed: onPressed,
-          child: hasicon
+          child: hasIcon
               ? Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

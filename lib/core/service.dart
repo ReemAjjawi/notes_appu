@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-class CoreService{ 
+abstract class CoreService{ 
   late Dio dio;
 late Response response;
 }

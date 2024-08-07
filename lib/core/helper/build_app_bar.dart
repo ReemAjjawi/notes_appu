@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 AppBar buildAppBar({
   Widget? leadingg,
-  bool hasleading = false,
+  bool hasLeading = false,
   Function()? onPressed,
   Widget? title,
 }) {
   return AppBar(
     backgroundColor: Colors.white,
     leadingWidth: 100,
-    leading: hasleading
+    leading: hasLeading
         ? Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

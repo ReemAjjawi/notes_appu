@@ -1,11 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:ride_application/core/resources/managers/colors_manager.dart';
-import 'package:ride_application/core/widgets/app_button.dart';
-import 'package:ride_application/core/widgets/app_text_field.dart';
+
 import 'package:ride_application/main.dart';
 
-import '../../core/resources/managers/assets_manager.dart';
 import '../../core/resources/managers/strings_manager.dart';
 
 gt() {}

@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:ride_application/core/resources/routes/config_router.dart';
 import 'package:ride_application/injection_file.dart';
-
-import 'features/Auth/presentation/view/news_view.dart';
-import 'features/on_boarding_screen/on_borarding_view.dart';
-import 'responsive/adaptive_layout.dart';
-import 'responsive/desktop_layout.dart';
-import 'responsive/mobile_layout.dart';
+import 'config/bloc_observe_config.dart';
+import 'core/resources/routes/app_routes.dart';
 
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await initializeDependencies();
+   WidgetsFlutterBinding.ensureInitialized();
+   await initializeDependencies();
+
   await Hive.initFlutter();
+    Bloc.observer = MyBlocObserver();
   await Hive.openBox('projectBox');
 
   runApp(const MyApp());
@@ -29,13 +27,15 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
+    
     screenWidth = MediaQuery.sizeOf(context).width;
     screenHeight = MediaQuery.sizeOf(context).height;
     orientation = MediaQuery.orientationOf(context);
     isPortrait = orientation == Orientation.portrait;
     isMobile = screenWidth < 600;
-    return MaterialApp.router(
-      routerConfig: router,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+       onGenerateRoute: AppRoutes.onGenerateRoutes,
     );
   }
 }

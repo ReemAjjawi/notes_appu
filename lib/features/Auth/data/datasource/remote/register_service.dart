@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
 
@@ -10,15 +11,16 @@ import 'package:ride_application/features/Auth/data/model/article_model.dart';
 import '../../../../../config/app_url.dart';
 import '../../../../../core/error/exceptions.dart';
 import '../../../../../core/service.dart';
+import '../../../../../core/success/success.dart';
 import '../../../domain/entity/article_entity.dart';
 
-class AuthServiceImp {
-  Dio dio;
+class AuthServiceImp extends CoreService {
+Dio dio;
   AuthServiceImp({
     required this.dio,
   });
 
-  Future<bool> signUp(UserModel user) async {
+  Future<Success> Register(UserModel user) async {
     print(user.toMap());
     print('${AppUrl.baseUrl}/${AppUrl.signUp}');
     final _data = user.toMap();
@@ -34,9 +36,16 @@ class AuthServiceImp {
 
       box.put('token', token);
 
-      return true;
-    } else {
+      return  DataSuccess();
+    } else if(response.statusCode == 403 ){
+      print(response.data['message']);
+      throw PasswordExcetion(response.data['message']);
+    }
+    else
+    {
       throw ServerException();
     }
+   
   }
 }
+

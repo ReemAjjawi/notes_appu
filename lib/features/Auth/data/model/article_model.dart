@@ -3,22 +3,16 @@ import 'dart:convert';
 
 import '../../domain/entity/article_entity.dart';
 
-class UserModel {
- final String firstName;
-  final String lastName;
-  final String phone;
-  final String username;
-  final String birthDate;
-  final String password;
-  final String confirmPassword;
-  UserModel({
-   required this.firstName,
-    required this.lastName,
-    required this.phone,
-    required this.username,
-    required this.birthDate,
-    required this.password,
-    required this.confirmPassword,
+class UserModel extends UserEntity{
+
+  UserModel( {
+   required super.firstName,
+    required super.lastName,
+    required super.phone,
+    required super.username,
+    required super.birthDate,
+    required super.password,
+    required super.confirmPassword,
   });
 
 

@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController? controller;
@@ -9,15 +11,16 @@ class CustomTextFormField extends StatelessWidget {
   final FormFieldValidator<String>? validator;
   final bool? filledbool;
   final TextStyle? textStyle;
-  final IconData? suffixIconIcon;
+  final Widget? suffixIconIcon;
   final Color? suffixIcoColor;
   final IconData? prefixIconIcon;
   final Color? prefixIconColor;
   final Color colorborder;
-  late double width;
-  late double height;
+  final double width;
+  final double height;
+  final bool? obscureText;
 
-   CustomTextFormField({
+  CustomTextFormField({
     Key? key,
     this.controller,
     this.keyboardType,
@@ -31,6 +34,7 @@ class CustomTextFormField extends StatelessWidget {
     this.prefixIconIcon,
     this.suffixIcoColor,
     this.prefixIconColor,
+    this.obscureText,
     required this.colorborder,
     required this.width,
     required this.height,
@@ -44,24 +48,22 @@ class CustomTextFormField extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         keyboardType: keyboardType,
+        obscureText: obscureText ?? false,
         decoration: InputDecoration(
-            filled: filledbool,
-            fillColor: backgroundColor,
-            hintText: hintText,
-            hintStyle: textStyleHintText,
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: colorborder),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: colorborder),
-            ),
-            suffixIcon: Icon(
-              suffixIconIcon,
-              color: suffixIcoColor,
-            ),
-            prefixIcon: Icon(
+          filled: filledbool,
+          fillColor: backgroundColor,
+          hintText: hintText,
+          hintStyle: textStyleHintText,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: colorborder),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: colorborder),
+          ),
+          suffixIcon: suffixIconIcon,
+          prefixIcon: Icon(
               prefixIconIcon,
               color: prefixIconColor,
             )),

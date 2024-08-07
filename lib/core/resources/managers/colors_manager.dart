@@ -7,6 +7,7 @@ class ColorManager{
          static const scondaryColor=Color(0xFFE2F5ED);
         static const whiteColor=Color(0xFFFFFFFF);
        static const hintTextColor=Color(0xFFD0D0D0);
+       static const underHintTextColor=Color(0xFFA6A6A6);
        static const titleNotificationColor=Color(0xFF121212);
        static const subTitleNotificationColor=Color(0xFF898989);
        static const titleColor=Color(0xFF5A5A5A);

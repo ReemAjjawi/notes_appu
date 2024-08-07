@@ -12,17 +12,19 @@ import 'package:ride_application/features/on_boarding_screen/on_borarding_view.d
 import 'package:ride_application/main.dart';
 
 import '../../../../core/widgets/secondary_text_field.dart';
+import '../../data/model/article_model.dart';
 
-class Sin_up extends StatelessWidget {
-  Sin_up({super.key});
+class 
+SignUpScreen extends StatelessWidget {
+  SignUpScreen({super.key});
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController EMAILController = TextEditingController();
-  final TextEditingController NUMBERController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController numberController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(
-        hasleading: true,
+        hasLeading: true,
         onPressed: () {
           Navigator.of(context).pop();
         },
@@ -54,7 +56,7 @@ class Sin_up extends StatelessWidget {
                   height: screenHeight / 14),
               SizedBox(height: screenHeight / 50),
               CustomTextFormField(
-                  controller: EMAILController,
+                  controller: emailController,
                   hintText: StringsManager.EMAIL,
                   colorborder: ColorManager.subLineColor,
                   width: screenWidth * 0.92,
@@ -64,7 +66,7 @@ class Sin_up extends StatelessWidget {
                 width: screenWidth * 0.92,
                 height: screenHeight / 10,
                 child: IntlPhoneField(
-                  controller: NUMBERController,
+                  controller: numberController,
                   decoration: InputDecoration(
                     hintText: StringsManager.YOURMOBILENUMBER,
                     hintStyle: const TextStyle(
@@ -151,19 +153,37 @@ class Sin_up extends StatelessWidget {
                   ),
                   text: StringsManager.SIGNUP,
                   onPressed: () {
-                    context.go('/WelcomeView/Sin_up/SetPasswordView');
+                     UserModel user = UserModel(
+                firstName:"wertyu",
+                lastName: "dddd",
+                phone: numberController.text,
+                username: nameController.text,
+                birthDate: "2024-08-02",
+                password: "ddddd",
+                confirmPassword: "565gg",
+                     );
+                     print(user);
+      Navigator.pushNamed(context, '/RegisterScreen', arguments: user);
+                  
                   },
                   backgroundColor: ColorManager.primaryColor,
                   width: screenWidth * 0.88,
                   height: screenHeight / 13,
-                  hasicon: false),
-              Text(
+                  hasIcon: false),
+                  Row(
+                    children: [
+
+                    ],
+                  ),
+              Text( 
                 "______________________ or ______________________",
                 style: TextStyle(
                   // fontWeight: FontWeight.w400,
                   fontSize: screenWidth * 0.04,
                   color: ColorManager.subTitleColor,
                 ),
+
+                
               ),
               SizedBox(height: screenHeight / 50),
               AppButton(
@@ -177,7 +197,7 @@ class Sin_up extends StatelessWidget {
                 bordergroundColor: ColorManager.subLineColor,
                 width: screenWidth * 0.92,
                 height: screenHeight / 14,
-                hasicon: true,
+                hasIcon: true,
                 img: AssetsManager.gmailImage,
               ),
               SizedBox(height: screenHeight / 50),
@@ -192,7 +212,7 @@ class Sin_up extends StatelessWidget {
                 bordergroundColor: ColorManager.subLineColor,
                 width: screenWidth * 0.92,
                 height: screenHeight / 14,
-                hasicon: true,
+                hasIcon: true,
                 img: AssetsManager.facebookImage,
               ),
               SizedBox(height: screenHeight / 50),
@@ -207,7 +227,7 @@ class Sin_up extends StatelessWidget {
                 bordergroundColor: ColorManager.subLineColor,
                 width: screenWidth * 0.92,
                 height: screenHeight / 14,
-                hasicon: true,
+                hasIcon: true,
                 img: AssetsManager.appleImage,
               ),
               SizedBox(height: screenHeight / 50),

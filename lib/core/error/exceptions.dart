@@ -1,5 +1,13 @@
-class ServerException implements Exception {}
 
-class OfflineException  implements Exception {}
 
-class EmptyCacheException  implements Exception {}
+ class ServerException implements Exception {}
+
+class ValidationException  implements Exception {}
+class PasswordExcetion implements ValidationException {
+  String message ;
+  PasswordExcetion (this.message){}
+}
+class UserNameExcetion implements ValidationException {
+    String message ;
+  UserNameExcetion (this.message){}
+}
