@@ -1,16 +1,14 @@
 import 'package:dio/dio.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class HeaderConfig {
   static Options getHeader({useToken = true}) {
+     var box = Hive.box('projectBox');
     if (useToken) {
       return Options(
         headers: {
           "accept": "*/*",
-          "Authorization": "Bearer ${(
-            // core.get<SharedPreferences>().getString(
-            //       'token',
-            //     ),
-          )}"
+          "Authorization": "Bearer ${(box.get('token'))}"
         },
       );
     } else {

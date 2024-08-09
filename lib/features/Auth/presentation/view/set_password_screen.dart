@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ride_application/core/helper/build_app_bar.dart';
 import 'package:ride_application/core/resources/managers/colors_manager.dart';
 import 'package:ride_application/core/resources/managers/strings_manager.dart';
 import 'package:ride_application/core/widgets/app_button.dart';
+import 'package:ride_application/features/auth/data/model/user_model.dart';
 import 'package:ride_application/main.dart';
-
 import '../../../../core/helper/indicator.dart';
 import '../../../../core/widgets/success_widget.dart';
 import '../../../../injection_file.dart';
-import '../../data/model/article_model.dart';
 import '../auth_bloc/auth_bloc.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -166,20 +164,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Center(
                 child: BlocBuilder<AuthBloc, RegisterClassState>(
                   builder: (context, state) {
-                     if (state is InitialState) {
+                     if (state is InitialState)  {
         return      AppButton(
                       text: StringsManager.REGISTER,
-                      onPressed: () {
+                      onPressed: () async{
                         
                         print(widget.user.firstName);
                         widget.user.password = passwordController.text;
                         widget.user.confirmPassword =
                             confirmPasswordController.text;
-                        Navigator.pushNamed(context, '/WelcomeView');
-
-                        context.read<AuthBloc>().add(
+                            print(widget.user);
+                             context.read<AuthBloc>().add(
                               RegisterEvent(widget.user),
                             );
+                        Navigator.pushNamed(context, '/CategoriesScreen');
+
+                     
                       },
                       backgroundColor: ColorManager.primaryColor,
                       width: screenWidth * 0.88,
@@ -208,7 +208,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         widget.user.password = passwordController.text;
                         widget.user.confirmPassword =
                             confirmPasswordController.text;
-                        Navigator.pushNamed(context, '/WelcomeView');
+                        Navigator.pushNamed(context, '/CategoriesScreen');
 
                         context.read<AuthBloc>().add(
                               RegisterEvent(widget.user),
@@ -256,134 +256,3 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
 
 
-
-
-
-//   import 'package:flutter/material.dart';
-// import 'package:ride_application/core/resources/managers/colors_manager.dart';
-// import 'package:ride_application/core/resources/managers/strings_manager.dart';
-// import 'package:ride_application/core/resources/managers/styles_manager.dart';
-// import 'package:ride_application/core/widgets/app_button.dart';
-// import 'package:ride_application/core/widgets/app_text_field.dart';
-// import 'package:ride_application/main.dart';
-
-// class SetPasswordView extends StatefulWidget {
-//   const SetPasswordView({super.key});
-
-//   @override
-//   State<SetPasswordView> createState() => _SetPasswordViewState();
-// }
-
-// class _SetPasswordViewState extends State<SetPasswordView> {
-//   final TextEditingController passwordController = TextEditingController();
-//   final TextEditingController confirmPasswordController = TextEditingController();
-//   bool obscureTextPassword = true;
-//   bool obscureTextConfirmPassword = true;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(),
-//       body: Column(
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         children: [
-//           Text(
-//             StringsManager.SETPASSWORD,
-//             style: StylesManager.headLineStyle,
-//           ),
-//           SizedBox(height: screenHeight * 0.01),
-//           Text(
-//             StringsManager.SETYOURPASSWORD,
-//             style: StylesManager.subLineStyle,
-//           ),
-//           SizedBox(height: screenHeight * 0.12),
-//           Center(
-//             child: SizedBox(
-//               width: screenWidth * 0.92,
-//               height: screenHeight / 15,
-//               child: CustomTextFormField(
-//                 controller: passwordController,
-//                 obscureText: obscureTextPassword,
-//                 hintText: StringsManager.ENTERYOURPASSWORD,
-//                 textStyleHintText: StylesManager.hintTextStyle,
-//                 suffixIconIcon: IconButton(
-//                   icon: Icon(
-//                     obscureTextPassword ? Icons.visibility : Icons.visibility_off,
-//                     color: ColorManager.hintTextColor,
-//                   ),
-//                   onPressed: () {
-//                     setState(() {
-//                       obscureTextPassword = !obscureTextPassword;
-//                     });
-//                   },
-//                 ),
-//                 colorborder: ColorManager.hintTextColor,
-//                 width: screenWidth * 0.92,
-//                 height: screenHeight / 15,
-//                 textStyle: TextStyle(
-//                   color: ColorManager.hintTextColor,
-//                   fontSize: screenHeight * 0.02,
-//                 ),
-//               ),
-//             ),
-//           ),
-//           SizedBox(height: screenHeight * 0.02),
-//           Center(
-//             child: SizedBox(
-//               width: screenWidth * 0.92,
-//               height: screenHeight / 15,
-//               child: CustomTextFormField(
-//                 controller: confirmPasswordController,
-//                 obscureText: obscureTextConfirmPassword,
-//                 hintText: StringsManager.CONFIRMPASSWORD,
-//                 textStyleHintText: StylesManager.hintTextStyle,
-//                 suffixIconIcon: IconButton(
-//                   icon: Icon(
-//                     obscureTextConfirmPassword ? Icons.visibility : Icons.visibility_off,
-//                     color: ColorManager.hintTextColor,
-//                   ),
-//                   onPressed: () {
-//                     setState(() {
-//                       obscureTextConfirmPassword = !obscureTextConfirmPassword;
-//                     });
-//                   },
-//                 ),
-//                 colorborder: ColorManager.hintTextColor,
-//                 width: screenWidth * 0.92,
-//                 height: screenHeight / 15,
-//                 textStyle: TextStyle(
-//                   color: ColorManager.hintTextColor,
-//                   fontSize: screenHeight * 0.02,
-//                 ),
-//               ),
-//             ),
-//           ),
-//           SizedBox(height: screenHeight * 0.01),
-//           SizedBox(
-//             width: screenWidth * 0.92,
-//             child: Text(
-//               StringsManager.ATLEASTNUMBERORASPECIALCHARACTER,
-//               style: StylesManager.underHintTextStyle,
-//             ),
-//           ),
-//           SizedBox(height: screenHeight * 0.20),
-//           Center(
-//             child: AppButton(
-//               text: StringsManager.REGISTER,
-//               onPressed: gt,
-//               backgroundColor: ColorManager.primaryColor,
-//               width: screenWidth * 0.88,
-//               height: screenHeight / 16.5,
-//               textStyle: StylesManager.greenButtonStyle,
-//               hasicon: false,
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-
-//   void gt() {
-//     // Implement the function to handle button press
-//   }
-// }

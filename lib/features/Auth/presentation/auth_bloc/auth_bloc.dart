@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 
 import 'package:meta/meta.dart';
-import 'package:ride_application/features/Auth/data/model/article_model.dart';
+import 'package:ride_application/features/auth/data/model/user_model.dart';
 
 import '../../../../core/error/failures.dart';
 import '../../domain/usecase/register_use_case.dart';

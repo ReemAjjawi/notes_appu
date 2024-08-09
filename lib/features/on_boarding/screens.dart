@@ -2,24 +2,24 @@ import 'package:flutter/material.dart';
 
 import '../../core/resources/managers/assets_manager.dart';
 import '../../core/resources/managers/strings_manager.dart';
-import '../Auth/presentation/view/welcome_screen.dart';
-import 'on_borarding_view.dart';
+import '../auth/presentation/view/welcome_screen.dart';
+import 'on_borarding_screen.dart';
 
 PageController onBoardingContoller = PageController();
    List  pages = [
-    OnBoardingView(
+    OnBoardingScreen(
               image: AssetsManager.taxiStartImage,
               progress: AssetsManager.startImage,
               headLine: StringsManager.ANYWHEREYOUARE,
               titleText: StringsManager.SELLHOUSES,
               index: 0),
-          OnBoardingView(
+          OnBoardingScreen(
               image: AssetsManager.orderImage,
               progress: AssetsManager.middleImage,
               headLine: StringsManager.ATANYTIME,
               titleText: StringsManager.SELLHOUSES,
               index: 1),
-          OnBoardingView(
+          OnBoardingScreen(
               image: AssetsManager.mapImage,
               progress: AssetsManager.completeImage,
               headLine: StringsManager.BOOKYOURCAR,
@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
       pages[0],
       pages[1],
       pages[2],
-           WelcomeView()
+           WelcomeScreen()
         ],
       ),
  

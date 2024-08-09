@@ -13,6 +13,7 @@ class ColorManager{
        static const titleColor=Color(0xFF5A5A5A);
        static const subTitleColor=Color(0xFFB8B8B8);
        static const offerColor=Color(0xFFF57F17);
+       static const borderColor=Color(0xFF08B783);
        static const deleteColor=Color(0xFFF44336);
        static const cancelColor=Color(0xFFD32F2F);
        static const doneColor=Color(0xFF43A048);

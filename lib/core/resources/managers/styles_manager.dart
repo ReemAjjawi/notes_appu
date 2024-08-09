@@ -30,6 +30,11 @@ class StylesManager {
      fontSize:  screenWidth *0.03,
     fontWeight: FontWeight.w400,
   );
+  static TextStyle subTitleStyle = TextStyle(
+    color: ColorManager.subTitleColor,
+     fontSize:  screenWidth *0.03,
+    fontWeight: FontWeight.w400,
+  );
    static TextStyle underHintTextStyle = TextStyle(
     color: ColorManager.underHintTextColor,
      fontSize:  screenWidth *0.03,

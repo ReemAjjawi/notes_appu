@@ -7,8 +7,8 @@ import '../../core/resources/managers/strings_manager.dart';
 
 gt() {}
 
-class OnBoardingView extends StatelessWidget {
-  const OnBoardingView(
+class OnBoardingScreen extends StatelessWidget {
+  const OnBoardingScreen(
       {super.key,
       required this.progress,
       required this.image,

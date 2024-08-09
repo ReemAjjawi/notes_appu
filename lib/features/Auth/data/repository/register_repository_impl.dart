@@ -1,11 +1,11 @@
 
 import 'package:dartz/dartz.dart';
 import 'package:ride_application/core/success/success.dart';
-import 'package:ride_application/features/Auth/data/model/article_model.dart';
+import 'package:ride_application/features/auth/data/model/user_model.dart';
 
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
-import '../../domain/entity/article_entity.dart';
+import '../../domain/entity/user_entity.dart';
 import '../../domain/repository/register_repository.dart';
 import '../datasource/remote/register_service.dart';
 
@@ -19,15 +19,12 @@ class RegisterRepoImpl implements RegisterRepo {
   });
 
   @override
-  Future<Either<Failures, Success>> Register(UserEntity user) async {
+  Future<Either<Failures, Success>> Register(UserModel user) async {
     print('==========================================================');
-   // print(await networkConnection.isConnected);
- //   if (await networkConnection.isConnected) {
       try {
         Success registerDone=
-            await authServiceImp.Register(user as UserModel
-        );
-    //    localArticleDataSource.cacheArticles(articles);
+            await authServiceImp.Register(user);
+ 
         return Right(registerDone);
       } on ServerException {
         return Left(ServerFailure());

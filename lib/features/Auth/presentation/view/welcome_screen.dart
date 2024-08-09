@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:ride_application/core/resources/managers/assets_manager.dart';
 import 'package:ride_application/core/resources/managers/colors_manager.dart';
 import 'package:ride_application/core/resources/managers/strings_manager.dart';
 import 'package:ride_application/core/widgets/app_button.dart';
-import 'package:ride_application/core/widgets/app_text_field.dart';
-import 'package:ride_application/features/on_boarding_screen/on_borarding_view.dart';
 import 'package:ride_application/main.dart';
 
-class WelcomeView extends StatelessWidget {
+class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +53,7 @@ class WelcomeView extends StatelessWidget {
           SizedBox(height: screenHeight * 0.02),
           AppButton(
             text: StringsManager.LOGIN,
-            onPressed: gt,
+            onPressed: (){},
             backgroundColor: ColorManager.whiteColor,
             width: screenWidth * 0.88,
             height: screenHeight / 15,
@@ -109,7 +106,7 @@ Row(
           SizedBox(height: screenHeight * 0.02),
           AppButton(
             text: StringsManager.LOGIN,
-            onPressed: gt,
+            onPressed: (){},
             backgroundColor: ColorManager.whiteColor,
             width: screenWidth * 0.88,
             height: screenHeight / 15,

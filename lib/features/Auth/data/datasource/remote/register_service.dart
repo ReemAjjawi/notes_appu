@@ -6,13 +6,13 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
 
-import 'package:ride_application/features/Auth/data/model/article_model.dart';
+import 'package:ride_application/features/auth/data/model/user_model.dart';
 
 import '../../../../../config/app_url.dart';
 import '../../../../../core/error/exceptions.dart';
 import '../../../../../core/service.dart';
 import '../../../../../core/success/success.dart';
-import '../../../domain/entity/article_entity.dart';
+import '../../../domain/entity/user_entity.dart';
 
 class AuthServiceImp extends CoreService {
 Dio dio;
