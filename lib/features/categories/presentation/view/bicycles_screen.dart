@@ -132,6 +132,7 @@ Widget _buildListView(categoryName) {
                   height: screenHeight * 0.2,
                   child: Image.asset(bicycleItem['iconPath']!),
                 ),
+                
                 subtitle4: AppButton(
                   text: StringsManager.VIEWBicycleLIST,
                   onPressed: (){
@@ -162,7 +163,7 @@ Widget _buildListView(categoryName) {
           ),
         );}
         else {
-          return Indicator();
+          return Center(child: Indicator());
         }
       
     },

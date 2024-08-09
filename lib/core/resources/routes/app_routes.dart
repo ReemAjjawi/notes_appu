@@ -29,7 +29,8 @@ return      _materialRoute(WelcomeScreen());
      return _materialRoute(Map(categoryName:settings.arguments as String),);
 
   case '/BicyclesFromCategorey':
-     return _materialRoute(BicyclesFromCategorey(categoryName:settings.arguments as String,hubId: settings.arguments as int,),);
+  final args = settings.arguments as CategoryArguments;
+  return _materialRoute(BicyclesFromCategorey(categoryName: args.categoryName, hubId: args.hubId));
 
 
       case '/WelcomeView':

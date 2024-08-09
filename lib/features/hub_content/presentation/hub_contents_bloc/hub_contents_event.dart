@@ -3,12 +3,12 @@
 
 sealed class HubContentsClassEvent {}
 
-class getHubContentsEvent extends HubContentsClassEvent {
+class GetHubContentsEvent extends HubContentsClassEvent {
 int hubId;
-String bicycleCategory;
-  getHubContentsEvent(
+String categoryName;
+  GetHubContentsEvent(
      this.hubId,
-     this.bicycleCategory,
+     this.categoryName,
   );
 
 }

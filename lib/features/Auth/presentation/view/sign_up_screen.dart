@@ -153,8 +153,8 @@ SignUpScreen extends StatelessWidget {
                   text: StringsManager.SIGNUP,
                   onPressed: () {
                      UserModel user = UserModel(
-                firstName:"weggtyu",
-                lastName: "dfcdszdd",
+                firstName:"weggjhgggtyu",
+                lastName: "dfcdjhhhszdd",
                 phone: numberController.text,
                 username: nameController.text,
                 birthDate: "2024-08-02",
