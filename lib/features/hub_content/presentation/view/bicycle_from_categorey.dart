@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ride_application/core/helper/build_app_bar.dart';
+import 'package:ride_application/core/helper/indicator.dart';
 import 'package:ride_application/core/resources/managers/assets_manager.dart';
 import 'package:ride_application/core/resources/managers/colors_manager.dart';
 import 'package:ride_application/core/resources/managers/strings_manager.dart';
 import 'package:ride_application/core/resources/managers/styles_manager.dart';
 import 'package:ride_application/core/widgets/app_button.dart';
 import 'package:ride_application/core/widgets/app_list_tile.dart';
+import 'package:ride_application/features/hub_content/presentation/hub_contents_bloc/hub_contents_state.dart';
 import 'package:ride_application/main.dart';
 
 import '../../../../injection_file.dart';
@@ -27,14 +29,12 @@ class BicyclesFromCategorey extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<HubContentsBloc>(
       create: (context) => sl()..add(GetHubContentsEvent(hubId, categoryName)),
-      child: Builder(
-        builder: (context) {
-          return Scaffold(
-            appBar: _buildAppBar(context),
-            body: _buildBody(hubId, categoryName),
-          );
-        }
-      ),
+      child: Builder(builder: (context) {
+        return Scaffold(
+          appBar: _buildAppBar(context),
+          body: _buildBody(),
+        );
+      }),
     );
   }
 }
@@ -46,7 +46,7 @@ PreferredSizeWidget _buildAppBar(BuildContext context) {
   );
 }
 
-Widget _buildBody(int hubId,String categoryName) {
+Widget _buildBody() {
   return SingleChildScrollView(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +55,7 @@ Widget _buildBody(int hubId,String categoryName) {
         _buildSizeBox(),
         _buildText2(),
         _buildSizeBox(),
-        _buildListView(hubId, categoryName),
+        _buildListView(),
       ],
     ),
   );
@@ -79,85 +79,104 @@ Widget _buildText2() {
   );
 }
 
-Widget _buildListView(int hubId,String categoryName) {
-  final List<String> cars = [
-    StringsManager.BMWCABRIO,
-    StringsManager.MUSTANGSHELBYGT,
-    StringsManager.BMW18,
-    StringsManager.JAGUARSILBER,
-  ];
+Widget _buildListView() {
 
-  return ListView.builder(
-    shrinkWrap: true,
-    physics: NeverScrollableScrollPhysics(),
-    itemCount: cars.length,
-    itemBuilder: (context, index) {
-      final car = cars[index];
-      return Card(
-        child: CustomListTile(
-          height: screenHeight * 0.35,
-          width: double.infinity,
-          backgroundColor: ColorManager.scondaryColor,
-          borderColor: ColorManager.borderColor,
-          hasrawsubtitle: false,
-          hasrawtitle: false,
-          hascolum: true,
-          title: Text(
-            car,
-            style: StylesManager.titleTextStyle,
-          ),
-          subtitle: Text(
-            StringsManager.INFOCAR,
-            style: StylesManager.subTitleStyle,
-          ),
-          subtitle2: Text(""),
-          subtitle3: Row(
-            children: [
-              Icon(
-                Icons.location_on,
-                color: ColorManager.underHintTextColor,
+  return BlocBuilder<HubContentsBloc, HubContentsClassState>(
+    builder: (context, state) {
+      if(state is Success){
+      return ListView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        itemCount: state.bicycles.length,
+        itemBuilder: (context, index) {
+          final bicycle = state.bicycles[index];
+          return InkWell(onTap: (){
+                            Navigator.pushNamed(context, '/BicycleDetailsScreen', arguments: bicycle);
+
+          },
+            child: Card(
+              child: CustomListTile(
+                height: screenHeight * 0.35,
+                width: double.infinity,
+                backgroundColor: ColorManager.scondaryColor,
+                borderColor: ColorManager.borderColor,
+                hasrawsubtitle: false,
+                hasrawtitle: false,
+                hascolum: true,
+                title: Text(
+                  bicycle.type,
+                  style: StylesManager.titleTextStyle,
+                ),
+                subtitle: Text(
+                  StringsManager.INFOCAR,
+                  style: StylesManager.subTitleStyle,
+                ),
+                subtitle2: Text(""),
+                subtitle3: Row(
+                  children: [
+                    Icon(
+                      Icons.location_on,
+                      color: ColorManager.underHintTextColor,
+                    ),
+                    SizedBox(width: screenWidth * 0.01),
+                    Text(
+                      StringsManager.DESTANCE,
+                      style: StylesManager.underHintTextStyle,
+                    ),
+                  ],
+                ),
+                trailing: Container(
+                  width: screenWidth * 0.25,
+                  height: screenHeight * 0.8,
+                  child: Image.asset(
+                    AssetsManager.bmwImage,
+                    // fit: BoxFit.cover,
+                  ),
+                ),
+                subtitle4: AppButton(
+                  text: StringsManager.BOOKLATER,
+                  onPressed: (){
+                    
+                  },
+                  backgroundColor: ColorManager.scondaryColor,
+                  width: screenWidth * 0.44,
+                  height: screenHeight / 15,
+                  textStyle: StylesManager.whiteButtonStyle,
+                  hasIcon: false,
+                ),
+                subtitle5: AppButton(
+                  text: StringsManager.RIDENOW,
+                  onPressed: (){
+            
+                  },
+                  backgroundColor: ColorManager.primaryColor,
+                  width: screenWidth * 0.44,
+                  height: screenHeight / 15,
+                  textStyle: StylesManager.greenButtonStyle,
+                  hasIcon: false,
+                ),
               ),
-              SizedBox(width: screenWidth * 0.01),
-              Text(
-                StringsManager.DESTANCE,
-                style: StylesManager.underHintTextStyle,
-              ),
-            ],
-          ),
-          trailing: Container(
-            width: screenWidth * 0.25,
-            height: screenHeight * 0.8,
-            child: Image.asset(
-              AssetsManager.bmwImage,
-              // fit: BoxFit.cover,
             ),
-          ),
-          subtitle4: AppButton(
-            text: StringsManager.BOOKLATER,
-            onPressed: wiee,
-            backgroundColor: ColorManager.scondaryColor,
-            width: screenWidth * 0.44,
-            height: screenHeight / 15,
-            textStyle: StylesManager.whiteButtonStyle,
-            hasIcon: false,
-          ),
-          subtitle5: AppButton(
-            text: StringsManager.RIDENOW,
-            onPressed: wiee,
-            backgroundColor: ColorManager.primaryColor,
-            width: screenWidth * 0.44,
-            height: screenHeight / 15,
-            textStyle: StylesManager.greenButtonStyle,
-            hasIcon: false,
-          ),
-        ),
-      );
-    },
+          );
+        },
+      );}
+      else if(state is LoadingState){
+        return Center(
+          child: Indicator(),
+        );}
+        else 
+        {
+return Container(
+  child: Text(
+    (state as FailureState).message
+  ),
+);
+        }
+      }
+    
   );
 }
 
 void _onAppBarPressed(context) {
   Navigator.of(context).pop();
 }
-
-wiee() {}

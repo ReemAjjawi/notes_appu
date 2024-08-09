@@ -1,5 +1,7 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:ride_application/core/helper/build_app_bar.dart';
 import 'package:ride_application/core/resources/managers/assets_manager.dart';
 import 'package:ride_application/core/resources/managers/colors_manager.dart';
@@ -7,9 +9,15 @@ import 'package:ride_application/core/resources/managers/strings_manager.dart';
 import 'package:ride_application/core/resources/managers/styles_manager.dart';
 import 'package:ride_application/core/widgets/app_button.dart';
 import 'package:ride_application/core/widgets/app_list_tile.dart';
+import 'package:ride_application/features/hub_content/data/model/second_model.dart';
 import 'package:ride_application/main.dart';
 
-class CarDetailsScreen extends StatelessWidget {
+class BicycleDetailsScreen extends StatelessWidget {
+  BicycleListModel bicycle;
+   BicycleDetailsScreen({
+    Key? key,
+    required this.bicycle,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +64,7 @@ class CarDetailsScreen extends StatelessWidget {
 
     Widget _buildText() {
     return Text(
-                      StringsManager.MUSTANGSHELBYGT,
+                      bicycle.type,
                       style: StylesManager.headLineStyle,
                     );
   }
