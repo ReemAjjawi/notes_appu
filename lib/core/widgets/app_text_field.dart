@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
+import 'package:ride_application/main.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController? controller;
@@ -50,20 +50,27 @@ class CustomTextFormField extends StatelessWidget {
         keyboardType: keyboardType,
         obscureText: obscureText ?? false,
         decoration: InputDecoration(
-          filled: filledbool,
-          fillColor: backgroundColor,
-          hintText: hintText,
-          hintStyle: textStyleHintText,
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: colorborder),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: colorborder),
-          ),
-          suffixIcon: suffixIconIcon,
-          prefixIcon: Icon(
+            filled: filledbool,
+            fillColor: backgroundColor,
+            hintText: hintText,
+            hintStyle: textStyleHintText,
+            border: OutlineInputBorder(
+              borderSide: BorderSide(color: colorborder),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colorborder),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: colorborder),
+            ),
+            contentPadding: EdgeInsets.symmetric(
+                vertical: screenHeight * 0.02, horizontal: screenWidth * 0.04),
+            errorMaxLines: 1,
+            errorStyle: TextStyle(height: 0.5),
+            suffixIcon: suffixIconIcon,
+            prefixIcon: Icon(
               prefixIconIcon,
               color: prefixIconColor,
             )),

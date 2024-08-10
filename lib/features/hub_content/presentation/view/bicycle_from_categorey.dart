@@ -14,26 +14,41 @@ import 'package:ride_application/features/hub_content/presentation/hub_contents_
 import 'package:ride_application/main.dart';
 
 import '../../../../injection_file.dart';
+import '../../../map/data/model/hubinfo_model.dart';
 import '../hub_contents_bloc/hub_contens_bloc.dart';
 import '../hub_contents_bloc/hub_contents_event.dart';
+import 'bicycle_details_screen.dart';
 
 class BicyclesFromCategorey extends StatelessWidget {
-  int hubId;
+  HubinfoModel hubId;
+  HubinfoModel hubIdto;
   String categoryName;
   BicyclesFromCategorey({
     Key? key,
     required this.hubId,
+    required this.hubIdto,
     required this.categoryName,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocProvider<HubContentsBloc>(
-      create: (context) => sl()..add(GetHubContentsEvent(hubId, categoryName)),
+      create: (context) =>
+          sl()..add(GetHubContentsEvent(hubId.id as int, categoryName)),
       child: Builder(builder: (context) {
         return Scaffold(
-          appBar: _buildAppBar(context),
-          body: _buildBody(),
-        );
+            appBar: _buildAppBar(context),
+            body: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildText(),
+                  _buildSizeBox(),
+                  _buildText2(),
+                  _buildSizeBox(),
+                  buildListView(hubId, hubIdto),
+                ],
+              ),
+            ));
       }),
     );
   }
@@ -43,21 +58,6 @@ PreferredSizeWidget _buildAppBar(BuildContext context) {
   return buildAppBar(
     hasLeading: true,
     onPressed: () => _onAppBarPressed(context),
-  );
-}
-
-Widget _buildBody() {
-  return SingleChildScrollView(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildText(),
-        _buildSizeBox(),
-        _buildText2(),
-        _buildSizeBox(),
-        _buildListView(),
-      ],
-    ),
   );
 }
 
@@ -79,21 +79,28 @@ Widget _buildText2() {
   );
 }
 
-Widget _buildListView() {
-
+Widget buildListView(hubId, hubIdto) {
   return BlocBuilder<HubContentsBloc, HubContentsClassState>(
-    builder: (context, state) {
-      if(state is Success){
+      builder: (context, state) {
+    if (state is Success) {
       return ListView.builder(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         itemCount: state.bicycles.length,
         itemBuilder: (context, index) {
           final bicycle = state.bicycles[index];
-          return InkWell(onTap: (){
-                            Navigator.pushNamed(context, '/BicycleDetailsScreen', arguments: bicycle);
-
-          },
+          return InkWell(
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                '/BicycleDetailsScreen',
+                arguments: DetailArguments(
+                  bicycle: bicycle,
+                  hubId: hubId,
+                  hubIdto: hubIdto,
+                ),
+              );
+            },
             child: Card(
               child: CustomListTile(
                 height: screenHeight * 0.35,
@@ -135,9 +142,7 @@ Widget _buildListView() {
                 ),
                 subtitle4: AppButton(
                   text: StringsManager.BOOKLATER,
-                  onPressed: (){
-                    
-                  },
+                  onPressed: () {},
                   backgroundColor: ColorManager.scondaryColor,
                   width: screenWidth * 0.44,
                   height: screenHeight / 15,
@@ -146,9 +151,7 @@ Widget _buildListView() {
                 ),
                 subtitle5: AppButton(
                   text: StringsManager.RIDENOW,
-                  onPressed: (){
-            
-                  },
+                  onPressed: () {},
                   backgroundColor: ColorManager.primaryColor,
                   width: screenWidth * 0.44,
                   height: screenHeight / 15,
@@ -159,22 +162,17 @@ Widget _buildListView() {
             ),
           );
         },
-      );}
-      else if(state is LoadingState){
-        return Center(
-          child: Indicator(),
-        );}
-        else 
-        {
-return Container(
-  child: Text(
-    (state as FailureState).message
-  ),
-);
-        }
-      }
-    
-  );
+      );
+    } else if (state is LoadingState) {
+      return Center(
+        child: Indicator(),
+      );
+    } else {
+      return Container(
+        child: Text((state as FailureState).message),
+      );
+    }
+  });
 }
 
 void _onAppBarPressed(context) {

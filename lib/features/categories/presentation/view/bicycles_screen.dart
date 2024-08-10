@@ -88,84 +88,78 @@ Widget _buildListView(categoryName) {
   ];
   return BlocBuilder<BicycleBloc, BicyclesClassState>(
     builder: (context, state) {
-      if (state is Success){
-      return Expanded(
-        child: ListView.builder(
-          itemCount: state.bicycles.length,
-          itemBuilder: (context, index) {
-                        final bicycle = state.bicycles[index];
+      if (state is Success) {
+        return Expanded(
+          child: ListView.builder(
+            itemCount: state.bicycles.length,
+            itemBuilder: (context, index) {
+              final bicycle = state.bicycles[index];
 
-            final bicycleItem = bicycles[index];
-            return Card(
-              child: CustomListTile(
-                height: screenHeight * 0.30,
-                width: double.infinity,
-                backgroundColor: ColorManager.scondaryColor,
-                borderColor: ColorManager.borderColor,
-                hasrawsubtitle: false,
-                hasrawtitle: false,
-                hascolum: true,
-                title: Text(
-                  bicycle.type!,
-                  style: StylesManager.titleTextStyle,
-                ),
-                subtitle: Text(
-                  StringsManager.INFOCAR,
-                  style: StylesManager.subTitleStyle,
-                ),
-                subtitle2: Text(""),
-                subtitle3: Row(
-                  children: [
-                    Icon(
-                      Icons.location_on,
-                      color: ColorManager.underHintTextColor,
-                    ),
-                    SizedBox(width: screenWidth * 0.01),
-                    Text(
-                      StringsManager.DESTANCE,
-                      style: StylesManager.underHintTextStyle,
-                    ),
-                  ],
-                ),
-                trailing: SizedBox(
-                  width: screenWidth * 0.25,
-                  height: screenHeight * 0.2,
-                  child: Image.asset(bicycleItem['iconPath']!),
-                ),
-                
-                subtitle4: AppButton(
-                  text: StringsManager.VIEWBicycleLIST,
-                  onPressed: (){
-                     Navigator.pushNamed(context, '/map',arguments: categoryName);
-
-                  },
+              final bicycleItem = bicycles[index];
+              return Card(
+                child: CustomListTile(
+                  height: screenHeight * 0.30,
+                  width: double.infinity,
                   backgroundColor: ColorManager.scondaryColor,
-                  width: screenWidth * 0.88,
-                  height: screenHeight / 15,
-                  textStyle: TextStyle(
-                    color: ColorManager.borderColor,
-                    fontWeight: FontWeight.bold,
+                  borderColor: ColorManager.borderColor,
+                  hasrawsubtitle: false,
+                  hasrawtitle: false,
+                  hascolum: true,
+                  title: Text(
+                    bicycle.type!,
+                    style: StylesManager.titleTextStyle,
                   ),
-                  hasIcon: false,
+                  subtitle: Text(
+                    StringsManager.INFOCAR,
+                    style: StylesManager.subTitleStyle,
+                  ),
+                  subtitle2: Text(""),
+                  subtitle3: Row(
+                    children: [
+                      Icon(
+                        Icons.location_on,
+                        color: ColorManager.underHintTextColor,
+                      ),
+                      SizedBox(width: screenWidth * 0.01),
+                      Text(
+                        StringsManager.DESTANCE,
+                        style: StylesManager.underHintTextStyle,
+                      ),
+                    ],
+                  ),
+                  trailing: SizedBox(
+                    width: screenWidth * 0.25,
+                    height: screenHeight * 0.2,
+                    child: Image.asset(bicycleItem['iconPath']!),
+                  ),
+                  subtitle4: AppButton(
+                    text: StringsManager.VIEWBicycleLIST,
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/LocationScreen',
+                          arguments: categoryName);
+                    },
+                    backgroundColor: ColorManager.scondaryColor,
+                    width: screenWidth * 0.88,
+                    height: screenHeight / 15,
+                    textStyle: TextStyle(
+                      color: ColorManager.borderColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    hasIcon: false,
+                  ),
+                  subtitle5: Text(""),
                 ),
-                subtitle5: Text(""),
-              ),
-            );
-          },
-        ),
-      );}
-      else if(state is FailureState)
-      {
-        return Container(
-          child: 
-          Text(
-            state.message
+              );
+            },
           ),
-        );}
-        else {
-          return Center(child: Indicator());
-        }
-      
+        );
+      } else if (state is FailureState) {
+        return Container(
+          child: Text(state.message),
+        );
+      } else {
+        return Center(child: Indicator());
+      }
     },
   );
 }

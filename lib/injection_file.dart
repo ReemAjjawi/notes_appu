@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ride_application/features/categories/data/datasource/remote/categories_service.dart';
@@ -16,62 +15,70 @@ import 'features/auth/data/datasource/remote/register_service.dart';
 import 'features/auth/data/repository/register_repository_impl.dart';
 import 'features/auth/domain/usecase/register_use_case.dart';
 import 'features/auth/presentation/auth_bloc/auth_bloc.dart';
-
+import 'features/map/data/datasource/remote/Hub_service.dart';
+import 'features/map/data/repository/register_repository_impl.dart';
+import 'features/map/domain/usecase/register_use_case.dart';
+import 'features/map/presentation/hub_bloc/hub_bloc.dart';
+import 'features/request_rent/data/datasource/remote/register_service.dart';
+import 'features/request_rent/data/repository/register_repository_impl.dart';
+import 'features/request_rent/domain/usecase/register_use_case.dart';
+import 'features/request_rent/presentation/Reservation_bloc/Reservation_bloc.dart';
 
 final sl = GetIt.instance;
 
 Future<void> initializeDependencies() async {
-
-
-  
   sl.registerSingleton<Dio>(Dio());
 
   // Dependencies
   sl.registerSingleton<AuthServiceImp>(AuthServiceImp(dio: sl()));
 
   sl.registerSingleton<RegisterRepoImpl>(
-    RegisterRepoImpl(authServiceImp: sl())
-  );
-  
+      RegisterRepoImpl(authServiceImp: sl()));
+
   //UseCases
   sl.registerSingleton<RegisterUseCase>(
-    RegisterUseCase(registerRepoImpl: sl())
-  );
-
+      RegisterUseCase(registerRepoImpl: sl()));
 
   //Blocs
-  sl.registerFactory<AuthBloc>(
-    ()=> AuthBloc(sl())
-  );
-
-
+  sl.registerFactory<AuthBloc>(() => AuthBloc(sl()));
 
   sl.registerSingleton<CategoriesServiceImp>(CategoriesServiceImp(dio: Dio()));
-    sl.registerSingleton<CategoryRepoImpl>(CategoryRepoImpl(categoriesServiceImp: sl()));
+  sl.registerSingleton<CategoryRepoImpl>(
+      CategoryRepoImpl(categoriesServiceImp: sl()));
 
-  sl.registerSingleton<CategoryUseCase>(CategoryUseCase(categoryRepoImpl: sl()));
+  sl.registerSingleton<CategoryUseCase>(
+      CategoryUseCase(categoryRepoImpl: sl()));
 
- sl.registerFactory<CategoryBloc>(
-    ()=> CategoryBloc(sl())
-  );
+  sl.registerFactory<CategoryBloc>(() => CategoryBloc(sl()));
 
   sl.registerSingleton<BicycleUseCase>(BicycleUseCase(categoryRepoImpl: sl()));
 
- sl.registerFactory<BicycleBloc>(
-    ()=> BicycleBloc(sl())
-  );
-
-  
+  sl.registerFactory<BicycleBloc>(() => BicycleBloc(sl()));
   sl.registerSingleton<HubContentServiceImp>(HubContentServiceImp(dio: sl()));
 
-  
-  sl.registerSingleton<HubContenRepoImpl>(HubContenRepoImpl(hubContentServiceImp: sl()));
+  sl.registerSingleton<HubContenRepoImpl>(
+      HubContenRepoImpl(hubContentServiceImp: sl()));
 
+  sl.registerSingleton<GetHubContentsUseCase>(
+      GetHubContentsUseCase(hubContenRepoImpl: sl()));
+  sl.registerFactory<HubContentsBloc>(() => HubContentsBloc(sl()));
+//_____________________________________
 
-  sl.registerSingleton<GetHubContentsUseCase>(GetHubContentsUseCase(hubContenRepoImpl: sl()));
- sl.registerFactory<HubContentsBloc>(
-    ()=> HubContentsBloc(sl())
-  );
+  sl.registerSingleton<HubServiceImp>(HubServiceImp(dio: sl()));
 
+  sl.registerSingleton<HubRepoImpl>(HubRepoImpl(hubServiceImp: sl()));
 
+  sl.registerSingleton<HubUseCase>(HubUseCase(hubRepoImpl: sl()));
+
+  sl.registerFactory<HubBloc>(() => HubBloc(sl()));
+
+  sl.registerSingleton<ReservationServiceImp>(ReservationServiceImp(dio: sl()));
+
+  sl.registerSingleton<ReservationRepoImpl>(
+      ReservationRepoImpl(reservationServiceImp: sl()));
+
+  sl.registerSingleton<ReservationUseCase>(
+      ReservationUseCase(reservationRepoImpl: sl()));
+
+  sl.registerFactory<ReservationBloc>(() => ReservationBloc(sl()));
 }
