@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 String nam =
-    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1NTU1NTU1NTU1IiwiaWF0IjoxNzIzMjQxMTg4LCJleHAiOjE3MjMzMjc1ODh9.MF4OA30QCETnzt60VxZD3Ft8X0kPsd7GB6U20yzGwjo";
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyMTU0NTk4Nzc1IiwiaWF0IjoxNzIzMzk5MDY5LCJleHAiOjE3MjM0ODU0Njl9.B_7RKvrK1mAih6hVIQEWDFg0xo8_05xb_bgIL9htXTg";
 
 class HeaderConfig {
   static Options getHeader({useToken = true}) {
@@ -10,7 +10,10 @@ class HeaderConfig {
     // box.get('token')
     if (useToken) {
       return Options(
-        headers: {"accept": "*/*", "Authorization": "Bearer ${(nam)}"},
+        headers: {
+          "accept": "*/*",
+          "Authorization": "Bearer ${(box.get('token'))}"
+        },
       );
     } else {
       return Options(

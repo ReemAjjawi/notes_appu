@@ -1,45 +1,113 @@
-// // This is a basic Flutter widget test.
-// //
-// // To perform an interaction with a widget in your test, use the WidgetTester
-// // utility in the flutter_test package. For example, you can send tap and scroll
-// // gestures. You can also use WidgetTester to find child widgets in the widget
-// // tree, read text, and verify that the values of widget properties are correct.
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:ride_application/core/error/exceptions.dart';
+import 'package:ride_application/core/error/failures.dart';
+import 'package:ride_application/core/success/success.dart';
+import 'package:ride_application/features/auth/data/model/user_model.dart';
+import 'package:ride_application/features/auth/data/datasource/remote/register_service.dart';
+import 'package:ride_application/features/auth/data/repository/register_repository_impl.dart';
 
-// import 'package:dio/dio.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_test/flutter_test.dart';
-// import 'package:ride_application/features/categories/data/datasource/remote/categories_service.dart';
-// import 'package:ride_application/features/categories/presentation/view/bicycles_screen.dart';
-// import 'package:ride_application/features/categories/presentation/view/categories_screen.dart';
+import 'servies.dart';
 
-// import 'package:ride_application/main.dart';
+void main() {
+  group("Test Service ", () {
+    late AuthServiceImp authService;
+    late Dio dio;
+    late UserModel user;
 
-// void main() {
-//     group("Test Service ", () {
-//       late BicycleServiceimpl categoriesServiceImp;
-//       late Dio dio;
-//       late String category ="ride";
+    setUp(() {
+      dio = Dio();
+      authService = AuthServiceImp(dio: dio);
+      user = UserModel(
+          firstName: "firstName",
+          lastName: "lastName",
+          phone: "phone",
+          username: "usernme",
+          birthDate: "2022-07-08",
+          password: "password",
+          confirmPassword: "password");
+    });
 
-//       setUp(() {
-//         dio = Dio();
-//         authService = AuthService(dio: dio);
-//         user = UserModel(
-//             firstName: "firstName",
-//             lastName: "lastName",
-//             phone: "phone",
-//             username: "usernme",
-//             birthDate: "2022-07-08",
-//             password: "password",
-//             confirmPassword: "password");
-//       });
+    test("InValid Password", () async {
+      expect(
+        () async => await authService.Register(user),
+        throwsA(isA<PasswordMustContainOneUppercase>()),
+      );
+    });
+  });
 
-//       test("InValid Password", () async {
-//         try {
-//           var data = await authService.signUp(user);
-//         } catch (e) {
-//           print(e.runtimeType);
-//           expect(e, throwsA(PasswordMustContainOneUppercase()));
-//         }
-//       });
-//     });
-// }
+  group("testing for success ", () {
+    late AuthServiceImp authService;
+    late Dio dio;
+    late UserModel user;
+
+    setUp(() async {
+      dio = Dio();
+      authService = AuthServiceImp(dio: dio);
+//await Hive.initFlutter();
+      //await Hive.openBox('projectBox');
+      user = UserModel(
+          firstName: "firstName",
+          lastName: "lastName",
+          phone: "0933457677",
+          username: "reeno",
+          birthDate: "2022-07-08",
+          password: "kjhgfds567SSA*&^",
+          confirmPassword: "password");
+    });
+
+    test("Right Password", () async {
+      final result = await authService.Register(user);
+      expect(result, isA<Success>());
+    });
+  });
+  group("Test Repo", () {
+    late Dio dio;
+    late UserModel user;
+    late AuthServiceImp authService;
+    late RegisterRepoImpl repo;
+
+    setUp(() {
+      user = UserModel(
+          firstName: "firstName",
+          lastName: "lastName",
+          phone: "phone",
+          username: "usernme",
+          birthDate: "2022-07-08",
+          password: "password",
+          confirmPassword: "password");
+      dio = Dio();
+      authService = AuthServiceImp(dio: dio);
+      repo = RegisterRepoImpl(authServiceImp: authService);
+    });
+
+    test("Password Must Contain and return PasswordFailure", () async {
+      var data = await repo.Register(user);
+      expect(data.fold((l) => l, (r) => null), isA<PasswordFailure>());
+    });
+  });
+
+  group("Test Service of bicycle", () {
+    late CategoriesServiceImp categoriesServiceImp;
+    late Dio dio;
+
+    setUp(() {
+      dio = Dio();
+      categoriesServiceImp = CategoriesServiceImp(dio: dio);
+    });
+    test("InValid category", () async {
+      try {
+        String category = "Road_bike";
+        await categoriesServiceImp.getBicyclesByCategory(category);
+        fail('Expected an exception to be thrown');
+      } catch (e) {
+        expect(e, isA<ServerException>());
+        // expect((e as PasswordMustContainOneUppercase).message,
+        //     "Password must contain 1 or more uppercase characters.");
+      }
+    });
+  });
+}

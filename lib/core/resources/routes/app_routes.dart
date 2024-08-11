@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:ride_application/features/auth/presentation/view/welcome_screen.dart';
-import 'package:ride_application/features/categories/data/model/category_model.dart';
-import 'package:ride_application/features/categories/domain/repository/category_repository.dart';
 import 'package:ride_application/features/hub_content/data/model/second_model.dart';
+import 'package:ride_application/features/map/data/model/hubinfo_model.dart';
 import '../../../features/auth/data/model/user_model.dart';
 import '../../../features/auth/presentation/view/sign_up_screen.dart';
 import '../../../features/auth/presentation/view/set_password_screen.dart';
@@ -11,11 +10,11 @@ import '../../../features/categories/presentation/view/bicycles_screen.dart';
 import '../../../features/categories/presentation/view/categories_screen.dart';
 import '../../../features/hub_content/presentation/view/bicycle_details_screen.dart';
 import '../../../features/hub_content/presentation/view/bicycle_from_categorey.dart';
-import '../../../features/map/data/model/hub_model.dart';
 import '../../../features/map/presentation/view/home_screen.dart';
 import '../../../features/map/presentation/view/location_screen.dart';
 import '../../../features/map/presentation/view/map_screen.dart';
 import '../../../features/request_rent/presentation/view/Reservation_screen.dart';
+import '../../../features/request_rent/presentation/view/nn.dart';
 
 class AppRoutes {
   static Route onGenerateRoutes(RouteSettings settings) {
@@ -27,7 +26,33 @@ class AppRoutes {
         if (token != null) {
           return _materialRoute(WelcomeScreen());
         } else {
-          return _materialRoute(CategoriesScreen());
+          return _materialRoute(CategoriesScreen()
+              //   ReservationScreen(
+              //   bicycle: BicycleListModel(
+              //       id: 0,
+              //       modelPrice: ModelPriceModel(id: 0, price: 0, model: "d"),
+              //       type: "d",
+              //       size: 2,
+              //       note: "D",
+              //       maintenance: ['d'],
+              //       extension: ['d'],
+              //       photoId: 0,
+              //       hasOffer: "d",
+              //       discountPrice: 5),
+              //   hubId: HubinfoModel(
+              //       latitude: 0,
+              //       longitude: 0,
+              //       id: 0,
+              //       name: "ddd",
+              //       description: "ddd"),
+              //   hubIdto: HubinfoModel(
+              //       latitude: 0,
+              //       longitude: 0,
+              //       id: 0,
+              //       name: "ddd",
+              //       description: "description"),
+              // )
+              );
         }
       case '/BicyclesScreen':
         return _materialRoute(

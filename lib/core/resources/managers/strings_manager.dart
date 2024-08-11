@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 class StringsManager {
   static const String ANYWHEREYOUARE = "Anywhere you are";

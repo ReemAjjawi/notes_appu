@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dash/flutter_dash.dart';
 import 'package:ride_application/core/helper/build_app_bar.dart';
 import 'package:ride_application/core/resources/managers/assets_manager.dart';
 import 'package:ride_application/core/resources/managers/colors_manager.dart';
@@ -32,8 +35,11 @@ class ReservationScreen extends StatelessWidget {
     required this.hubIdto,
   }) : super(key: key);
 
-  final TextEditingController dateController = TextEditingController();
-  final TextEditingController timeController = TextEditingController();
+  final TextEditingController durationController = TextEditingController();
+  final TextEditingController timestartController = TextEditingController();
+
+  final TextEditingController timeendController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -46,7 +52,7 @@ class ReservationScreen extends StatelessWidget {
             appBar: buildAppBar(
               hasLeading: true,
               title: Text(StringsManager.REQUESTFORRENT),
-              onPressed: () => onAppBarPressed(context),
+              onPressed: () => _onAppBarPressed(context),
             ),
             body: Form(
                 key: _formKey, child: buildBody(screenWidth, screenHeight)),
@@ -107,65 +113,142 @@ class ReservationScreen extends StatelessWidget {
 
   Widget buildBody(double screenWidth, double screenHeight) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      CustomListTile(
-        leading: const Icon(
-          Icons.location_on,
-          color: ColorManager.cancelColor,
+      _buildSizeBox2(screenHeight / 14),
+      Stack(
+        children: [
+          Column(
+            children: [
+              CustomListTile(
+                leading: const Icon(
+                  Icons.location_on,
+                  color: ColorManager.cancelColor,
+                ),
+                title: Text(StringsManager.CURRENTLOCATION,
+                    style: StylesManager.titleTextStyle),
+                subtitle: Text(hubId.name, style: StylesManager.subTitleStyle),
+                backgroundColor: ColorManager.whiteColor,
+                borderColor: ColorManager.whiteColor,
+                height: screenHeight * 0.1,
+                width: screenWidth,
+                hasrawtitle: false,
+                hasrawsubtitle: false,
+                hascolum: false,
+              ),
+              CustomListTile(
+                leading: const Icon(
+                  Icons.location_on,
+                  color: Colors.blue,
+                ),
+                title: Text(StringsManager.OFFICE,
+                    style: StylesManager.titleTextStyle),
+                subtitle:
+                    Text(hubIdto.name, style: StylesManager.subTitleStyle),
+                backgroundColor: ColorManager.whiteColor,
+                borderColor: ColorManager.whiteColor,
+                height: screenHeight * 0.1,
+                width: screenWidth,
+                hasrawtitle: false,
+                hasrawsubtitle: false,
+                hascolum: false,
+              ),
+            ],
+          ),
+          Positioned(
+            left: screenWidth - (screenWidth - 29),
+            top: screenHeight * 0.1 / 2,
+            child: Dash(
+              direction: Axis.vertical,
+              length: screenHeight * 0.1,
+              dashLength: 4,
+              dashColor: Colors.grey,
+            ),
+          ),
+        ],
+      ),
+      Padding(
+        padding: EdgeInsets.all(screenWidth * 0.03),
+        child: CustomListTile(
+          title: Text(bicycle.type, style: StylesManager.titleTextStyle),
+          subtitle: Icon(Icons.star, color: ColorManager.starColor),
+          subtitle2: Text(
+            StringsManager.REVIEWS,
+            style: StylesManager.subTitleStyle,
+          ),
+          trailing: Image.asset(
+            AssetsManager.bmwRedImage,
+            height: screenHeight * 0.25,
+            fit: BoxFit.cover,
+          ),
+          backgroundColor: ColorManager.scondaryColor,
+          borderColor: ColorManager.borderColor,
+          height: screenHeight * 0.1,
+          width: screenWidth,
+          hasrawtitle: false,
+          hasrawsubtitle: true,
+          hascolum: false,
         ),
-        title: Text(StringsManager.CURRENTLOCATION,
-            style: StylesManager.titleTextStyle),
-        subtitle: Text(hubId.name, style: StylesManager.subTitleStyle),
-        backgroundColor: ColorManager.scondaryColor,
-        borderColor: ColorManager.borderColor,
-        height: screenHeight * 0.1,
-        width: screenWidth,
-        hasrawtitle: false,
-        hasrawsubtitle: false,
-        hascolum: false,
       ),
-      buildSizeBox2(screenHeight),
-      CustomListTile(
-        leading: const Icon(
-          Icons.location_on,
-          color: ColorManager.borderColor,
+      Padding(
+        padding: EdgeInsets.all(screenWidth * 0.03),
+        child: CustomTextFormField(
+          controller: durationController,
+          hintText: StringsManager.TIME,
+          colorborder: ColorManager.hintTextColor,
+          width: screenWidth,
+          height: screenHeight / 15,
         ),
-        title: Text(StringsManager.CURRENTLOCATION,
-            style: StylesManager.subTitleStyle),
-        subtitle: Text(hubIdto.name),
-        backgroundColor: ColorManager.scondaryColor,
-        borderColor: ColorManager.scondaryColor,
-        height: screenHeight * 0.1,
+      ),
+      Container(
         width: screenWidth,
-        hasrawtitle: false,
-        hasrawsubtitle: false,
-        hascolum: false,
+        height: screenHeight / 13,
+        child: Builder(builder: (context) {
+          return TextFormField(
+            controller: timestartController,
+            decoration: InputDecoration(
+              hintText: 'Enter start time',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              contentPadding: EdgeInsets.symmetric(
+                vertical: screenHeight * 0.02,
+                horizontal: screenWidth,
+              ),
+              errorMaxLines: 1,
+              errorStyle: TextStyle(height: 0.5),
+              suffixIcon: Icon(Icons.access_time),
+            ),
+            onTap: () async {
+              FocusScope.of(context).requestFocus(FocusNode());
+              TimeOfDay? pickedTime = await showTimePicker(
+                context: context,
+                initialTime: TimeOfDay.now(),
+              );
+              if (pickedTime != null) {
+                final now = DateTime.now();
+                final formattedTime = DateTime(
+                  now.year,
+                  now.month,
+                  now.day,
+                  pickedTime.hour,
+                  pickedTime.minute,
+                );
+                timestartController.text =
+                    "${formattedTime.toLocal()}".split(' ')[1].substring(0, 5);
+                print(timestartController.text);
+              }
+            },
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter start time';
+              }
+              return null;
+            },
+          );
+        }),
       ),
-      buildSizeBox2(screenHeight),
-      CustomTextFormField(
-        controller: timeController,
-        hintText: StringsManager.TIME,
-        colorborder: ColorManager.hintTextColor,
-        width: screenWidth * 0.88,
-        height: screenHeight / 15,
-      ),
-      buildSizeBox(screenHeight),
-      CustomListTile(
-        title: Text(bicycle.type, style: StylesManager.titleTextStyle),
-        subtitle: Text(bicycle.note, style: StylesManager.subTitleStyle),
-        backgroundColor: ColorManager.scondaryColor,
-        borderColor: ColorManager.borderColor,
-        height: screenHeight * 0.1,
-        width: screenWidth,
-        hasrawtitle: false,
-        hasrawsubtitle: false,
-        hascolum: false,
-      ),
-      buildSizeBox2(screenHeight),
-      buildText(),
-      buildSizeBox(screenHeight),
+      _buildText(),
+      _buildSizeBox(screenHeight),
       buildListView(screenHeight, screenWidth),
-      buildSizeBox2(screenHeight),
-      buildSizeBox2(screenHeight),
       Center(
         child: BlocBuilder<ReservationBloc, ReservationClassState>(
           builder: (context, state) {
@@ -178,7 +261,7 @@ class ReservationScreen extends StatelessWidget {
                         bicycleId: bicycle.id,
                         fromHubId: hubId.id,
                         toHubId: hubIdto.id,
-                        duration: int.parse(timeController.text),
+                        duration: int.parse(durationController.text),
                         startTime: "2024-08-09T15:44:48.928Z",
                         endTime: "2024-08-09T15:44:48.928Z",
                         reservationStatus: "New",
@@ -248,22 +331,22 @@ class ReservationScreen extends StatelessWidget {
   }
 }
 
-Widget buildSizeBox(double screenHeight) {
+Widget _buildSizeBox(double screenHeight) {
   return SizedBox(height: screenHeight * 0.02);
 }
 
-Widget buildSizeBox2(double screenHeight) {
+Widget _buildSizeBox2(double screenHeight) {
   return SizedBox(height: screenHeight * 0.05);
 }
 
-Widget buildText() {
+Widget _buildText() {
   return Text(
     StringsManager.SELECTPAYMENTMETHOD,
     style: StylesManager.headLineStyle,
   );
 }
 
-Widget buildAppButton() {
+Widget _buildAppButton() {
   return SizedBox(
     width: double.infinity,
     child: AppButton(
@@ -278,7 +361,7 @@ Widget buildAppButton() {
   );
 }
 
-void onAppBarPressed(context) {
+void _onAppBarPressed(context) {
   Navigator.of(context).pop();
 }
 
