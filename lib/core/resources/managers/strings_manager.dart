@@ -127,6 +127,16 @@ class StringsManager {
   static const String DATEend = "DateEnd";
   static const String DATEStar = "DateStar";
 
+  static const String VALIDPASSORD = "Please enter your password";
+  static const String VALIDPASSORDCON = "Please confirm your password";
+  static const String VALIDPASSORDCONmatch = "Passwords do not match";
+  static const String VALIDPHONE = "Please enter your mobile number";
+  static const String VALIDPHONEREG = "Mobile number must be exactly 10 digits";
+  static const String VALIDTEXT = "Please enter this box";
+  static const String VALIDDATE = "Please enter your birth date";
+
+  static const String VALIDPASSORDREG =
+      "Password must be at least 8 characters long, include an uppercase letter, a number, and a special character";
   static const String TIME = "Time";
   static const String SELECTPAYMENTMETHOD = "Select payment method";
   static const String VISANUMBER = "**** **** **** 8970";

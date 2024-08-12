@@ -104,8 +104,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     initialCountryCode: 'IN',
                     validator: (phone) {
-                       
-                      return phoneNumberValidator(phone?.completeNumber);
+                      return phoneValidator(phone);
                     },
                   ),
                 ),
@@ -113,40 +112,36 @@ class SignUpScreen extends StatelessWidget {
                   width: screenWidth * 0.92,
                   height: screenHeight / 13,
                   child: TextFormField(
-                    controller: dateController,
-                    decoration: InputDecoration(
-                      hintText: 'Enter your birth date',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+                      controller: dateController,
+                      decoration: InputDecoration(
+                        hintText: 'Enter your birth date',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: screenHeight * 0.02,
+                            horizontal: screenWidth * 0.04),
+                        errorMaxLines: 1,
+                        errorStyle: TextStyle(height: 0.5),
+                        suffixIcon: Icon(Icons.calendar_today),
                       ),
-                      contentPadding: EdgeInsets.symmetric(
-                          vertical: screenHeight * 0.02,
-                          horizontal: screenWidth * 0.04),
-                      errorMaxLines: 1,
-                      errorStyle: TextStyle(height: 0.5),
-                      suffixIcon: Icon(Icons.calendar_today),
-                    ),
-                    onTap: () async {
-                      FocusScope.of(context).requestFocus(FocusNode());
-                      DateTime? pickedDate = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(1900),
-                        lastDate: DateTime(2100),
-                      );
-                      if (pickedDate != null) {
-                        dateController.text =
-                            "${pickedDate.toLocal()}".split(' ')[0];
-                        print(dateController.text);
-                      }
-                    },
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your birth date';
-                      }
-                      return null;
-                    },
-                  ),
+                      onTap: () async {
+                        FocusScope.of(context).requestFocus(FocusNode());
+                        DateTime? pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime(2100),
+                        );
+                        if (pickedDate != null) {
+                          dateController.text =
+                              "${pickedDate.toLocal()}".split(' ')[0];
+                          print(dateController.text);
+                        }
+                      },
+                      validator: (value) {
+                        return dateValidator(value);
+                      }),
                 ),
                 Padding(
                   padding: EdgeInsets.all(screenWidth * 0.05),

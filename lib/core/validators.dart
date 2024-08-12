@@ -1,38 +1,48 @@
+import 'resources/managers/strings_manager.dart';
+
 String? passwordValidator(String? value) {
   if (value == null || value.isEmpty) {
-    return 'Please enter your password';
+    return StringsManager.VALIDPASSORD;
   }
   RegExp passwordRegExp =
       RegExp(r'^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$');
   if (!passwordRegExp.hasMatch(value)) {
-    return 'Password must be at least 8 characters long, include an uppercase letter, a number, and a special character';
+    return StringsManager.VALIDPASSORDREG;
   }
   return null;
 }
 
 String? confirmPasswordValidator(String? value, String password) {
   if (value == null || value.isEmpty) {
-    return 'Please confirm your password';
+    return StringsManager.VALIDPASSORDCON;
   }
   if (value != password) {
-    return 'Passwords do not match';
-  }
-  return null;
-}
-
-String? phoneNumberValidator(String? phone) {
-  if (phone == null || phone.isEmpty) {
-    return 'Please enter your mobile number';
-  }
-  if (!RegExp(r'^\d{10}$').hasMatch(phone)) {
-    return 'Mobile number must be exactly 10 digits';
+    return StringsManager.VALIDPASSORDCONmatch;
   }
   return null;
 }
 
 String? stringValidator(String? value) {
   if (value == null || value.isEmpty) {
-    return 'Please enter this box';
+    return StringsManager.VALIDTEXT;
+  }
+  return null;
+}
+
+String? dateValidator(value) {
+  if (value == null || value.isEmpty) {
+    return StringsManager.VALIDDATE;
+  }
+  return null;
+}
+
+String? phoneValidator(phone) {
+  if (phone == null || phone.number.isEmpty) {
+    return StringsManager.VALIDPHONE;
+  }
+
+  if (!RegExp(r'^\d{10}$').hasMatch(phone.number)) {
+    return StringsManager.VALIDPHONEREG;
   }
   return null;
 }

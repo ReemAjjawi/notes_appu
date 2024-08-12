@@ -13,8 +13,9 @@ import '../../../features/hub_content/presentation/view/bicycle_from_categorey.d
 import '../../../features/map/presentation/view/home_screen.dart';
 import '../../../features/map/presentation/view/location_screen.dart';
 import '../../../features/map/presentation/view/map_screen.dart';
+import '../../../features/request_rent/presentation/view/Reservation1_screen.dart';
 import '../../../features/request_rent/presentation/view/Reservation_screen.dart';
-import '../../../features/request_rent/presentation/view/nn.dart';
+import '../../../features/thank_you/thank_you_screen.dart';
 
 class AppRoutes {
   static Route onGenerateRoutes(RouteSettings settings) {
@@ -26,33 +27,31 @@ class AppRoutes {
         if (token != null) {
           return _materialRoute(WelcomeScreen());
         } else {
-          return _materialRoute(WelcomeScreen()
-              //   ReservationScreen(
-              //   bicycle: BicycleListModel(
-              //       id: 0,
-              //       modelPrice: ModelPriceModel(id: 0, price: 0, model: "d"),
-              //       type: "d",
-              //       size: 2,
-              //       note: "D",
-              //       maintenance: ['d'],
-              //       extension: ['d'],
-              //       photoId: 0,
-              //       hasOffer: "d",
-              //       discountPrice: 5),
-              //   hubId: HubinfoModel(
-              //       latitude: 0,
-              //       longitude: 0,
-              //       id: 0,
-              //       name: "ddd",
-              //       description: "ddd"),
-              //   hubIdto: HubinfoModel(
-              //       latitude: 0,
-              //       longitude: 0,
-              //       id: 0,
-              //       name: "ddd",
-              //       description: "description"),
-              // )
-              );
+          return _materialRoute(ReservationtowScreen(
+            bicycle: BicycleListModel(
+                id: 0,
+                modelPrice: ModelPriceModel(id: 0, price: 0, model: "d"),
+                type: "d",
+                size: 2,
+                note: "D",
+                maintenance: ['d'],
+                extension: ['d'],
+                photoId: 0,
+                hasOffer: "d",
+                discountPrice: 5),
+            hubId: HubinfoModel(
+                latitude: 0,
+                longitude: 0,
+                id: 0,
+                name: "ddd",
+                description: "ddd"),
+            hubIdto: HubinfoModel(
+                latitude: 0,
+                longitude: 0,
+                id: 0,
+                name: "ddd",
+                description: "description"),
+          ));
         }
       case '/BicyclesScreen':
         return _materialRoute(
@@ -78,6 +77,9 @@ class AppRoutes {
       case '/SignUp':
         return _materialRoute(SignUpScreen());
 
+      case '/ThankYouScreen':
+        return _materialRoute(ThankYouScreen());
+
       case '/CategoriesScreen':
         return _materialRoute(CategoriesScreen());
 
@@ -98,6 +100,10 @@ class AppRoutes {
       case '/ReservationScreen':
         final args = settings.arguments as DetailArguments;
         return _materialRoute(ReservationScreen(
+            bicycle: args.bicycle, hubId: args.hubId, hubIdto: args.hubIdto));
+      case '/ReservationtowScreen':
+        final args = settings.arguments as DetailArguments;
+        return _materialRoute(ReservationtowScreen(
             bicycle: args.bicycle, hubId: args.hubId, hubIdto: args.hubIdto));
 
       default:
