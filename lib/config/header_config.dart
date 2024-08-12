@@ -10,10 +10,7 @@ class HeaderConfig {
     // box.get('token')
     if (useToken) {
       return Options(
-        headers: {
-          "accept": "*/*",
-          "Authorization": "Bearer ${(box.get('token'))}"
-        },
+        headers: {"accept": "*/*", "Authorization": "Bearer ${(nam)}"},
       );
     } else {
       return Options(

@@ -26,7 +26,7 @@ class AppRoutes {
         if (token != null) {
           return _materialRoute(WelcomeScreen());
         } else {
-          return _materialRoute(CategoriesScreen()
+          return _materialRoute(WelcomeScreen()
               //   ReservationScreen(
               //   bicycle: BicycleListModel(
               //       id: 0,

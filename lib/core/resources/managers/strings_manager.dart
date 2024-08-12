@@ -1,4 +1,3 @@
-
 class StringsManager {
   static const String ANYWHEREYOUARE = "Anywhere you are";
   static const String ATANYTIME = "At anytime";
@@ -125,6 +124,9 @@ class StringsManager {
   static const String AUTOMATIC = "Automatic";
   static const String REQUESTFORRENT = "Request for rent";
   static const String DATE = "Date";
+  static const String DATEend = "DateEnd";
+  static const String DATEStar = "DateStar";
+
   static const String TIME = "Time";
   static const String SELECTPAYMENTMETHOD = "Select payment method";
   static const String VISANUMBER = "**** **** **** 8970";

@@ -100,7 +100,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         errorMaxLines: 2,
                         errorStyle: TextStyle(
-                          fontSize: screenHeight * 0.018,
+                          fontSize: screenHeight * 0.01,
                         ),
                         contentPadding: EdgeInsets.symmetric(
                           vertical: screenHeight * 0.02,
@@ -158,7 +158,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               BorderSide(color: ColorManager.hintTextColor),
                         ),
                         errorStyle: TextStyle(
-                          fontSize: screenHeight * 0.018,
+                          fontSize: screenHeight * 0.01,
                         ),
                         contentPadding: EdgeInsets.symmetric(
                           vertical: screenHeight * 0.02,

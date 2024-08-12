@@ -104,6 +104,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     initialCountryCode: 'IN',
                     validator: (phone) {
+                       
                       return phoneNumberValidator(phone?.completeNumber);
                     },
                   ),

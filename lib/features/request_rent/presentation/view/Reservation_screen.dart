@@ -17,8 +17,6 @@ import '../../../../core/helper/indicator.dart';
 import '../../../../core/widgets/success_widget.dart';
 import '../../../../injection_file.dart';
 import '../../../hub_content/data/model/second_model.dart';
-import '../../../hub_content/presentation/view/bicycle_details_screen.dart';
-import '../../../map/data/model/hub_model.dart';
 import '../../../map/data/model/hubinfo_model.dart';
 import '../../data/model/reservation_model.dart';
 import '../Reservation_bloc/Reservation_bloc.dart';
@@ -198,54 +196,74 @@ class ReservationScreen extends StatelessWidget {
           height: screenHeight / 15,
         ),
       ),
-      Container(
-        width: screenWidth,
-        height: screenHeight / 13,
-        child: Builder(builder: (context) {
-          return TextFormField(
-            controller: timestartController,
-            decoration: InputDecoration(
-              hintText: 'Enter start time',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              contentPadding: EdgeInsets.symmetric(
-                vertical: screenHeight * 0.02,
-                horizontal: screenWidth,
-              ),
-              errorMaxLines: 1,
-              errorStyle: TextStyle(height: 0.5),
-              suffixIcon: Icon(Icons.access_time),
-            ),
-            onTap: () async {
-              FocusScope.of(context).requestFocus(FocusNode());
-              TimeOfDay? pickedTime = await showTimePicker(
-                context: context,
-                initialTime: TimeOfDay.now(),
-              );
-              if (pickedTime != null) {
-                final now = DateTime.now();
-                final formattedTime = DateTime(
-                  now.year,
-                  now.month,
-                  now.day,
-                  pickedTime.hour,
-                  pickedTime.minute,
-                );
-                timestartController.text =
-                    "${formattedTime.toLocal()}".split(' ')[1].substring(0, 5);
-                print(timestartController.text);
-              }
-            },
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter start time';
-              }
-              return null;
-            },
-          );
-        }),
+      Padding(
+        padding: EdgeInsets.all(screenWidth * 0.03),
+        child: CustomTextFormField(
+          controller: timestartController,
+          hintText: StringsManager.DATEStar,
+          colorborder: ColorManager.hintTextColor,
+          width: screenWidth,
+          height: screenHeight / 15,
+        ),
       ),
+      Padding(
+        padding: EdgeInsets.all(screenWidth * 0.03),
+        child: CustomTextFormField(
+          controller: timeendController,
+          hintText: StringsManager.DATEend,
+          colorborder: ColorManager.hintTextColor,
+          width: screenWidth,
+          height: screenHeight / 15,
+        ),
+      ),
+      // Container(
+      //   width: screenWidth,
+      //   height: screenHeight / 13,
+      //   child: Builder(builder: (context) {
+      //     return TextFormField(
+      //       controller: timestartController,
+      //       decoration: InputDecoration(
+      //         hintText: 'Enter start time',
+      //         border: OutlineInputBorder(
+      //           borderRadius: BorderRadius.circular(10),
+      //         ),
+      //         contentPadding: EdgeInsets.symmetric(
+      //           vertical: screenHeight * 0.02,
+      //           horizontal: screenWidth,
+      //         ),
+      //         errorMaxLines: 1,
+      //         errorStyle: TextStyle(height: 0.5),
+      //         suffixIcon: Icon(Icons.access_time),
+      //       ),
+      //       onTap: () async {
+      //         FocusScope.of(context).requestFocus(FocusNode());
+      //         TimeOfDay? pickedTime = await showTimePicker(
+      //           context: context,
+      //           initialTime: TimeOfDay.now(),
+      //         );
+      //         if (pickedTime != null) {
+      //           final now = DateTime.now();
+      //           final formattedTime = DateTime(
+      //             now.year,
+      //             now.month,
+      //             now.day,
+      //             pickedTime.hour,
+      //             pickedTime.minute,
+      //           );
+      //           timestartController.text =
+      //               "${formattedTime.toLocal()}".split(' ')[1].substring(0, 5);
+      //           print(timestartController.text);
+      //         }
+      //       },
+      //       validator: (value) {
+      //         if (value == null || value.isEmpty) {
+      //           return 'Please enter start time';
+      //         }
+      //         return null;
+      //       },
+      //     );
+      //   }),
+      // ),
       _buildText(),
       _buildSizeBox(screenHeight),
       buildListView(screenHeight, screenWidth),
@@ -261,11 +279,12 @@ class ReservationScreen extends StatelessWidget {
                         bicycleId: bicycle.id,
                         fromHubId: hubId.id,
                         toHubId: hubIdto.id,
-                        duration: int.parse(durationController.text),
-                        startTime: "2024-08-09T15:44:48.928Z",
-                        endTime: "2024-08-09T15:44:48.928Z",
+                        duration: 30,
+                        startTime: "2024-08-09T15:00:48.928Z",
+                        endTime: "2024-08-09T15:30:48.928Z",
                         reservationStatus: "New",
                         paymentMethod: "Wallet");
+                    print(reservation);
                     context.read<ReservationBloc>().add(
                           ReservationEvent(reservation),
                         );
