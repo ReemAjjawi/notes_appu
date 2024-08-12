@@ -27,31 +27,7 @@ class AppRoutes {
         if (token != null) {
           return _materialRoute(WelcomeScreen());
         } else {
-          return _materialRoute(ReservationtowScreen(
-            bicycle: BicycleListModel(
-                id: 0,
-                modelPrice: ModelPriceModel(id: 0, price: 0, model: "d"),
-                type: "d",
-                size: 2,
-                note: "D",
-                maintenance: ['d'],
-                extension: ['d'],
-                photoId: 0,
-                hasOffer: "d",
-                discountPrice: 5),
-            hubId: HubinfoModel(
-                latitude: 0,
-                longitude: 0,
-                id: 0,
-                name: "ddd",
-                description: "ddd"),
-            hubIdto: HubinfoModel(
-                latitude: 0,
-                longitude: 0,
-                id: 0,
-                name: "ddd",
-                description: "description"),
-          ));
+          return _materialRoute(WelcomeScreen());
         }
       case '/BicyclesScreen':
         return _materialRoute(
