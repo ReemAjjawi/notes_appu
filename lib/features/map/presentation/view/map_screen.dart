@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:ride_application/core/helper/indicator.dart';
-import 'package:ride_application/core/resources/managers/colors_manager.dart';
 
-import 'package:ride_application/injection_file.dart';
-import 'package:ride_application/main.dart';
-
+import '../../../../core/helper/indicator.dart';
+import '../../../../core/resources/managers/colors_manager.dart';
+import '../../../../injection_file.dart';
+import '../../../../main.dart';
 import '../../data/model/hub_model.dart';
 import '../../data/model/hubinfo_model.dart';
 import '../hub_bloc/hub_bloc.dart';
@@ -64,7 +63,7 @@ class MapScreen extends StatelessWidget {
     final polylines = data.map<Polyline>((hubs) {
       return Polyline(
         points: [Locationcurr, LatLng(hubs.latitude, hubs.longitude)],
-        strokeWidth: 2.0,
+        strokeWidth: 1.0,
         color: Colors.blue.withOpacity(0.5),
       );
     }).toList();
@@ -78,6 +77,7 @@ class MapScreen extends StatelessWidget {
       child: Builder(builder: (context) {
         return Container(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               InkWell(
                 child: Icon(
@@ -107,7 +107,7 @@ class MapScreen extends StatelessWidget {
               Text(
                 hubs.name,
                 style: TextStyle(
-                  fontWeight: FontWeight.w400,
+                  fontWeight: FontWeight.w900,
                   fontSize: screenWidth * 0.01,
                   color: ColorManager.titleNotificationColor,
                 ),

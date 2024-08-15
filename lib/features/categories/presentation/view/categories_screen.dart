@@ -45,16 +45,16 @@ Widget _buildBody() {
     child: Column(
       //  crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        _buildSizeBox(),
+        _buildSizeBox(screenHeight),
         _buildText(),
-        _buildSizeBox(),
-        _buildGridView(),
+        _buildSizeBox(screenHeight),
+        _buildGridView(screenWidth, screenHeight, isPortrait),
       ],
     ),
   );
 }
 
-Widget _buildSizeBox() {
+Widget _buildSizeBox(screenHeight) {
   return SizedBox(height: screenHeight * 0.02);
 }
 
@@ -65,7 +65,8 @@ Widget _buildText() {
   );
 }
 
-Widget _buildGridView() {
+Widget _buildGridView(
+    double screenWidth, double screenHeight, bool isPortrait) {
   final List<Map<String, String>> transportOptions = [
     {'iconPath': AssetsManager.bikeImage, 'label': StringsManager.CAR},
     {'iconPath': AssetsManager.bikeImage, 'label': StringsManager.BIKE},
@@ -74,64 +75,64 @@ Widget _buildGridView() {
   ];
   return BlocBuilder<CategoryBloc, CategoriesClassState>(
     builder: (context, state) {
-      if (state is Success){
-      return Expanded(
-        child: GridView.builder(
-          itemCount: state.categories.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: screenWidth * 0.04,
-            mainAxisSpacing: screenHeight * 0.02,
-            childAspectRatio: 6 / 5,
-          ),
-          itemBuilder: (context, index) {
-            final option = transportOptions[index];
-            return InkWell(
-              onTap: (){
-                  Navigator.pushNamed(context, '/BicyclesScreen', arguments: state.categories[index].name);
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  color: ColorManager.scondaryColor,
-                  border: Border.all(
-                    //bordercolor
-                    color: ColorManager.titleColor,
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      option['iconPath']!,
-                      width: screenWidth * 0.15,
-                      height: screenWidth * 0.15,
-                    ),
-                    SizedBox(height: screenHeight * 0.01),
-                    Text(
-                      state.categories[index].name!,
-                      style: StylesManager.subLineStyle,
-                    ),
-                    SizedBox(height: screenHeight * 0.01),
-                  ],
-                ),
+      if (state is Success) {
+        return Expanded(
+          child: Padding(
+            padding:  EdgeInsets.all(padding),
+            child: GridView.builder(
+              itemCount: state.categories.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: isPortrait ? 2 : 3,
+                crossAxisSpacing: screenWidth * 0.04,
+                mainAxisSpacing: screenHeight * 0.02,
+                childAspectRatio: isPortrait ? (6 / 5) : (6 / 4),
               ),
-            );
-          },
-        ),
-      );}
-      else if (state is FailureState){
-return Container(
-  child: Text(
-    state.message.toString()
-  ),
-);
+              itemBuilder: (context, index) {
+                final option = transportOptions[index];
+                return InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/BicyclesScreen',
+                        arguments: state.categories[index].name);
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: ColorManager.scondaryColor,
+                      border: Border.all(
+                        //bordercolor
+                        color: ColorManager.titleColor,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          option['iconPath']!,
+                          width: screenWidth * 0.15,
+                          height: screenWidth * 0.15,
+                        ),
+                        SizedBox(height: screenHeight * 0.01),
+                        Text(
+                          state.categories[index].name,
+                          style: StylesManager.subLineStyle,
+                        ),
+                        SizedBox(height: screenHeight * 0.01),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        );
+      } else if (state is FailureState) {
+        return Container(
+          child: Text(state.message.toString()),
+        );
+      } else {
+        return Indicator();
       }
-      else {
- return Indicator(); 
-      }
-     
     },
   );
 }

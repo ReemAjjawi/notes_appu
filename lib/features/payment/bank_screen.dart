@@ -121,7 +121,7 @@ Widget _buildListView(double screenHeight, double screenWidth) {
                 style: StylesManager.subTitleStyle),
             backgroundColor: ColorManager.scondaryColor,
             borderColor: ColorManager.borderColor,
-            height: screenHeight * 0.1,
+            height: screenHeight / 7,
             width: screenWidth,
             hasrawtitle: false,
             hasrawsubtitle: false,

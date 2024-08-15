@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:ride_application/features/auth/presentation/view/welcome_screen.dart';
-import 'package:ride_application/features/hub_content/data/model/second_model.dart';
-import 'package:ride_application/features/map/data/model/hubinfo_model.dart';
+
 import '../../../features/auth/data/model/user_model.dart';
 import '../../../features/auth/presentation/view/sign_up_screen.dart';
 import '../../../features/auth/presentation/view/set_password_screen.dart';
 import '../../../features/categories/presentation/view/bicycles_screen.dart';
 import '../../../features/categories/presentation/view/categories_screen.dart';
+import '../../../features/favourite/favourite_screen.dart';
+import '../../../features/hub_content/data/model/second_model.dart';
 import '../../../features/hub_content/presentation/view/bicycle_details_screen.dart';
 import '../../../features/hub_content/presentation/view/bicycle_from_categorey.dart';
+import '../../../features/map/data/model/hubinfo_model.dart';
 import '../../../features/map/presentation/view/home_screen.dart';
 import '../../../features/map/presentation/view/location_screen.dart';
 import '../../../features/map/presentation/view/map_screen.dart';

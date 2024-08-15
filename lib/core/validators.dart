@@ -4,8 +4,8 @@ String? passwordValidator(String? value) {
   if (value == null || value.isEmpty) {
     return StringsManager.VALIDPASSORD;
   }
-  RegExp passwordRegExp =
-      RegExp(r'^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$');
+  RegExp passwordRegExp = RegExp(
+      r'^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\-\\/|=])[A-Za-z\d!@#$%^&*()_+{}\[\]:;<>,.?~\-\\/|=]{8,}$');
   if (!passwordRegExp.hasMatch(value)) {
     return StringsManager.VALIDPASSORDREG;
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ride_application/core/helper/build_bottom_sheet.dart';
-import 'package:ride_application/pages.dart';
 
+import '../../../../core/helper/build_bottom_sheet.dart';
+import '../../../../pages.dart';
 import '../../data/model/hub_model.dart';
 
 class HomeScreenArguments {

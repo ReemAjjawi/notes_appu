@@ -173,7 +173,7 @@ class ReservationScreen extends StatelessWidget {
 
   Padding buildbottom(double screenWidth, double screenHeight) {
     return Padding(
-      padding: EdgeInsets.all(screenWidth * 0.02),
+      padding: EdgeInsets.all(padding),
       child: BlocBuilder<ReservationBloc, ReservationClassState>(
         builder: (context, state) {
           if (state is InitialState) {
@@ -215,7 +215,7 @@ class ReservationScreen extends StatelessWidget {
               hasIcon: false,
             );
           } else if (state is LoadingStateReservation) {
-            return const Indicator();
+            return const Center(child: Indicator());
           } else if (state is FailureStateReservation) {
             return SizedBox(
               height: screenHeight / 3,
@@ -265,7 +265,7 @@ class ReservationScreen extends StatelessWidget {
 
   Padding _buildtextendtime(double screenWidth, double screenHeight) {
     return Padding(
-      padding: EdgeInsets.all(screenWidth * 0.03),
+      padding: EdgeInsets.all(padding),
       child: CustomTextFormField(
         controller: timeendController,
         hintText: StringsManager.DATEend,
@@ -278,7 +278,7 @@ class ReservationScreen extends StatelessWidget {
 
   Padding _buildtextstarttime(double screenWidth, double screenHeight) {
     return Padding(
-      padding: EdgeInsets.all(screenWidth * 0.03),
+      padding: EdgeInsets.all(padding),
       child: CustomTextFormField(
         controller: timestartController,
         hintText: StringsManager.DATEStar,
@@ -291,7 +291,7 @@ class ReservationScreen extends StatelessWidget {
 
   Padding _buildtexttime(double screenWidth, double screenHeight) {
     return Padding(
-      padding: EdgeInsets.all(screenWidth * 0.03),
+      padding: EdgeInsets.all(padding),
       child: CustomTextFormField(
         controller: durationController,
         hintText: StringsManager.TIME,
@@ -304,7 +304,7 @@ class ReservationScreen extends StatelessWidget {
 
   Padding _bildlisttitle1(double screenWidth, double screenHeight) {
     return Padding(
-      padding: EdgeInsets.all(screenWidth * 0.03),
+      padding: EdgeInsets.all(padding),
       child: CustomListTile(
         title: Text(bicycle.type, style: StylesManager.titleTextStyle),
         subtitle: Icon(Icons.star, color: ColorManager.starColor),

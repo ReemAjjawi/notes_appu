@@ -109,7 +109,7 @@ class ReservationtowScreen extends StatelessWidget {
 
   Widget _buildbottom1(double screenWidth, double screenHeight, context) {
     return Padding(
-      padding: EdgeInsets.all(screenWidth * 0.02),
+      padding: EdgeInsets.all(padding),
       child: AppButton(
         text: StringsManager.CONFIRMBOOKING,
         onPressed: () {
@@ -185,7 +185,7 @@ class ReservationtowScreen extends StatelessWidget {
 
   Padding _bulidlisttitlee(double screenWidth, double screenHeight) {
     return Padding(
-      padding: EdgeInsets.all(screenWidth * 0.03),
+      padding: EdgeInsets.all(padding),
       child: CustomListTile(
         title: Text(bicycle.type, style: StylesManager.titleTextStyle),
         subtitle: Icon(Icons.star, color: ColorManager.starColor),
@@ -249,7 +249,7 @@ Widget _buildSizeBox2(double screenHeight) {
 
 Widget _buildText() {
   return Padding(
-    padding: EdgeInsets.all(screenWidth * 0.02),
+    padding: EdgeInsets.all(padding),
     child: Text(
       StringsManager.SELECTPAYMENTMETHOD,
       style: StylesManager.headLineStyle,
@@ -259,7 +259,7 @@ Widget _buildText() {
 
 Widget _buildText1() {
   return Padding(
-    padding: EdgeInsets.all(screenWidth * 0.02),
+    padding: EdgeInsets.all(padding),
     child: Text(
       StringsManager.CHARGE,
       style: StylesManager.headLineStyle,

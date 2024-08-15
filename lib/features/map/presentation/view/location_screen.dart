@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
-import 'package:ride_application/core/resources/managers/assets_manager.dart';
-import 'package:ride_application/core/resources/managers/colors_manager.dart';
-import 'package:ride_application/core/resources/managers/strings_manager.dart';
-import 'package:ride_application/core/widgets/app_button.dart';
-import 'package:ride_application/features/map/presentation/view/home_screen.dart';
-import 'package:ride_application/main.dart';
 
+import '../../../../core/resources/managers/assets_manager.dart';
+import '../../../../core/resources/managers/colors_manager.dart';
+import '../../../../core/resources/managers/strings_manager.dart';
+import '../../../../core/widgets/app_button.dart';
+import '../../../../main.dart';
 import '../../data/model/hub_model.dart';
+import 'home_screen.dart';
 
 class LocationScreen extends StatelessWidget {
   LocationScreen({super.key, required this.categoryName});

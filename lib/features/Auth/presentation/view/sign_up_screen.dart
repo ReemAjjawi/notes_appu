@@ -41,7 +41,7 @@ class SignUpScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsets.all(screenWidth * 0.03),
+                  padding: EdgeInsets.all(padding),
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
@@ -144,13 +144,13 @@ class SignUpScreen extends StatelessWidget {
                       }),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(screenWidth * 0.05),
+                  padding: EdgeInsets.all(padding),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(
+                      Padding(
+                        padding: EdgeInsets.all(padding),
+                        child: const Icon(
                           Icons.check_circle_outline_outlined,
                           color: ColorManager.primaryColor,
                         ),
