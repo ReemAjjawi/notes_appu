@@ -7,17 +7,19 @@ import 'config/bloc_observe_config.dart';
 import 'core/resources/routes/app_routes.dart';
 
 void main() async {
-   WidgetsFlutterBinding.ensureInitialized();
-   await initializeDependencies();
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeDependencies();
 
   await Hive.initFlutter();
-    Bloc.observer = MyBlocObserver();
+  Bloc.observer = MyBlocObserver();
   await Hive.openBox('projectBox');
 
   runApp(const MyApp());
 }
 
 late double screenWidth;
+late double padding = 8.0;
+
 late double screenHeight;
 late Orientation orientation;
 late bool isPortrait;
@@ -27,15 +29,15 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    
     screenWidth = MediaQuery.sizeOf(context).width;
     screenHeight = MediaQuery.sizeOf(context).height;
     orientation = MediaQuery.orientationOf(context);
+    padding = screenHeight * 0.02;
     isPortrait = orientation == Orientation.portrait;
     isMobile = screenWidth < 600;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-       onGenerateRoute: AppRoutes.onGenerateRoutes,
+      onGenerateRoute: AppRoutes.onGenerateRoutes,
     );
   }
 }

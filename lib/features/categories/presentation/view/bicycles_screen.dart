@@ -8,7 +8,6 @@ import 'package:ride_application/core/resources/managers/strings_manager.dart';
 import 'package:ride_application/core/resources/managers/styles_manager.dart';
 import 'package:ride_application/core/widgets/app_button.dart';
 import 'package:ride_application/core/widgets/app_list_tile.dart';
-import 'package:ride_application/features/categories/domain/repository/category_repository.dart';
 import 'package:ride_application/features/categories/presentation/bicycle_bloc/bicycle_bloc.dart';
 import 'package:ride_application/features/categories/presentation/bicycle_bloc/bicycle_event.dart';
 import 'package:ride_application/features/categories/presentation/bicycle_bloc/bicycle_state.dart';
@@ -28,7 +27,7 @@ class BicyclesScreen extends StatelessWidget {
       child: Builder(builder: (context) {
         return Scaffold(
           appBar: _buildAppBar(context),
-          body: _buildBody(categoryName),
+          body: _buildBody(screenHeight, categoryName, screenWidth, isPortrait),
         );
       }),
     );
@@ -42,16 +41,20 @@ PreferredSizeWidget _buildAppBar(BuildContext context) {
   );
 }
 
-Widget _buildBody(categoryName) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      _buildText(),
-      _buildSizeBox(),
-      _buildText2(),
-      _buildSizeBox(),
-      _buildListView(categoryName),
-    ],
+Widget _buildBody(
+    double screenHeight, categoryName, double screenWidth, bool isPortrait) {
+  return Padding(
+    padding:  EdgeInsets.all(padding),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildText(),
+        _buildSizeBox(),
+        _buildText2(),
+        _buildSizeBox(),
+        _buildListView(screenHeight, categoryName, screenWidth, isPortrait),
+      ],
+    ),
   );
 }
 
@@ -73,7 +76,8 @@ Widget _buildText2() {
   );
 }
 
-Widget _buildListView(categoryName) {
+Widget _buildListView(
+    double screenHeight, categoryName, double screenWidth, bool isPortrait) {
   final List<Map<String, String>> bicycles = [
     {'iconPath': AssetsManager.bmwImage, 'name': StringsManager.BMWCABRIO},
     {
@@ -98,15 +102,21 @@ Widget _buildListView(categoryName) {
               final bicycleItem = bicycles[index];
               return Card(
                 child: CustomListTile(
-                  height: screenHeight * 0.30,
+                  height: isPortrait ? screenHeight / 4 : screenHeight / 2,
                   width: double.infinity,
                   backgroundColor: ColorManager.scondaryColor,
                   borderColor: ColorManager.borderColor,
                   hasrawsubtitle: false,
                   hasrawtitle: false,
                   hascolum: true,
+                  trailing: SizedBox(
+                    width: isPortrait ? screenWidth * 0.25 : screenWidth * 0.15,
+                    height:
+                        isPortrait ? screenHeight * 0.2 : screenHeight * 0.15,
+                    child: Image.asset(bicycleItem['iconPath']!),
+                  ),
                   title: Text(
-                    bicycle.type!,
+                    bicycle.type,
                     style: StylesManager.titleTextStyle,
                   ),
                   subtitle: Text(
@@ -116,7 +126,7 @@ Widget _buildListView(categoryName) {
                   subtitle2: Text(""),
                   subtitle3: Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.location_on,
                         color: ColorManager.underHintTextColor,
                       ),
@@ -127,11 +137,6 @@ Widget _buildListView(categoryName) {
                       ),
                     ],
                   ),
-                  trailing: SizedBox(
-                    width: screenWidth * 0.25,
-                    height: screenHeight * 0.2,
-                    child: Image.asset(bicycleItem['iconPath']!),
-                  ),
                   subtitle4: AppButton(
                     text: StringsManager.VIEWBicycleLIST,
                     onPressed: () {
@@ -139,15 +144,15 @@ Widget _buildListView(categoryName) {
                           arguments: categoryName);
                     },
                     backgroundColor: ColorManager.scondaryColor,
-                    width: screenWidth * 0.88,
-                    height: screenHeight / 15,
-                    textStyle: TextStyle(
+                    width: screenWidth * 0.50,
+                    height: screenHeight / 20,
+                    textStyle: const TextStyle(
                       color: ColorManager.borderColor,
                       fontWeight: FontWeight.bold,
                     ),
                     hasIcon: false,
                   ),
-                  subtitle5: Text(""),
+                  subtitle5: const Text(""),
                 ),
               );
             },

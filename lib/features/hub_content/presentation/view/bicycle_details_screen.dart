@@ -40,7 +40,7 @@ class BicycleDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(context),
-      body: _buildBody(),
+      body: _buildBody(screenWidth, screenHeight),
     );
   }
 
@@ -51,7 +51,7 @@ class BicycleDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(double screenWidth, double screenHeight) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,53 +60,59 @@ class BicycleDetailsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildText(),
-              _buildRow(),
-              _buildSizeBox(),
-              _buildImage(),
+              _buildRow(screenWidth),
+              _buildSizeBox(screenHeight),
+              _buildImage(screenWidth, screenHeight),
             ],
           ),
-          _buildSizeBox(),
+          _buildSizeBox(screenHeight),
           _buildText2(),
-          _buildSizeBox(),
-          _buildRow2(),
-          _buildSizeBox(),
+          _buildSizeBox(screenHeight),
+          _buildRow2(screenWidth, screenHeight),
+          _buildSizeBox(screenHeight),
           _buildText3(),
-          _buildSizeBox(),
-          _buildListTile(),
-          _buildSizeBox(),
-          _buildRow3(),
-          _buildSizeBox(),
+          _buildSizeBox(screenHeight),
+          _buildListTile(screenWidth, screenHeight),
+          _buildSizeBox(screenHeight),
+          _buildRow3(screenWidth, screenHeight),
+          _buildSizeBox(screenHeight),
         ],
       ),
     );
   }
 
   Widget _buildText() {
-    return Text(
-      bicycle.type,
-      style: StylesManager.headLineStyle,
+    return Padding(
+      padding: EdgeInsets.all(padding),
+      child: Text(
+        bicycle.type,
+        style: StylesManager.headLineStyle,
+      ),
     );
   }
 
-  Widget _buildRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Icon(Icons.star, color: ColorManager.starColor),
-        SizedBox(width: screenWidth * 0.01),
-        Text(
-          StringsManager.REVIEWS,
-          style: StylesManager.subTitleStyle,
-        ),
-      ],
+  Widget _buildRow(double screenWidth) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Icon(Icons.star, color: ColorManager.starColor),
+          SizedBox(width: screenWidth * 0.01),
+          Text(
+            StringsManager.REVIEWS,
+            style: StylesManager.subTitleStyle,
+          ),
+        ],
+      ),
     );
   }
 
-  Widget _buildSizeBox() {
+  Widget _buildSizeBox(double screenHeight) {
     return SizedBox(height: screenHeight * 0.02);
   }
 
-  Widget _buildImage() {
+  Widget _buildImage(double screenWidth, double screenHeight) {
     return Center(
       child: Image.asset(
         AssetsManager.bmwRedImage,
@@ -117,15 +123,22 @@ class BicycleDetailsScreen extends StatelessWidget {
   }
 
   Widget _buildText2() {
-    return Text(StringsManager.SPECIFICATIONS,
-        style: StylesManager.headLineStyle);
+    return Padding(
+      padding: EdgeInsets.all(padding),
+      child: Text(StringsManager.SPECIFICATIONS,
+          style: StylesManager.headLineStyle),
+    );
   }
 
   Widget _buildText3() {
-    return Text(StringsManager.CARFEATURES, style: StylesManager.headLineStyle);
+    return Padding(
+      padding: EdgeInsets.all(padding),
+      child:
+          Text(StringsManager.CARFEATURES, style: StylesManager.headLineStyle),
+    );
   }
 
-  Widget _buildRow2() {
+  Widget _buildRow2(double screenWidth, double screenHeight) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -149,7 +162,7 @@ class BicycleDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildListTile() {
+  Widget _buildListTile(double screenWidth, double screenHeight) {
     return Column(
       children: [
         _buildFeatureItem(
@@ -170,7 +183,7 @@ class BicycleDetailsScreen extends StatelessWidget {
       double screenWidth, double screenHeight) {
     return Flexible(
       child: Container(
-        height: screenHeight * 0.15,
+        height: screenHeight / 4,
         width: screenWidth * 0.22,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
@@ -184,11 +197,11 @@ class BicycleDetailsScreen extends StatelessWidget {
           children: [
             Image.asset(
               image,
-              height: screenHeight * 0.06,
+              height: screenHeight * 0.04,
             ),
-            SizedBox(height: screenHeight * 0.01),
+            SizedBox(height: screenHeight * 0.001),
             Text(title, style: StylesManager.titleNotificationStyle),
-            SizedBox(height: screenHeight * 0.005),
+            SizedBox(height: screenHeight * 0.0005),
             Text(value, style: StylesManager.subTitleNotificationStyle),
           ],
         ),
@@ -215,7 +228,7 @@ class BicycleDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildRow3() {
+  Widget _buildRow3(double screenWidth, double screenHeight) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [

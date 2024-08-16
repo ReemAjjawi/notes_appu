@@ -37,19 +37,23 @@ class BicyclesFromCategorey extends StatelessWidget {
       child: Builder(builder: (context) {
         return Scaffold(
             appBar: _buildAppBar(context),
-            body: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildText(),
-                  _buildSizeBox(),
-                  _buildText2(),
-                  _buildSizeBox(),
-                  buildListView(hubId, hubIdto),
-                ],
-              ),
-            ));
+            body: _buildbady(screenHeight, screenWidth));
       }),
+    );
+  }
+
+  SingleChildScrollView _buildbady(double screenHeight, double screenWidth) {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildText(),
+          _buildSizeBox(screenHeight),
+          _buildText2(),
+          _buildSizeBox(screenHeight),
+          buildListView(hubId, hubIdto, screenHeight, screenWidth),
+        ],
+      ),
     );
   }
 }
@@ -62,24 +66,30 @@ PreferredSizeWidget _buildAppBar(BuildContext context) {
 }
 
 Widget _buildText() {
-  return Text(
-    StringsManager.AVAIABLECARSFORRIDE,
-    style: StylesManager.titleTextStyle,
+  return Padding(
+    padding: EdgeInsets.all(padding),
+    child: Text(
+      StringsManager.AVAIABLECARSFORRIDE,
+      style: StylesManager.titleTextStyle,
+    ),
   );
 }
 
-Widget _buildSizeBox() {
+Widget _buildSizeBox(double screenHeight) {
   return SizedBox(height: screenHeight * 0.02);
 }
 
 Widget _buildText2() {
-  return Text(
-    StringsManager.CARSFOUND,
-    style: StylesManager.subTitleStyle,
+  return Padding(
+    padding: EdgeInsets.all(padding),
+    child: Text(
+      StringsManager.CARSFOUND,
+      style: StylesManager.subTitleStyle,
+    ),
   );
 }
 
-Widget buildListView(hubId, hubIdto) {
+Widget buildListView(hubId, hubIdto, double screenHeight, double screenWidth) {
   return BlocBuilder<HubContentsBloc, HubContentsClassState>(
       builder: (context, state) {
     if (state is Success) {
@@ -90,20 +100,10 @@ Widget buildListView(hubId, hubIdto) {
         itemBuilder: (context, index) {
           final bicycle = state.bicycles[index];
           return InkWell(
-            onTap: () {
-              Navigator.pushNamed(
-                context,
-                '/BicycleDetailsScreen',
-                arguments: DetailArguments(
-                  bicycle: bicycle,
-                  hubId: hubId,
-                  hubIdto: hubIdto,
-                ),
-              );
-            },
+            onTap: () {},
             child: Card(
               child: CustomListTile(
-                height: screenHeight * 0.35,
+                height: screenHeight * 0.25,
                 width: double.infinity,
                 backgroundColor: ColorManager.scondaryColor,
                 borderColor: ColorManager.borderColor,
@@ -133,7 +133,7 @@ Widget buildListView(hubId, hubIdto) {
                   ],
                 ),
                 trailing: Container(
-                  width: screenWidth * 0.25,
+                  width: screenWidth * 0.20,
                   height: screenHeight * 0.8,
                   child: Image.asset(
                     AssetsManager.bmwImage,
@@ -144,16 +144,26 @@ Widget buildListView(hubId, hubIdto) {
                   text: StringsManager.BOOKLATER,
                   onPressed: () {},
                   backgroundColor: ColorManager.scondaryColor,
-                  width: screenWidth * 0.44,
+                  width: screenWidth * 0.27,
                   height: screenHeight / 15,
                   textStyle: StylesManager.whiteButtonStyle,
                   hasIcon: false,
                 ),
                 subtitle5: AppButton(
                   text: StringsManager.RIDENOW,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/BicycleDetailsScreen',
+                      arguments: DetailArguments(
+                        bicycle: bicycle,
+                        hubId: hubId,
+                        hubIdto: hubIdto,
+                      ),
+                    );
+                  },
                   backgroundColor: ColorManager.primaryColor,
-                  width: screenWidth * 0.44,
+                  width: screenWidth * 0.27,
                   height: screenHeight / 15,
                   textStyle: StylesManager.greenButtonStyle,
                   hasIcon: false,
