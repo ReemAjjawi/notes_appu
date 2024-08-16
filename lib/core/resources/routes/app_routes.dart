@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:ride_application/features/authation/data/model/user_model.dart';
-import 'package:ride_application/features/authation/presentation/view/login_screen.dart';
-import 'package:ride_application/features/authation/presentation/view/set_password_screen.dart';
-import 'package:ride_application/features/authation/presentation/view/sign_up_screen.dart';
-import 'package:ride_application/features/authation/presentation/view/welcome_screen.dart';
-
+import '../../../features/authation/data/model/user_model.dart';
+import '../../../features/authation/presentation/view/login_screen.dart';
+import '../../../features/authation/presentation/view/set_password_screen.dart';
+import '../../../features/authation/presentation/view/sign_up_screen.dart';
+import '../../../features/authation/presentation/view/welcome_screen.dart';
 import '../../../features/categories/presentation/view/bicycles_screen.dart';
 import '../../../features/categories/presentation/view/categories_screen.dart';
 import '../../../features/hub_content/presentation/view/bicycle_details_screen.dart';
