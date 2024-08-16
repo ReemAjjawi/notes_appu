@@ -1,8 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:dartz/dartz.dart';
-import 'package:ride_application/core/success/success.dart';
 import '../../../../core/error/failures.dart';
+import '../../../../core/success/success.dart';
 import '../../data/repository/register_repository_impl.dart';
 
 class RegisterUseCase{

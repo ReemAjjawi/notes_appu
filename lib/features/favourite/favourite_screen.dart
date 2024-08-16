@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:ride_application/core/helper/build_app_bar.dart';
-import 'package:ride_application/core/resources/managers/colors_manager.dart';
-import 'package:ride_application/core/resources/managers/strings_manager.dart';
-import 'package:ride_application/core/resources/managers/styles_manager.dart';
-import 'package:ride_application/core/widgets/app_list_tile.dart';
-import 'package:ride_application/main.dart';
+
+import '../../core/helper/build_app_bar.dart';
+import '../../core/resources/managers/colors_manager.dart';
+import '../../core/resources/managers/strings_manager.dart';
+import '../../core/resources/managers/styles_manager.dart';
+import '../../core/widgets/app_list_tile.dart';
+import '../../main.dart';
 
 class FavoriteScreen extends StatelessWidget {
   @override
@@ -66,7 +67,7 @@ Widget _buildListView(double screenWidth, double screenHeight) {
       itemBuilder: (context, index) {
         return Card(
           child: CustomListTile(
-            leading: Icon(Icons.location_on),
+            leading: const Icon(Icons.location_on),
             title: Text(
               favoritePlaces[index]['type']!,
               style: StylesManager.titleTextStyle,
@@ -76,7 +77,8 @@ Widget _buildListView(double screenWidth, double screenHeight) {
               style: StylesManager.subTitleStyle,
             ),
             trailing: IconButton(
-              icon: Icon(Icons.remove_circle, color: ColorManager.cancelColor),
+              icon: const Icon(Icons.remove_circle,
+                  color: ColorManager.cancelColor),
               onPressed: () {},
             ),
             backgroundColor: Colors.white,

@@ -1,18 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
-import 'package:ride_application/core/helper/build_app_bar.dart';
-import 'package:ride_application/core/resources/managers/assets_manager.dart';
-import 'package:ride_application/core/resources/managers/colors_manager.dart';
-import 'package:ride_application/core/resources/managers/strings_manager.dart';
-import 'package:ride_application/core/resources/managers/styles_manager.dart';
-import 'package:ride_application/core/widgets/app_button.dart';
-import 'package:ride_application/core/widgets/app_list_tile.dart';
-import 'package:ride_application/features/hub_content/data/model/second_model.dart';
-import 'package:ride_application/main.dart';
-
+import '../../../../core/helper/build_app_bar.dart';
+import '../../../../core/resources/managers/assets_manager.dart';
+import '../../../../core/resources/managers/colors_manager.dart';
+import '../../../../core/resources/managers/strings_manager.dart';
+import '../../../../core/resources/managers/styles_manager.dart';
+import '../../../../core/widgets/app_button.dart';
+import '../../../../core/widgets/app_list_tile.dart';
+import '../../../../main.dart';
 import '../../../map/data/model/hubinfo_model.dart';
+import '../../data/model/second_model.dart';
 
 class DetailArguments {
   final BicycleListModel bicycle;
@@ -97,7 +95,7 @@ class BicycleDetailsScreen extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Icon(Icons.star, color: ColorManager.starColor),
+          const Icon(Icons.star, color: ColorManager.starColor),
           SizedBox(width: screenWidth * 0.01),
           Text(
             StringsManager.REVIEWS,

@@ -3,85 +3,73 @@ import 'package:dio/dio.dart';
 import '../../../../../config/app_url.dart';
 import '../../../../../config/header_config.dart';
 import '../../../../../core/error/exceptions.dart';
-import '../../../../../core/success/success.dart';
 
 import '../../model/bicycle_model.dart';
 import '../../model/category_model.dart';
 
-abstract class CategoriesService{
-Future <List<CategoryModel>>  getCategories();
-Future <List<BicycleModel>>  getBicyclesByCategory(String categoryName);
+abstract class CategoriesService {
+  Future<List<CategoryModel>> getCategories();
+  Future<List<BicycleModel>> getBicyclesByCategory(String categoryName);
 }
 
-
 class CategoriesServiceImp implements CategoriesService {
-Dio dio;
+  Dio dio;
   CategoriesServiceImp({
     required this.dio,
   });
 
- 
   @override
-  Future <List<BicycleModel>>  getBicyclesByCategory  (String categoryName) async{
-  
-    print('${AppUrl.baseUrl}/${AppUrl.getBicyclesByCategory}?category=$categoryName');
- 
-        print("hiiiii");
+  Future<List<BicycleModel>> getBicyclesByCategory(String categoryName) async {
+    print(
+        '${AppUrl.baseUrl}/${AppUrl.getBicyclesByCategory}?category=$categoryName');
 
- Response response = await dio.get('${AppUrl.baseUrl}/${AppUrl.getBicyclesByCategory}?category=$categoryName',options: HeaderConfig.getHeader(useToken: true));
-      print("hiiiii");
+    print("hiiiii");
+
+    Response response = await dio.get(
+        '${AppUrl.baseUrl}/${AppUrl.getBicyclesByCategory}?category=$categoryName',
+        options: HeaderConfig.getHeader(useToken: true));
+    print("hiiiii");
     if (response.statusCode == 200) {
       print(response.data);
 
- print("hiiiii");
+      print("hiiiii");
       List<BicycleModel> bicycles = List.generate(
         response.data['body'].length,
         (index) => BicycleModel.fromJson(response.data['body'][index]),
       );
       return bicycles;
-       }
-    else
-    {
+    } else {
       throw ServerException();
     }
-   
   }
 
- 
-   
-  
-
- @override
-  Future <List<CategoryModel>> getCategories  () async{
-  
+  @override
+  Future<List<CategoryModel>> getCategories() async {
     print('${AppUrl.baseUrl}/${AppUrl.getAllCategories}');
- 
-  
-    Response response = await dio.get('${AppUrl.baseUrl}/${AppUrl.getAllCategories}',options: HeaderConfig.getHeader(useToken: true));
-     
+
+    Response response = await dio.get(
+        '${AppUrl.baseUrl}/${AppUrl.getAllCategories}',
+        options: HeaderConfig.getHeader(useToken: true));
+
     if (response.statusCode == 200) {
       print(response.data['']);
 
-  print("response");
-    print(response);
-      print(response.data);  
-     print(response.data['body']);  
-     print("response.data['body']");  
+      print("response");
+      print(response);
+      print(response.data);
+      print(response.data['body']);
+      print("response.data['body']");
 
-     List<CategoryModel> categories = List.generate(
+      List<CategoryModel> categories = List.generate(
         response.data['body'].length,
-        (index) => CategoryModel.fromJson(response.data['body'][index] ),
+        (index) => CategoryModel.fromJson(response.data['body'][index]),
       );
       return categories;
-       } else if(response.statusCode == 403 ){
+    } else if (response.statusCode == 403) {
       print(response.data['message']);
       throw PasswordExcetion(response.data['message']);
-    }
-    else
-    {
+    } else {
       throw ServerException();
     }
-   
-  
-}
+  }
 }

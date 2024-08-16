@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ride_application/core/helper/indicator.dart';
-import 'package:ride_application/features/categories/presentation/category_bloc/category_bloc.dart';
+
 import '../../../../core/helper/build_app_bar.dart';
+import '../../../../core/helper/indicator.dart';
 import '../../../../core/resources/managers/assets_manager.dart';
 import '../../../../core/resources/managers/colors_manager.dart';
 import '../../../../core/resources/managers/strings_manager.dart';
 import '../../../../core/resources/managers/styles_manager.dart';
 import '../../../../injection_file.dart';
 import '../../../../main.dart';
+import '../category_bloc/category_bloc.dart';
 import '../category_bloc/category_event.dart';
 import '../category_bloc/category_state.dart';
 
@@ -78,7 +79,7 @@ Widget _buildGridView(
       if (state is Success) {
         return Expanded(
           child: Padding(
-            padding:  EdgeInsets.all(padding),
+            padding: EdgeInsets.all(padding),
             child: GridView.builder(
               itemCount: state.categories.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -127,11 +128,9 @@ Widget _buildGridView(
           ),
         );
       } else if (state is FailureState) {
-        return Container(
-          child: Text(state.message.toString()),
-        );
+        return Text(state.message.toString());
       } else {
-        return Indicator();
+        return const Indicator();
       }
     },
   );

@@ -3,10 +3,9 @@ import 'dart:convert';
 
 import '../../domain/entity/user_entity.dart';
 
-class UserModel extends UserEntity{
-
-  UserModel( {
-   required super.firstName,
+class UserModel extends UserEntity {
+  UserModel({
+    required super.firstName,
     required super.lastName,
     required super.phone,
     required super.username,
@@ -14,9 +13,6 @@ class UserModel extends UserEntity{
     required super.password,
     required super.confirmPassword,
   });
-
-
-
 
   UserModel copyWith({
     String? firstName,
@@ -56,7 +52,7 @@ class UserModel extends UserEntity{
       lastName: map['lastName'] as String,
       phone: map['phone'] as String,
       username: map['username'] as String,
-      birthDate:map['birthDate'] as String,
+      birthDate: map['birthDate'] as String,
       password: map['password'] as String,
       confirmPassword: map['confirmPassword'] as String,
     );
@@ -64,7 +60,8 @@ class UserModel extends UserEntity{
 
   String toJson() => json.encode(toMap());
 
-  factory UserModel.fromJson(String source) => UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory UserModel.fromJson(String source) =>
+      UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -74,25 +71,24 @@ class UserModel extends UserEntity{
   @override
   bool operator ==(covariant UserModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.firstName == firstName &&
-      other.lastName == lastName &&
-      other.phone == phone &&
-      other.username == username &&
-      other.birthDate == birthDate &&
-      other.password == password &&
-      other.confirmPassword == confirmPassword;
+
+    return other.firstName == firstName &&
+        other.lastName == lastName &&
+        other.phone == phone &&
+        other.username == username &&
+        other.birthDate == birthDate &&
+        other.password == password &&
+        other.confirmPassword == confirmPassword;
   }
 
   @override
   int get hashCode {
     return firstName.hashCode ^
-      lastName.hashCode ^
-      phone.hashCode ^
-      username.hashCode ^
-      birthDate.hashCode ^
-      password.hashCode ^
-      confirmPassword.hashCode;
+        lastName.hashCode ^
+        phone.hashCode ^
+        username.hashCode ^
+        birthDate.hashCode ^
+        password.hashCode ^
+        confirmPassword.hashCode;
   }
 }

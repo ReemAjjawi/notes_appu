@@ -146,7 +146,7 @@ class MapScreen extends StatelessWidget {
                           TileLayer(
                             urlTemplate:
                                 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                            subdomains: ['a', 'b', 'c'],
+                            subdomains: const ['a', 'b', 'c'],
                           ),
                           // PolylineLayer(
                           //   polylines: polylines,
@@ -166,13 +166,13 @@ class MapScreen extends StatelessWidget {
               body: Center(
                 child: Text(
                   state.message,
-                  style: TextStyle(color: Colors.red, fontSize: 18),
+                  style: const TextStyle(color: Colors.red, fontSize: 18),
                 ),
               ),
             );
           }
 
-          return Center(child: Indicator());
+          return const Center(child: Indicator());
         },
       ),
     );

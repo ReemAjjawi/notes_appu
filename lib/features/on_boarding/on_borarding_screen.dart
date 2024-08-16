@@ -1,9 +1,7 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import 'package:ride_application/main.dart';
-
 import '../../core/resources/managers/strings_manager.dart';
+import '../../main.dart';
 
 gt() {}
 
@@ -26,12 +24,12 @@ class OnBoardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-        Padding(
-          padding: const EdgeInsets.only(right: 10.0),
+        const Padding(
+          padding: EdgeInsets.only(right: 10.0),
           child: Align(
               alignment: Alignment.topRight, child: Text(StringsManager.SKIP)),
         ),
-        Container(
+        SizedBox(
           //   clipBehavior: Clip.hardEdge,
           width: screenWidth * 0.9,
           height: screenHeight / 4,
@@ -47,7 +45,7 @@ class OnBoardingScreen extends StatelessWidget {
           titleText,
           style: TextStyle(),
         ),
-        Container(
+        SizedBox(
           //   clipBehavior: Clip.hardEdge,
           width: screenWidth / 13,
           height: screenHeight / 10,

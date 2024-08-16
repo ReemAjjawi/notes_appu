@@ -15,7 +15,7 @@ class LocationScreen extends StatelessWidget {
   LocationScreen({super.key, required this.categoryName});
   String categoryName;
   final Location location = Location();
-  final LatLng damascusLocation = LatLng(33.5138, 36.2765);
+  final LatLng damascusLocation = const LatLng(33.5138, 36.2765);
 
   final ValueNotifier<HubModel?> hubNotifier = ValueNotifier<HubModel?>(null);
   final ValueNotifier<bool> isLoadingNotifier = ValueNotifier<bool>(false);
@@ -62,7 +62,7 @@ class LocationScreen extends StatelessWidget {
           children: [
             TileLayer(
               urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-              subdomains: ['a', 'b', 'c'],
+              subdomains: const ['a', 'b', 'c'],
             ),
             if (hubNotifier.value != null)
               MarkerLayer(
@@ -72,12 +72,10 @@ class LocationScreen extends StatelessWidget {
                     height: screenHeight * 0.04,
                     point: LatLng(hubNotifier.value!.latitude,
                         hubNotifier.value!.longtitude),
-                    child: Container(
-                      child: Icon(
-                        Icons.location_on,
-                        color: Colors.red,
-                        size: screenWidth * 0.04,
-                      ),
+                    child: Icon(
+                      Icons.location_on,
+                      color: Colors.red,
+                      size: screenWidth * 0.04,
                     ),
                   ),
                 ],
@@ -95,7 +93,7 @@ class LocationScreen extends StatelessWidget {
         valueListenable: isLoadingNotifier,
         builder: (context, isLoading, _) {
           return isLoading
-              ? CircularProgressIndicator()
+              ? const CircularProgressIndicator()
               : Container(
                   width: screenWidth * 0.60,
                   height: screenHeight / 2,

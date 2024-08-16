@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:ride_application/core/helper/build_app_bar.dart';
-import 'package:ride_application/core/resources/managers/assets_manager.dart';
-import 'package:ride_application/core/resources/managers/colors_manager.dart';
-import 'package:ride_application/core/resources/managers/strings_manager.dart';
-import 'package:ride_application/core/resources/managers/styles_manager.dart';
-import 'package:ride_application/core/widgets/app_button.dart';
-import 'package:ride_application/core/widgets/app_list_tile.dart';
-import 'package:ride_application/core/widgets/app_text_field.dart';
-import 'package:ride_application/core/widgets/secondary_text_field.dart';
-import 'package:ride_application/main.dart';
+
+import '../../core/helper/build_app_bar.dart';
+import '../../core/resources/managers/assets_manager.dart';
+import '../../core/resources/managers/colors_manager.dart';
+import '../../core/resources/managers/strings_manager.dart';
+import '../../core/resources/managers/styles_manager.dart';
+import '../../core/widgets/app_button.dart';
+import '../../core/widgets/app_list_tile.dart';
+import '../../core/widgets/app_text_field.dart';
+import '../../core/widgets/secondary_text_field.dart';
+import '../../main.dart';
 
 class PaymentScreen extends StatelessWidget {
   final TextEditingController accountNumberController = TextEditingController();
@@ -24,7 +25,7 @@ class PaymentScreen extends StatelessWidget {
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return buildAppBar(
       hasLeading: true,
-      title: Text(StringsManager.AMOUNT),
+      title: const Text(StringsManager.AMOUNT),
       onPressed: () => _onAppBarPressed(context),
     );
   }
@@ -54,7 +55,7 @@ Widget _buildTextField() {
   return GendertextField(
     width: screenWidth * 0.88,
     height: screenHeight / 15,
-    options: [
+    options: const [
       StringsManager.WELTON,
       StringsManager.CASH,
       StringsManager.PAYMENT

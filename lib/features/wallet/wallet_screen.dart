@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:ride_application/core/helper/build_app_bar.dart';
-import 'package:ride_application/core/resources/managers/assets_manager.dart';
-import 'package:ride_application/core/resources/managers/colors_manager.dart';
-import 'package:ride_application/core/resources/managers/strings_manager.dart';
-import 'package:ride_application/core/resources/managers/styles_manager.dart';
-import 'package:ride_application/core/widgets/app_button.dart';
-import 'package:ride_application/core/widgets/app_list_tile.dart';
-import 'package:ride_application/main.dart';
+
+import '../../core/helper/build_app_bar.dart';
+import '../../core/resources/managers/assets_manager.dart';
+import '../../core/resources/managers/colors_manager.dart';
+import '../../core/resources/managers/strings_manager.dart';
+import '../../core/resources/managers/styles_manager.dart';
+import '../../core/widgets/app_button.dart';
+import '../../core/widgets/app_list_tile.dart';
+import '../../main.dart';
 
 class WalletScreen extends StatelessWidget {
   WalletScreen({super.key});
@@ -96,7 +97,7 @@ class WalletScreen extends StatelessWidget {
                   style: StylesManager.headLineStyle,
                 ),
                 SizedBox(height: screenHeight * 0.01),
-                Text(
+                const Text(
                   StringsManager.AVAILABLEBALANCE,
                 ),
               ],
@@ -118,7 +119,7 @@ class WalletScreen extends StatelessWidget {
                   style: StylesManager.headLineStyle,
                 ),
                 SizedBox(height: screenHeight * 0.01),
-                Text(
+                const Text(
                   StringsManager.TOTALEXPEND,
                 ),
               ],

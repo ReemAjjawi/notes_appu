@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:ride_application/core/resources/managers/colors_manager.dart';
-import 'package:ride_application/core/resources/managers/strings_manager.dart';
-import 'package:ride_application/core/widgets/app_button.dart';
-import 'package:ride_application/features/auth/data/model/user_model.dart';
-import 'package:ride_application/main.dart';
+import 'package:ride_application/features/authation/data/model/user_model.dart';
+
 import '../../../../core/helper/indicator.dart';
+import '../../../../core/resources/managers/colors_manager.dart';
+import '../../../../core/resources/managers/strings_manager.dart';
 import '../../../../core/validators.dart';
+import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/success_widget.dart';
 import '../../../../injection_file.dart';
+import '../../../../main.dart';
 import '../auth_bloc/auth_bloc.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -26,7 +26,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final ValueNotifier<bool> obscureTextPasswordNotifier = ValueNotifier(true);
-  final ValueNotifier<bool> obscureTextConfirmPasswordNotifier = ValueNotifier(true);
+  final ValueNotifier<bool> obscureTextConfirmPasswordNotifier =
+      ValueNotifier(true);
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +58,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       fontSize: screenHeight * 0.02,
                     ),
                   ),
-                  SizedBox(height: isPortrait ? screenHeight * 0.12 : screenHeight * 0.05),
+                  SizedBox(
+                      height: isPortrait
+                          ? screenHeight * 0.12
+                          : screenHeight * 0.05),
                   Center(
                     child: SizedBox(
                       width: screenWidth * 0.92,
@@ -82,20 +86,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   color: ColorManager.hintTextColor,
                                 ),
                                 onPressed: () {
-                                  obscureTextPasswordNotifier.value = !obscureTextPassword;
+                                  obscureTextPasswordNotifier.value =
+                                      !obscureTextPassword;
                                 },
                               ),
-                              border: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: ColorManager.hintTextColor),
+                              border: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: ColorManager.hintTextColor),
                               ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: ColorManager.hintTextColor),
+                              enabledBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: ColorManager.hintTextColor),
                               ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: ColorManager.hintTextColor),
+                              focusedBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: ColorManager.hintTextColor),
                               ),
                               errorMaxLines: 2,
                               errorStyle: TextStyle(
@@ -143,20 +148,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   color: ColorManager.hintTextColor,
                                 ),
                                 onPressed: () {
-                                  obscureTextConfirmPasswordNotifier.value = !obscureTextConfirmPassword;
+                                  obscureTextConfirmPasswordNotifier.value =
+                                      !obscureTextConfirmPassword;
                                 },
                               ),
-                              border: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: ColorManager.hintTextColor),
+                              border: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: ColorManager.hintTextColor),
                               ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: ColorManager.hintTextColor),
+                              enabledBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: ColorManager.hintTextColor),
                               ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: ColorManager.hintTextColor),
+                              focusedBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: ColorManager.hintTextColor),
                               ),
                               errorStyle: TextStyle(
                                 fontSize: screenHeight * 0.018,
@@ -190,7 +196,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: isPortrait ? screenHeight * 0.20 : screenHeight * 0.10),
+                  SizedBox(
+                      height: isPortrait
+                          ? screenHeight * 0.20
+                          : screenHeight * 0.10),
                   Center(
                     child: BlocBuilder<AuthBloc, RegisterClassState>(
                       builder: (context, state) {
@@ -207,7 +216,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 context.read<AuthBloc>().add(
                                       RegisterEvent(widget.user),
                                     );
-                                Navigator.pushNamed(context, '/CategoriesScreen');
+                                // Navigator.pushNamed(context, '/LoginScreen');
+                                Navigator.pushNamed(
+                                    context, '/CategoriesScreen');
                               }
                             },
                             backgroundColor: ColorManager.primaryColor,
@@ -238,6 +249,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           passwordController.text;
                                       widget.user.confirmPassword =
                                           confirmPasswordController.text;
+                                      // Navigator.pushNamed(
+                                      //     context, '/LoginScreen');
+
                                       Navigator.pushNamed(
                                           context, '/CategoriesScreen');
                                     }
@@ -253,14 +267,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                                 Text(
                                   state.message,
-                                  style:
-                                      TextStyle(fontSize: 20, color: Colors.red),
+                                  style: const TextStyle(
+                                      fontSize: 20, color: Colors.red),
                                 )
                               ],
                             ),
                           );
                         } else {
-                          return SuccessWidget();
+                          return const SuccessWidget();
                         }
                       },
                     ),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ride_application/core/resources/managers/colors_manager.dart';
-import 'package:ride_application/core/resources/managers/styles_manager.dart';
-import 'package:ride_application/core/widgets/app_button.dart';
 import '../../core/resources/managers/assets_manager.dart';
+import '../../core/resources/managers/colors_manager.dart';
 import '../../core/resources/managers/strings_manager.dart';
+import '../../core/resources/managers/styles_manager.dart';
+import '../../core/widgets/app_button.dart';
 import '../../main.dart';
 
 class SuccessScreen extends StatelessWidget {
@@ -17,19 +17,21 @@ class SuccessScreen extends StatelessWidget {
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
-      title: Text(StringsManager.AMOUNT),
+      title: const Text(StringsManager.AMOUNT),
       leading: IconButton(
-        icon: Icon(Icons.arrow_back),
+        icon: const Icon(Icons.arrow_back),
         onPressed: () => _onAppBarPressed(context),
       ),
     );
   }
 
-  Widget _buildBody(BuildContext context, double screenWidth, double screenHeight, bool isPortrait) {
+  Widget _buildBody(BuildContext context, double screenWidth,
+      double screenHeight, bool isPortrait) {
     return _buildAppButton(context, screenWidth, screenHeight, isPortrait);
   }
 
-  Widget _buildAppButton(BuildContext context, double screenWidth, double screenHeight, bool isPortrait) {
+  Widget _buildAppButton(BuildContext context, double screenWidth,
+      double screenHeight, bool isPortrait) {
     return Center(
       child: AppButton(
         text: StringsManager.SHOWSUCCESSDIALOG,
@@ -93,7 +95,7 @@ class SuccessDialog extends StatelessWidget {
                     _buildSubTitle(),
                     _buildAmountInfo(),
                     _buildBackButton(context),
-                   _buildSizeBox(screenHeight),
+                    _buildSizeBox(screenHeight),
                   ],
                 ),
               ),
@@ -171,7 +173,6 @@ class SuccessDialog extends StatelessWidget {
   }
 }
 
-
-  Widget _buildSizeBox(double screenHeight) {
-    return SizedBox(height: screenHeight * 0.03);
-  }
+Widget _buildSizeBox(double screenHeight) {
+  return SizedBox(height: screenHeight * 0.03);
+}

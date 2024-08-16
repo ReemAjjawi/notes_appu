@@ -2,21 +2,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:ride_application/core/helper/build_app_bar.dart';
-import 'package:ride_application/core/helper/indicator.dart';
-import 'package:ride_application/core/resources/managers/assets_manager.dart';
-import 'package:ride_application/core/resources/managers/colors_manager.dart';
-import 'package:ride_application/core/resources/managers/strings_manager.dart';
-import 'package:ride_application/core/resources/managers/styles_manager.dart';
-import 'package:ride_application/core/widgets/app_button.dart';
-import 'package:ride_application/core/widgets/app_list_tile.dart';
-import 'package:ride_application/features/hub_content/presentation/hub_contents_bloc/hub_contents_state.dart';
-import 'package:ride_application/main.dart';
-
+import '../../../../core/helper/build_app_bar.dart';
+import '../../../../core/helper/indicator.dart';
+import '../../../../core/resources/managers/assets_manager.dart';
+import '../../../../core/resources/managers/colors_manager.dart';
+import '../../../../core/resources/managers/strings_manager.dart';
+import '../../../../core/resources/managers/styles_manager.dart';
+import '../../../../core/widgets/app_button.dart';
+import '../../../../core/widgets/app_list_tile.dart';
 import '../../../../injection_file.dart';
+import '../../../../main.dart';
 import '../../../map/data/model/hubinfo_model.dart';
 import '../hub_contents_bloc/hub_contens_bloc.dart';
 import '../hub_contents_bloc/hub_contents_event.dart';
+import '../hub_contents_bloc/hub_contents_state.dart';
 import 'bicycle_details_screen.dart';
 
 class BicyclesFromCategorey extends StatelessWidget {
@@ -33,7 +32,7 @@ class BicyclesFromCategorey extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<HubContentsBloc>(
       create: (context) =>
-          sl()..add(GetHubContentsEvent(hubId.id as int, categoryName)),
+          sl()..add(GetHubContentsEvent(hubId.id, categoryName)),
       child: Builder(builder: (context) {
         return Scaffold(
             appBar: _buildAppBar(context),
@@ -95,7 +94,7 @@ Widget buildListView(hubId, hubIdto, double screenHeight, double screenWidth) {
     if (state is Success) {
       return ListView.builder(
         shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: state.bicycles.length,
         itemBuilder: (context, index) {
           final bicycle = state.bicycles[index];
@@ -118,10 +117,10 @@ Widget buildListView(hubId, hubIdto, double screenHeight, double screenWidth) {
                   StringsManager.INFOCAR,
                   style: StylesManager.subTitleStyle,
                 ),
-                subtitle2: Text(""),
+                subtitle2: const Text(""),
                 subtitle3: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.location_on,
                       color: ColorManager.underHintTextColor,
                     ),
@@ -132,7 +131,7 @@ Widget buildListView(hubId, hubIdto, double screenHeight, double screenWidth) {
                     ),
                   ],
                 ),
-                trailing: Container(
+                trailing: SizedBox(
                   width: screenWidth * 0.20,
                   height: screenHeight * 0.8,
                   child: Image.asset(
@@ -174,13 +173,11 @@ Widget buildListView(hubId, hubIdto, double screenHeight, double screenWidth) {
         },
       );
     } else if (state is LoadingState) {
-      return Center(
+      return const Center(
         child: Indicator(),
       );
     } else {
-      return Container(
-        child: Text((state as FailureState).message),
-      );
+      return Text((state as FailureState).message);
     }
   });
 }

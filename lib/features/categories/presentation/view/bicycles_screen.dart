@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ride_application/core/helper/build_app_bar.dart';
-import 'package:ride_application/core/helper/indicator.dart';
-import 'package:ride_application/core/resources/managers/assets_manager.dart';
-import 'package:ride_application/core/resources/managers/colors_manager.dart';
-import 'package:ride_application/core/resources/managers/strings_manager.dart';
-import 'package:ride_application/core/resources/managers/styles_manager.dart';
-import 'package:ride_application/core/widgets/app_button.dart';
-import 'package:ride_application/core/widgets/app_list_tile.dart';
-import 'package:ride_application/features/categories/presentation/bicycle_bloc/bicycle_bloc.dart';
-import 'package:ride_application/features/categories/presentation/bicycle_bloc/bicycle_event.dart';
-import 'package:ride_application/features/categories/presentation/bicycle_bloc/bicycle_state.dart';
-import 'package:ride_application/main.dart';
 
+import '../../../../core/helper/build_app_bar.dart';
+import '../../../../core/helper/indicator.dart';
+import '../../../../core/resources/managers/assets_manager.dart';
+import '../../../../core/resources/managers/colors_manager.dart';
+import '../../../../core/resources/managers/strings_manager.dart';
+import '../../../../core/resources/managers/styles_manager.dart';
+import '../../../../core/widgets/app_button.dart';
+import '../../../../core/widgets/app_list_tile.dart';
 import '../../../../injection_file.dart';
+import '../../../../main.dart';
+import '../bicycle_bloc/bicycle_bloc.dart';
+import '../bicycle_bloc/bicycle_event.dart';
+import '../bicycle_bloc/bicycle_state.dart';
 
 class BicyclesScreen extends StatelessWidget {
   BicyclesScreen({super.key, required this.categoryName});
@@ -44,7 +44,7 @@ PreferredSizeWidget _buildAppBar(BuildContext context) {
 Widget _buildBody(
     double screenHeight, categoryName, double screenWidth, bool isPortrait) {
   return Padding(
-    padding:  EdgeInsets.all(padding),
+    padding: EdgeInsets.all(padding),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -123,7 +123,7 @@ Widget _buildListView(
                     StringsManager.INFOCAR,
                     style: StylesManager.subTitleStyle,
                   ),
-                  subtitle2: Text(""),
+                  subtitle2: const Text(""),
                   subtitle3: Row(
                     children: [
                       const Icon(
@@ -159,11 +159,9 @@ Widget _buildListView(
           ),
         );
       } else if (state is FailureState) {
-        return Container(
-          child: Text(state.message),
-        );
+        return Text(state.message);
       } else {
-        return Center(child: Indicator());
+        return const Center(child: Indicator());
       }
     },
   );
