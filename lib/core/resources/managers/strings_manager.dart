@@ -255,12 +255,17 @@ class StringsManager {
   static const String ADDRESS = "Address";
   static const String CONTACTUSFORRIDESHARE = "Contact us for Ride share";
   static const String ADDRESSINFORMATION =
-      "House# 72, Road# 21, Banani, Dhaka-1213 (near Banani\n Bidyaniketon School &\nCollege, beside University of South Asia)\n \nCall : 13301 (24/7)\nEmail : support@pathao.com";
+      "    House# 72, Road# 21, Banani, Dhaka-1213 (near Banani\n Bidyaniketon School &\nCollege, beside University of South Asia)\n \nCall : 13301 (24/7)\nEmail : support@pathao.com";
   static const String SENDMESSAGE = "Send Message";
   static const String DELETE = "Delete";
   static const String DELETEACCOUNTINFORMATION =
-      "Are you sure you want to delete your account? Please read how account deletion will affect.\nDeleting your account removes personal information our database. Tour email becomes permanently reserved and same email cannot be re-use to register a new account.";
+      "Are  you  sure  you   want  to  delete your account? Please read how account deletion \nwill affect.\nDeleting your account removes personal \ninformation our database. Tour email \nbecomes permanently reserved and same\n email cannot be re-use to register a new \naccount.";
   static const String SUBHELPANDSUPPORT =
       "Lorem ipsum dolor sit amet consectetur. Sit pulvinar mauris mauris eu nibh semper nisl pretium laoreet. Sed non faucibus ac lectus eu arcu. Nulla sit congue facilisis vestibulum egestas nisl feugiat pharetra. Odio sit tortor morbi at orci ipsum dapibus interdum. Lorem felis est aliquet arcu nullam pellentesque. Et habitasse ac arcu et nunc euismod rhoncus facilisis sollicitudin.";
+<<<<<<< HEAD
+static const String SHOWSUCCESSDIALOG = "Show Success Dialog";
+static const String WHRITEYOURTEXT = "Write your text";
+=======
   static const String SHOWSUCCESSDIALOG = "Show Success Dialog";
+>>>>>>> c28ce41f0cfa9449aea5e272968d92b53aa98476
 }

@@ -11,9 +11,11 @@ import '../../main.dart';
 class ThankYouScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _buildAppBar(context),
-      body: _buildBody(screenWidth, screenHeight),
+    return MaterialApp(
+      home: Scaffold(
+        appBar: _buildAppBar(context),
+        body: _buildBody(screenWidth, screenHeight),
+      ),
     );
   }
 }
