@@ -291,12 +291,17 @@ class SignUpScreen extends StatelessWidget {
                         color: ColorManager.titleColor,
                       ),
                     ),
-                    Text(
-                      StringsManager.SIGNIN,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: screenWidth * 0.035,
-                        color: ColorManager.primaryColor,
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/LoginScreen');
+                      },
+                      child: Text(
+                        StringsManager.SIGNIN,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: screenWidth * 0.035,
+                          color: ColorManager.primaryColor,
+                        ),
                       ),
                     ),
                   ],

@@ -317,7 +317,7 @@ class _RegisterScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        StringsManager.ALREADYHAVEANACCOUNT,
+                        StringsManager.DONTHAVEANACCOUNT,
                         style: TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: screenWidth * 0.035,

@@ -18,7 +18,6 @@ import '../../../../core/helper/indicator.dart';
 import '../../../../core/widgets/success_widget.dart';
 import '../../../../injection_file.dart';
 
-import '../../data/model/reservation_model.dart';
 import '../Reservation_bloc/Reservation_bloc.dart';
 
 class ReservationScreen extends StatelessWidget {
@@ -44,18 +43,13 @@ class ReservationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ReservationBloc(sl()),
-      child: MaterialApp(
-        home: Builder(builder: (context) {
-          return Scaffold(
-            appBar: buildAppBar(
-              hasLeading: true,
-              title: const Text(StringsManager.REQUESTFORRENT),
-              onPressed: () => _onAppBarPressed(context),
-            ),
-            body: Form(
-                key: _formKey, child: buildBody(screenWidth, screenHeight)),
-          );
-        }),
+      child: Scaffold(
+        appBar: buildAppBar(
+          hasLeading: true,
+          title: const Text(StringsManager.REQUESTFORRENT),
+          onPressed: () => _onAppBarPressed(context),
+        ),
+        body: Form(key: _formKey, child: buildBody(screenWidth, screenHeight)),
       ),
     );
   }

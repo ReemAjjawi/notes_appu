@@ -30,6 +30,8 @@ class StringsManager {
   static const String NAME = "Name";
   static const String EMAIL = "Email";
   static const String GENDER = "Gender";
+  static const String DONTHAVEANACCOUNT = "Don’t have an account?";
+
   static const String BYSIGNINGUPYOUAGREETOTHE =
       "By signing up. you agree to the";
   static const String TERMSOFSERVICE = "Terms of service";

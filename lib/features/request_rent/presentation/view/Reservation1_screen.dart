@@ -28,19 +28,14 @@ class ReservationtowScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Builder(builder: (context) {
-        return Scaffold(
-          appBar: buildAppBar(
-            hasLeading: true,
-            title: Text(StringsManager.REQUESTFORRENT),
-            onPressed: () => _onAppBarPressed(context),
-          ),
-          body: Form(
-              key: formKey,
-              child: buildBody(screenWidth, screenHeight, context)),
-        );
-      }),
+    return Scaffold(
+      appBar: buildAppBar(
+        hasLeading: true,
+        title: Text(StringsManager.REQUESTFORRENT),
+        onPressed: () => _onAppBarPressed(context),
+      ),
+      body: Form(
+          key: formKey, child: buildBody(screenWidth, screenHeight, context)),
     );
   }
 

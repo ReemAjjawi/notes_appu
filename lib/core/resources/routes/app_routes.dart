@@ -26,8 +26,9 @@ class AppRoutes {
         if (token != null) {
           return _materialRoute(WelcomeScreen());
         } else {
-          return _materialRoute(LoginScreen());
+          return _materialRoute(WelcomeScreen());
         }
+
       case '/BicyclesScreen':
         return _materialRoute(
           BicyclesScreen(categoryName: settings.arguments as String),
@@ -75,6 +76,7 @@ class AppRoutes {
         return _materialRoute(LocationScreen(
           categoryName: settings.arguments as String,
         ));
+
       case '/ReservationScreen':
         final args = settings.arguments as DetailArguments;
         return _materialRoute(ReservationScreen(
