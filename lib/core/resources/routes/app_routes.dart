@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:ride_application/features/auth/presentation/view/welcome_screen.dart';
 
+import '../../../features/Auth/presentation/view/set_password_screen.dart';
 import '../../../features/Auth/presentation/view/sign_up_screen.dart';
+import '../../../features/Settings/presentation/view/change_language.dart';
+import '../../../features/Settings/presentation/view/change_password.dart';
+import '../../../features/Settings/presentation/view/contact_us.dart';
+import '../../../features/Settings/presentation/view/delete_account.dart';
+import '../../../features/Settings/presentation/view/privacy_policy.dart';
+import '../../../features/Settings/presentation/view/settings.dart';
 import '../../../features/auth/data/model/user_model.dart';
-import '../../../features/auth/presentation/view/set_password_screen.dart';
 import '../../../features/categories/presentation/view/bicycles_screen.dart';
 import '../../../features/categories/presentation/view/categories_screen.dart';
 import '../../../features/hub_content/presentation/view/bicycle_details_screen.dart';
@@ -12,10 +18,10 @@ import '../../../features/hub_content/presentation/view/bicycle_from_categorey.d
 import '../../../features/map/presentation/view/home_screen.dart';
 import '../../../features/map/presentation/view/location_screen.dart';
 import '../../../features/map/presentation/view/map_screen.dart';
-import '../../../features/payment/success_screen.dart';
 import '../../../features/request_rent/presentation/view/Reservation1_screen.dart';
 import '../../../features/request_rent/presentation/view/Reservation_screen.dart';
 import '../../../features/thank_you/thank_you_screen.dart';
+
 
 
 
@@ -29,7 +35,7 @@ class AppRoutes {
         if (token != null) {
           return _materialRoute(WelcomeScreen());
         } else {
-          return _materialRoute(SuccessScreen());
+          return _materialRoute(ContactUsScreen());
         }
       case '/BicyclesScreen':
         return _materialRoute(

@@ -10,11 +10,10 @@ import 'package:ride_application/main.dart';
 class ThankYouScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: _buildAppBar(context),
         body: _buildBody(screenWidth, screenHeight),
-      ),
+      
     );
   }
 }
