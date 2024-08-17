@@ -1,24 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-<<<<<<< HEAD
-import 'package:ride_application/features/auth/presentation/view/welcome_screen.dart';
-
-import '../../../features/Auth/presentation/view/set_password_screen.dart';
-import '../../../features/Auth/presentation/view/sign_up_screen.dart';
 import '../../../features/Settings/presentation/view/change_language.dart';
 import '../../../features/Settings/presentation/view/change_password.dart';
 import '../../../features/Settings/presentation/view/contact_us.dart';
 import '../../../features/Settings/presentation/view/delete_account.dart';
 import '../../../features/Settings/presentation/view/privacy_policy.dart';
 import '../../../features/Settings/presentation/view/settings.dart';
-import '../../../features/auth/data/model/user_model.dart';
-=======
 import '../../../features/authation/data/model/user_model.dart';
 import '../../../features/authation/presentation/view/login_screen.dart';
 import '../../../features/authation/presentation/view/set_password_screen.dart';
 import '../../../features/authation/presentation/view/sign_up_screen.dart';
 import '../../../features/authation/presentation/view/welcome_screen.dart';
->>>>>>> c28ce41f0cfa9449aea5e272968d92b53aa98476
 import '../../../features/categories/presentation/view/bicycles_screen.dart';
 import '../../../features/categories/presentation/view/categories_screen.dart';
 import '../../../features/hub_content/presentation/view/bicycle_details_screen.dart';
@@ -30,12 +22,6 @@ import '../../../features/request_rent/presentation/view/Reservation1_screen.dar
 import '../../../features/request_rent/presentation/view/Reservation_screen.dart';
 import '../../../features/thank_you/thank_you_screen.dart';
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> c28ce41f0cfa9449aea5e272968d92b53aa98476
 class AppRoutes {
   static Route onGenerateRoutes(RouteSettings settings) {
     switch (settings.name) {
