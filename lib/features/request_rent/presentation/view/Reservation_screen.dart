@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dash/flutter_dash.dart';
 import '../../../../core/helper/build_app_bar.dart';
@@ -51,7 +49,7 @@ class ReservationScreen extends StatelessWidget {
           return Scaffold(
             appBar: buildAppBar(
               hasLeading: true,
-              title: Text(StringsManager.REQUESTFORRENT),
+              title: const Text(StringsManager.REQUESTFORRENT),
               onPressed: () => _onAppBarPressed(context),
             ),
             body: Form(
@@ -181,19 +179,19 @@ class ReservationScreen extends StatelessWidget {
               text: StringsManager.CONFIRMBOOKING,
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  ReservationModel reservation = ReservationModel(
-                      bicycleId: bicycle.id,
-                      fromHubId: hubId.id,
-                      toHubId: hubIdto.id,
-                      duration: 30,
-                      startTime: "2024-08-09T15:00:48.928Z",
-                      endTime: "2024-08-09T15:30:48.928Z",
-                      reservationStatus: "New",
-                      paymentMethod: "Wallet");
-                  print(reservation);
-                  context.read<ReservationBloc>().add(
-                        ReservationEvent(reservation),
-                      );
+                  // ReservationModel reservation = ReservationModel(
+                  //     bicycleId: bicycle.id,
+                  //     fromHubId: hubId.id,
+                  //     toHubId: hubIdto.id,
+                  //     duration: 30,
+                  //     startTime: "2024-08-09T15:00:48.928Z",
+                  //     endTime: "2024-08-09T15:30:48.928Z",
+                  //     reservationStatus: "New",
+                  //     paymentMethod: "Wallet");
+                  // print(reservation);
+                  // context.read<ReservationBloc>().add(
+                  //       ReservationEvent(reservation),
+                  //     );
                   Navigator.pushNamed(
                     context,
                     '/ReservationtowScreen',
@@ -225,18 +223,27 @@ class ReservationScreen extends StatelessWidget {
                     text: StringsManager.REGISTER,
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        ReservationModel reservation = ReservationModel(
-                            bicycleId: bicycle.id,
-                            fromHubId: hubId.id,
-                            toHubId: hubIdto.id,
-                            duration: 0,
-                            startTime: "2024-08-09T15:44:48.928Z",
-                            endTime: "2024-08-09T15:44:48.928Z",
-                            reservationStatus: "NEW",
-                            paymentMethod: "Wallet");
-                        context.read<ReservationBloc>().add(
-                              ReservationEvent(reservation),
-                            );
+                        // ReservationModel reservation = ReservationModel(
+                        //     bicycleId: bicycle.id,
+                        //     fromHubId: hubId.id,
+                        //     toHubId: hubIdto.id,
+                        //     duration: 0,
+                        //     startTime: "2024-08-09T15:44:48.928Z",
+                        //     endTime: "2024-08-09T15:44:48.928Z",
+                        //     reservationStatus: "NEW",
+                        //     paymentMethod: "Wallet");
+                        // context.read<ReservationBloc>().add(
+                        //       ReservationEvent(reservation),
+                        //     );
+                        Navigator.pushNamed(
+                          context,
+                          '/ReservationtowScreen',
+                          arguments: DetailArguments(
+                            bicycle: bicycle,
+                            hubId: hubId,
+                            hubIdto: hubIdto,
+                          ),
+                        );
                       }
                     },
                     backgroundColor: ColorManager.primaryColor,
@@ -307,7 +314,7 @@ class ReservationScreen extends StatelessWidget {
       padding: EdgeInsets.all(padding),
       child: CustomListTile(
         title: Text(bicycle.type, style: StylesManager.titleTextStyle),
-        subtitle: Icon(Icons.star, color: ColorManager.starColor),
+        subtitle: const Icon(Icons.star, color: ColorManager.starColor),
         subtitle2: Text(
           StringsManager.REVIEWS,
           style: StylesManager.subTitleStyle,
