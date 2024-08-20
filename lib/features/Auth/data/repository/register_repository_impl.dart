@@ -29,7 +29,7 @@ class RegisterRepoImpl implements RegisterRepo {
       } on ServerException {
         return Left(ServerFailure());
       }
-      on PasswordExcetion{
+      on PasswordMustContainOneUppercase{
          return Left(PasswordFailure("you must put password with symbols and capital letter"));
       }
       on UserNameExcetion{

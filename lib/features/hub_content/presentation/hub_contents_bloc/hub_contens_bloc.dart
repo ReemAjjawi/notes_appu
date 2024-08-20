@@ -7,9 +7,9 @@ import 'hub_contents_state.dart';
 
 class HubContentsBloc extends Bloc<HubContentsClassEvent,HubContentsClassState> {
   final GetHubContentsUseCase getHubContentsUseCase;
-  HubContentsBloc(this.getHubContentsUseCase) : super(InitialState()) {
+  HubContentsBloc(this.getHubContentsUseCase) : super(LoadingState()) {
     on<GetHubContentsEvent>((event, emit) async {
-      emit(LoadingState());
+ //     emit(LoadingState());
       final failureOrEntity = await getHubContentsUseCase.call(event.hubId,event.categoryName);
 
       failureOrEntity.fold((failure) {

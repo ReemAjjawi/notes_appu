@@ -13,8 +13,7 @@ import 'package:ride_application/main.dart';
 import '../../../../core/widgets/secondary_text_field.dart';
 import '../../data/model/user_model.dart';
 
-class 
-SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -73,7 +72,7 @@ SignUpScreen extends StatelessWidget {
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(),
+                      borderSide: const BorderSide(),
                     ),
                   ),
                   initialCountryCode: 'IN',
@@ -85,7 +84,7 @@ SignUpScreen extends StatelessWidget {
               GendertextField(
                 width: screenWidth * 0.92,
                 height: screenHeight / 13,
-                options: ['Male', 'Female'],
+                options: const ['Male', 'Female'],
                 hintText: StringsManager.GENDER,
               ),
               Padding(
@@ -115,7 +114,7 @@ SignUpScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              " " + StringsManager.TERMSOFSERVICE + " ",
+                              " ${StringsManager.TERMSOFSERVICE} ",
                               style: TextStyle(
                                 // fontWeight: FontWeight.w400,
                                 fontSize: screenWidth * 0.03,
@@ -125,7 +124,7 @@ SignUpScreen extends StatelessWidget {
                             Text(
                               StringsManager.AND,
                               style: TextStyle(
-                              // fontWeight: FontWeight.w400,
+                                // fontWeight: FontWeight.w400,
                                 fontSize: screenWidth * 0.03,
                                 color: ColorManager.subTitleColor,
                               ),
@@ -152,37 +151,33 @@ SignUpScreen extends StatelessWidget {
                   ),
                   text: StringsManager.SIGNUP,
                   onPressed: () {
-                     UserModel user = UserModel(
-                firstName:"weggjhgggtyu",
-                lastName: "dfcdjhhhszdd",
-                phone: numberController.text,
-                username: nameController.text,
-                birthDate: "2024-08-02",
-                password: "ddddd",
-                confirmPassword: "565gg",
-                     );
-                     print(user);
-      Navigator.pushNamed(context, '/RegisterScreen', arguments: user);
-                  
+                    UserModel user = UserModel(
+                      firstName: "weggjhgggtyu",
+                      lastName: "dfcdjhhhszdd",
+                      phone: numberController.text,
+                      username: nameController.text,
+                      birthDate: "2024-08-02",
+                      password: "ddddd",
+                      confirmPassword: "565gg",
+                    );
+                    print(user);
+                    Navigator.pushNamed(context, '/RegisterScreen',
+                        arguments: user);
                   },
                   backgroundColor: ColorManager.primaryColor,
                   width: screenWidth * 0.88,
                   height: screenHeight / 13,
                   hasIcon: false),
-                  Row(
-                    children: [
-
-                    ],
-                  ),
-              Text( 
+              const Row(
+                children: [],
+              ),
+              Text(
                 "______________________ or ______________________",
                 style: TextStyle(
                   // fontWeight: FontWeight.w400,
                   fontSize: screenWidth * 0.04,
                   color: ColorManager.subTitleColor,
                 ),
-
-                
               ),
               SizedBox(height: screenHeight / 50),
               AppButton(
@@ -191,7 +186,7 @@ SignUpScreen extends StatelessWidget {
                   color: ColorManager.titleColor,
                 ),
                 text: StringsManager.SIGNUPWITHGMAIL,
-                onPressed: (){},
+                onPressed: () {},
                 backgroundColor: ColorManager.whiteColor,
                 bordergroundColor: ColorManager.subLineColor,
                 width: screenWidth * 0.92,
@@ -206,7 +201,7 @@ SignUpScreen extends StatelessWidget {
                   color: ColorManager.titleColor,
                 ),
                 text: StringsManager.SIGNUPWITHFACEBOOK,
-                onPressed: (){},
+                onPressed: () {},
                 backgroundColor: ColorManager.whiteColor,
                 bordergroundColor: ColorManager.subLineColor,
                 width: screenWidth * 0.92,
@@ -221,7 +216,7 @@ SignUpScreen extends StatelessWidget {
                   color: ColorManager.titleColor,
                 ),
                 text: StringsManager.SIGNUPWITHAPPLE,
-                onPressed: (){},
+                onPressed: () {},
                 backgroundColor: ColorManager.whiteColor,
                 bordergroundColor: ColorManager.subLineColor,
                 width: screenWidth * 0.92,

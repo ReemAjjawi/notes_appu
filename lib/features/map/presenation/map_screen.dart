@@ -15,8 +15,7 @@ String categoryName;
     return Scaffold(
       body: InkWell(
         onTap: (){
-
-           Navigator.pushNamed(context, '/BicyclesFromCategorey' ,arguments:  CategoryArguments(categoryName: categoryName, hubId: id) );
+Navigator.pushNamed(context, '/BicyclesFromCategorey' ,arguments:  CategoryArguments(categoryName: categoryName, hubId: id) );
 
         },
         child: Container(

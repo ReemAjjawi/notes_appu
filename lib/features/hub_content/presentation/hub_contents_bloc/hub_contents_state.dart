@@ -6,9 +6,6 @@ import 'package:ride_application/features/hub_content/data/model/second_model.da
 @immutable
 sealed class HubContentsClassState {}
 
-final class InitialState extends HubContentsClassState {}
-
-
 class Success extends HubContentsClassState {
   final List<BicycleListModel> bicycles;
   Success({

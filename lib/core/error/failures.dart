@@ -13,3 +13,4 @@ class UserNameFailure implements ServerFailure {
     String message ;
   UserNameFailure (this.message){}
 }
+class ConnectionFailure extends Failures {}
