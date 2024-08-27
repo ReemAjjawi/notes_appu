@@ -21,11 +21,6 @@ class policyRepoImpl implements policyRepo {
       return Right(data);
     } on ServerException {
       return Left(ServerFailure());
-    } on PasswordExcetion {
-      return Left(PasswordFailure(
-          "you must put password with symbols and capital letter"));
-    } on UserNameExcetion {
-      return Left(UserNameFailure("you must change username"));
     }
   }
 
@@ -37,11 +32,6 @@ class policyRepoImpl implements policyRepo {
       return Right(data);
     } on ServerException {
       return Left(ServerFailure());
-    } on PasswordExcetion {
-      return Left(PasswordFailure(
-          "you must put password with symbols and capital letter"));
-    } on UserNameExcetion {
-      return Left(UserNameFailure("you must change username"));
-    }
+    } 
   }
 }

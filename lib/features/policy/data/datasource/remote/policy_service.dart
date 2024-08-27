@@ -49,10 +49,7 @@ class policyServiceImp extends policyService {
       print(response.data);
 
       return DataSuccess();
-    } else if (response.statusCode == 403) {
-      print(response.data['message']);
-      throw PasswordExcetion(response.data['message']);
-    } else {
+    }  else {
       throw ServerException();
     }
   }

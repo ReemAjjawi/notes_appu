@@ -13,6 +13,7 @@ import '../model/second_model.dart';
 class HubContenRepoImpl implements HubContenRepo {
   HubContentServiceImp hubContentServiceImp;
   HubContenRepoImpl({required this.hubContentServiceImp});
+
   @override
   Future<Either<Failures, SuccessSituation>> getHubContents(
       int hubId, String bicycleCategory) async {
@@ -21,8 +22,11 @@ class HubContenRepoImpl implements HubContenRepo {
       final bicycles =
           await hubContentServiceImp.getHubContents(hubId, bicycleCategory);
 //List<BicycleEntity> bicycles = bicyclesList.map<BicycleEntity>((bicycle) => bicycle as BicycleEntity).toList();
+
       return Right(bicycles);
-    } on ServerException {
+    } on EmptyException catch (e) {
+      return Left(EmptyFailure(e.message));
+    } catch (e) {
       return Left(ServerFailure());
     }
   }

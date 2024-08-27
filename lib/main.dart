@@ -23,6 +23,7 @@ void main() async {
   //     print('User is signed in!');
   //   }
   // });
+
   await Hive.initFlutter();
   Bloc.observer = MyBlocObserver();
   await Hive.openBox('projectBox');

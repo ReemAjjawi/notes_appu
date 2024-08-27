@@ -15,13 +15,7 @@ class WalletScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(context, screenWidth),
-      body: _buildBody(screenWidth, screenHeight, isPortrait),
-    );
-  }
-
-  PreferredSizeWidget _buildAppBar(BuildContext context, double screenWidth) {
-    return buildAppBar(
+      appBar: buildAppBar(
       leadingg: Container(
         width: screenWidth * 0.1,
         height: screenWidth * 0.1,
@@ -36,10 +30,13 @@ class WalletScreen extends StatelessWidget {
       // actions: [
       //   Icon(Icons.notifications_outlined),
       // ],
+    ),
+      body: _buildBody(),
     );
   }
 
-  Widget _buildBody(double screenWidth, double screenHeight, bool isPortrait) {
+ 
+  Widget _buildBody() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [

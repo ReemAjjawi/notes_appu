@@ -32,9 +32,9 @@ class AppRoutes {
         String? token = box.get('token');
 
         if (token != null) {
-          return _materialRoute(WelcomeScreen());
+          return _materialRoute(SignUpScreen());
         } else {
-          return _materialRoute(CategoriesScreen());
+          return _materialRoute(SignUpScreen());
         }
 
       case '/BicyclesScreen':
@@ -78,7 +78,7 @@ class AppRoutes {
         return _materialRoute(LoginScreen());
 
       case '/CategoriesScreen':
-        return _materialRoute(CategoriesScreen());
+        return _materialRoute(const CategoriesScreen());
 
       case '/SettingsScreen':
         return _materialRoute(SettingsScreen());

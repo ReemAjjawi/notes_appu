@@ -11,5 +11,23 @@ class AppUrl {
   static const String getBicyclesByCategory = "bicycle/bicycles-by-category";
   static const String makeReservation = "reservation";
 
-  static const String getHubContent = "hub-content/";
+  static const String getHubContent = "hub-content";
+  //post
+  static const String getWalletInfo = "wallet";
+  static const String addMoneyToWallet = "wallet";
+  //PUT
+//Add money to my wallet by code
+// {
+//   "code": "string"
+// }
+  static const String createWallet = "wallet";
+
+//POST
+// {
+//   "securityCode": "string",
+//   "confirmSecurityCode": "string",
+//   "bankAccount": "string"
+// }
+
+  static const String getValidCodes = "wallet/All-valid-codes";
 }

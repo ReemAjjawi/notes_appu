@@ -75,7 +75,7 @@ class CategoriesServiceImp implements CategoriesService {
       return DataSuccessList(data: categories);
     } else if (response.statusCode == 403) {
       print(response.data['message']);
-      throw PasswordExcetion(response.data['message']);
+      throw PasswordException(response.data['message']);
     } else {
       throw ServerException();
     }

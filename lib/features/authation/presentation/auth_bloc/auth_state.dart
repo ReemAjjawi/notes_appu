@@ -11,9 +11,24 @@ class RegisterSuccessState extends RegisterClassState {
 class LoadingState extends RegisterClassState {}
 
 class FailureState extends RegisterClassState {
-   final String message;
+   final String? message;
 
    FailureState({required this.message});
+}
+
+
+class FailurePhoneState extends RegisterClassState {
+   final String? message;
+
+   FailurePhoneState({required this.message});
+
+}
+
+
+class FailureUsernameState extends RegisterClassState {
+   final String? message;
+
+   FailureUsernameState({required this.message});
 
 
 }

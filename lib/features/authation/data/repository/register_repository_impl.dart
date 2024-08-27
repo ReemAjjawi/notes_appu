@@ -24,13 +24,13 @@ class RegisterRepoImpl implements RegisterRepo {
       return Right(registerDone);
     } on ServerException {
       return Left(ServerFailure());
-    } on PasswordExcetion {
-      return Left(PasswordFailure(
-          "you must put password with symbols and capital letter"));
-    } on UserNameExcetion {
-      return Left(UserNameFailure("you must change username"));
+    } on PhoneException catch (e) {
+      
+      return Left(PhoneFailure(e.message));
+    } on UsernameException catch (e) {
+      return Left(UserNameFailure(e.message));
     }
-  }
+    }
 
   Future<Either<Failures, SuccessSituation>> LogIn(LogInModel logn) async {
     print('==========================================================');
@@ -40,10 +40,10 @@ class RegisterRepoImpl implements RegisterRepo {
       return Right(LogInDone);
     } on ServerException {
       return Left(ServerFailure());
-    } on PasswordExcetion {
+    } on PasswordException {
       return Left(PasswordFailure(
           "you must put password with symbols and capital letter"));
-    } on UserNameExcetion {
+    } on UsernameException {
       return Left(UserNameFailure("you must change username"));
     }
   }

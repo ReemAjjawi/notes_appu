@@ -8,10 +8,14 @@ String nam =
 class HeaderConfig {
   static Options getHeader({useToken = true}) {
     var box = Hive.box('projectBox');
-    //box.get('token')
+    //
     if (useToken) {
       return Options(
-        headers: {"accept": "*/*", "Authorization": "Bearer ${(nam)}"},
+        headers: {
+          "accept": "*/*",
+          "Authorization":
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwMzI4MjkxNzU2IiwiaWF0IjoxNzI0Njk4Mzc1LCJleHAiOjE3MjQ3ODQ3NzV9.QJRGEpEj23MkV3laOv6w3SflUXibqQ38Oz1DzscoJGw"
+        },
       );
     } else {
       return Options(

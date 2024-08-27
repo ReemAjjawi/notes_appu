@@ -6,7 +6,9 @@ import 'package:ride_application/features/authation/domain/usecase/login_use_cas
 import 'package:ride_application/features/authation/domain/usecase/register_use_case.dart';
 import 'package:ride_application/features/authation/presentation/auth_bloc/auth_bloc.dart';
 import 'package:ride_application/features/authation/presentation/login_bloc/login_bloc.dart';
-
+import 'package:ride_application/features/wallet/data/datasource/remote/create_wallet_service.dart';
+import 'package:ride_application/features/wallet/data/repository/wallet_creation_repository_impl.dart';
+import 'package:ride_application/features/wallet/presentation/bloc/wallet_creation_bloc/wallet_creation_bloc.dart';
 import 'features/categories/data/datasource/remote/categories_service.dart';
 import 'features/categories/data/repository/category_repository_impl.dart';
 import 'features/categories/domain/usecase/bicycle_use_case.dart';
@@ -17,6 +19,10 @@ import 'features/changepassword/data/datasource/remote/changepassword_service.da
 import 'features/changepassword/data/repository/changepassword_repository_impl.dart';
 import 'features/changepassword/domain/usecase/changepassword_use_case.dart';
 import 'features/changepassword/presentation/changepassword_bloc/changepassword_bloc.dart';
+import 'features/get_wallet/data/datasource/remote/get_wallet_service.dart';
+import 'features/get_wallet/data/repository/wallet_creation_repository_impl.dart';
+import 'features/get_wallet/domain/usecase/wallet_info_use_case.dart';
+import 'features/get_wallet/presentation/bloc_file/wallet_info_bloc.dart';
 import 'features/hub_content/data/datasource/remote/hub_contents_service.dart';
 import 'features/hub_content/data/repository/hub_contents_repository_impl.dart';
 import 'features/hub_content/domain/usecase/get_hub_contents__use_case.dart';
@@ -35,6 +41,7 @@ import 'features/request_rent/data/datasource/remote/register_service.dart';
 import 'features/request_rent/data/repository/register_repository_impl.dart';
 import 'features/request_rent/domain/usecase/register_use_case.dart';
 import 'features/request_rent/presentation/Reservation_bloc/Reservation_bloc.dart';
+import 'features/wallet/domain/usecase/wallet_creation_use_case.dart';
 
 final sl = GetIt.instance;
 
@@ -59,7 +66,7 @@ Future<void> initializeDependencies() async {
 
   sl.registerFactory<LogInBloc>(() => LogInBloc(sl()));
 
-//------------------------------------
+//__________________________________
   sl.registerSingleton<CategoriesServiceImp>(CategoriesServiceImp(dio: Dio()));
   sl.registerSingleton<CategoryRepoImpl>(
       CategoryRepoImpl(categoriesServiceImp: sl()));
@@ -90,7 +97,7 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<HubUseCase>(HubUseCase(hubRepoImpl: sl()));
 
   sl.registerFactory<HubBloc>(() => HubBloc(sl()));
-//---------------------------------------
+//____________________________________
   sl.registerSingleton<ReservationServiceImp>(ReservationServiceImp(dio: sl()));
 
   sl.registerSingleton<ReservationRepoImpl>(
@@ -123,4 +130,28 @@ Future<void> initializeDependencies() async {
       changepasswordUseCase(changepassworImpl: sl()));
 
   sl.registerFactory<changepasswordBloc>(() => changepasswordBloc(sl()));
+  //_______________________________
+
+  sl.registerSingleton<WalletCreationServiceImp>(
+      WalletCreationServiceImp(dio: sl()));
+
+  sl.registerSingleton<WalletCreationRepoImpl>(
+      WalletCreationRepoImpl(walletCreationServiceImp: sl()));
+
+  sl.registerSingleton<WalletCreationUseCase>(
+      WalletCreationUseCase(walletCreationRepoImp: sl()));
+
+  sl.registerFactory<WalletCreationBloc>(() => WalletCreationBloc(sl()));
+
+  //___________________________________________
+
+  sl.registerSingleton<WalletInfoServiceImp>(WalletInfoServiceImp(dio: sl()));
+
+  sl.registerSingleton<WalletInfoRepoImp>(
+      WalletInfoRepoImp(walletInfoServiceImp: sl()));
+
+  sl.registerSingleton<WalletInfoUseCase>(
+      WalletInfoUseCase(walletInfoRepoImp: sl()));
+
+  sl.registerFactory<WalletInfoBloc>(() => WalletInfoBloc(sl()));
 }

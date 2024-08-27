@@ -9,7 +9,6 @@ import '../../../../core/resources/managers/colors_manager.dart';
 import '../../../../core/resources/managers/strings_manager.dart';
 import '../../../../core/validators.dart';
 import '../../../../core/widgets/app_button.dart';
-import '../../../../core/widgets/success_widget.dart';
 import '../../../../injection_file.dart';
 import '../../../../main.dart';
 import '../auth_bloc/auth_bloc.dart';
@@ -73,7 +72,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Center(
                     child: SizedBox(
                       width: screenWidth * 0.92,
-                      height: screenHeight / 15,
+                      height: screenHeight / 12,
                       child: ValueListenableBuilder<bool>(
                         valueListenable: obscureTextPasswordNotifier,
                         builder: (context, obscureTextPassword, child) {
@@ -110,10 +109,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 borderSide: BorderSide(
                                     color: ColorManager.hintTextColor),
                               ),
-                              errorMaxLines: 2,
-                              errorStyle: TextStyle(
-                                fontSize: screenHeight * 0.018,
-                              ),
+                              errorMaxLines: 1,
+                              errorStyle: const TextStyle(height: 0.4),
                               contentPadding: EdgeInsets.symmetric(
                                 vertical: screenHeight * 0.02,
                                 horizontal: screenWidth * 0.04,
@@ -135,7 +132,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Center(
                     child: SizedBox(
                       width: screenWidth * 0.92,
-                      height: screenHeight / 15,
+                      height: screenHeight / 12,
                       child: ValueListenableBuilder<bool>(
                         valueListenable: obscureTextConfirmPasswordNotifier,
                         builder: (context, obscureTextConfirmPassword, child) {
@@ -172,12 +169,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 borderSide: BorderSide(
                                     color: ColorManager.hintTextColor),
                               ),
-                              errorStyle: TextStyle(
-                                fontSize: screenHeight * 0.018,
-                              ),
+                              errorMaxLines: 1,
+                              errorStyle: const TextStyle(height: 0.4),
                               contentPadding: EdgeInsets.symmetric(
                                 vertical: screenHeight * 0.02,
-                                horizontal: screenWidth * 0.02,
+                                horizontal: screenWidth * 0.04,
                               ),
                             ),
                             style: TextStyle(
@@ -218,6 +214,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             title: 'Error',
                             text: state.message,
                           );
+
+                          Navigator.pushNamed(context, '/SignUp');
                         } else if (state is RegisterSuccessState) {
                           QuickAlert.show(
                             context: context,
@@ -289,7 +287,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   hasIcon: false,
                                 ),
                                 Text(
-                                  state.message,
+                                  state.message!,
                                   style: const TextStyle(
                                       fontSize: 20, color: Colors.red),
                                 )

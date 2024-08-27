@@ -45,7 +45,7 @@ class SignUpScreen extends StatelessWidget {
                       StringsManager.SIGNUPWITH,
                       style: TextStyle(
                         fontWeight: FontWeight.w100,
-                        fontSize: screenWidth * 0.07,
+                        fontSize: screenWidth * 0.06,
                         color: ColorManager.headLineColor,
                       ),
                     ),
@@ -96,7 +96,7 @@ class SignUpScreen extends StatelessWidget {
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(),
+                        borderSide: const BorderSide(),
                       ),
                     ),
                     initialCountryCode: 'IN',
@@ -105,7 +105,7 @@ class SignUpScreen extends StatelessWidget {
                     },
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: screenWidth * 0.92,
                   height: screenHeight / 13,
                   child: TextFormField(
@@ -114,14 +114,16 @@ class SignUpScreen extends StatelessWidget {
                         hintText: 'Enter your birth date',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(
+                              // color: ColorManager.primaryColor,
+                              ),
                         ),
-                        
                         contentPadding: EdgeInsets.symmetric(
                             vertical: screenHeight * 0.02,
                             horizontal: screenWidth * 0.04),
                         errorMaxLines: 1,
-                        errorStyle: TextStyle(height: 0.5),
-                        suffixIcon: Icon(Icons.calendar_today),
+                        errorStyle: const TextStyle(height: 0.5),
+                        suffixIcon: const Icon(Icons.calendar_today),
                       ),
                       onTap: () async {
                         FocusScope.of(context).requestFocus(FocusNode());
@@ -168,7 +170,7 @@ class SignUpScreen extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                " " + StringsManager.TERMSOFSERVICE + " ",
+                                " ${StringsManager.TERMSOFSERVICE} ",
                                 style: TextStyle(
                                   // fontWeight: FontWeight.w400,
                                   fontSize: screenWidth * 0.03,
@@ -224,7 +226,7 @@ class SignUpScreen extends StatelessWidget {
                     width: screenWidth * 0.88,
                     height: screenHeight / 13,
                     hasIcon: false),
-                Row(
+                const Row(
                   children: [],
                 ),
                 Text(

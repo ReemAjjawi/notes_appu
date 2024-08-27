@@ -4,11 +4,17 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ride_application/core/error/exceptions.dart';
 import 'package:ride_application/core/error/failures.dart';
 import 'package:ride_application/core/success/success.dart';
+<<<<<<< HEAD
 
 import 'package:ride_application/features/authation/data/datasource/remote/register_service.dart';
 import 'package:ride_application/features/authation/data/model/user_model.dart';
 import 'package:ride_application/features/authation/data/repository/register_repository_impl.dart';
 
+=======
+import 'package:ride_application/features/authation/data/datasource/remote/register_service.dart';
+import 'package:ride_application/features/authation/data/model/user_model.dart';
+import 'package:ride_application/features/authation/data/repository/register_repository_impl.dart';
+>>>>>>> 6f9d5824fc23bcaff4ea49f61f0610e9e7eeed53
 import 'servies.dart';
 
 void main() {

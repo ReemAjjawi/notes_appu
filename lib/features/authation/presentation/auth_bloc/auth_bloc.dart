@@ -11,30 +11,37 @@ part 'auth_state.dart';
 
 class AuthBloc extends Bloc<RegisterClassEvent, RegisterClassState> {
   final RegisterUseCase signUpUseCase;
+
   AuthBloc(this.signUpUseCase) : super(InitialState()) {
     on<RegisterEvent>((event, emit) async {
       emit(LoadingState());
       final failureOrEntity = await signUpUseCase.call(event.user);
 
       failureOrEntity.fold((failure) {
-        String message = '';
+        String? message = '';
         switch (failure.runtimeType) {
-        //  case PasswordFailure():
-// emit(FailurePasswordState(message: message));
-     //       break;
-//case UserNameFailure()
-// emit(FailureusernameState(message: message));
-     //       break;
-    case ServerFailure():
-    message="please try again";
-       emit(FailureState(message: message));
-       break;
+          // case PasswordFailure:
+          //   message = (failure as PasswordFailure).message;
+          //   emit(FailurePasswordState(message: message));
+          //   break;
+          case UserNameFailure:
+            message = (failure as UserNameFailure).message;
+            emit(FailureUsernameState(message: message));
+            break;
+          case PhoneFailure:
+            message = (failure as PhoneFailure).message;
+            emit(FailurePhoneState(message: message));
+            break;
+          case ServerFailure:
+            message = "Please try again later.";
+            emit(FailureState(message: message));
+            break;
+          default:
+            message = "An unknown error occurred.";
+            emit(FailureState(message: message));
         }
-     
       }, (success) {
-        emit(
-          RegisterSuccessState(),
-        );
+        emit(RegisterSuccessState());
       });
     });
   }

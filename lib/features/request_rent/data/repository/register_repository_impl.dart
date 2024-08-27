@@ -24,10 +24,10 @@ class ReservationRepoImpl implements ReservationRepo {
       return Right(registerDone);
     } on ServerException {
       return Left(ServerFailure());
-    } on PasswordExcetion {
+    } on PasswordException {
       return Left(PasswordFailure(
           "You must put password with symbols and capital letter"));
-    } on UserNameExcetion {
+    } on UsernameException {
       return Left(UserNameFailure("You must change username"));
     }
   }

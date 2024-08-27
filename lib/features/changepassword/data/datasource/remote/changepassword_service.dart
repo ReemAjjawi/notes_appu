@@ -27,9 +27,6 @@ class changepasswordServiceImp extends CoreService {
     if (response.statusCode == 202) {
       print("Change password done successfully");
       return DataSuccess();
-    } else if (response.statusCode == 403) {
-      print(response.data['message']);
-      throw PasswordExcetion(response.data['message']);
     } else {
       throw ServerException();
     }

@@ -23,10 +23,10 @@ class HubRepoImpl implements HubRepo {
       return Right(data);
     } on ServerException {
       return Left(ServerFailure());
-    } on PasswordExcetion {
+    } on PasswordException {
       return Left(PasswordFailure(
           "you must put password with symbols and capital letter"));
-    } on UserNameExcetion {
+    } on UsernameException {
       return Left(UserNameFailure("you must change username"));
     }
   }

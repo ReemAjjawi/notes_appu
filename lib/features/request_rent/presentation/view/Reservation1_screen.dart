@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dash/flutter_dash.dart';
-
 import '../../../../core/helper/build_app_bar.dart';
 import '../../../../core/resources/managers/assets_manager.dart';
 import '../../../../core/resources/managers/colors_manager.dart';

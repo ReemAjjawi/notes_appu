@@ -26,6 +26,8 @@ class HubContentsBloc
           //       break;
           case ServerFailure():
             message = "please try again";
+            print(failure.runtimeType);
+            print("iam in switch hub content bloc ");
             emit(FailureState(message: message));
             break;
         }

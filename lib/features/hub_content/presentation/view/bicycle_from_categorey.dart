@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quickalert/quickalert.dart';
 
 import '../../../../core/helper/build_app_bar.dart';
 import '../../../../core/helper/indicator.dart';
@@ -23,11 +24,11 @@ class BicyclesFromCategorey extends StatelessWidget {
   HubinfoModel hubIdto;
   String categoryName;
   BicyclesFromCategorey({
-    Key? key,
+    super.key,
     required this.hubId,
     required this.hubIdto,
     required this.categoryName,
-  }) : super(key: key);
+  });
   @override
   Widget build(BuildContext context) {
     return BlocProvider<HubContentsBloc>(
@@ -89,8 +90,20 @@ Widget _buildText2() {
 }
 
 Widget buildListView(hubId, hubIdto, double screenHeight, double screenWidth) {
-  return BlocBuilder<HubContentsBloc, HubContentsClassState>(
-      builder: (context, state) {
+  return BlocConsumer<HubContentsBloc, HubContentsClassState>(
+      listener: (context, state) {
+    if (state is FailureState) {
+      QuickAlert.show(
+        context: context,
+        type: QuickAlertType.error,
+        title: 'Error',
+        text: state.message,
+      );
+      Navigator.pushNamed(context, '/LocationScreen');
+    } else if (state is LoadingState) {
+      QuickAlert.show(context: context, type: QuickAlertType.loading);
+    }
+  }, builder: (context, state) {
     if (state is Success) {
       return ListView.builder(
         shrinkWrap: true,
@@ -173,9 +186,7 @@ Widget buildListView(hubId, hubIdto, double screenHeight, double screenWidth) {
         },
       );
     } else if (state is LoadingState) {
-      return const Center(
-        child: Indicator(),
-      );
+      return const Center();
     } else {
       return Text((state as FailureState).message);
     }

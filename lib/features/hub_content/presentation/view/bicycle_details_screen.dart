@@ -270,3 +270,10 @@ class BicycleDetailsScreen extends StatelessWidget {
 
   wiee() {}
 }
+
+
+
+
+
+
+
