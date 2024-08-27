@@ -10,7 +10,7 @@ class LogInUseCase {
     required this.registerRepoImpl,
   });
 
-  Future<Either<Failures, Success>> call(params1) async {
+  Future<Either<Failures, SuccessSituation>> call(params1) async {
     return await registerRepoImpl.LogIn(params1);
   }
 }

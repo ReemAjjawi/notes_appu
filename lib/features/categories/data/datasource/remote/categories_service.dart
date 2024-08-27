@@ -1,15 +1,18 @@
 import 'package:dio/dio.dart';
+import 'package:ride_application/core/success/success.dart';
 
 import '../../../../../config/app_url.dart';
 import '../../../../../config/header_config.dart';
 import '../../../../../core/error/exceptions.dart';
 
+import '../../../domain/entity/bicycle_entity.dart';
+import '../../../domain/entity/category_entity.dart';
 import '../../model/bicycle_model.dart';
 import '../../model/category_model.dart';
 
 abstract class CategoriesService {
-  Future<List<CategoryModel>> getCategories();
-  Future<List<BicycleModel>> getBicyclesByCategory(String categoryName);
+  Future<SuccessSituation> getCategories();
+  Future<SuccessSituation> getBicyclesByCategory(String categoryName);
 }
 
 class CategoriesServiceImp implements CategoriesService {
@@ -19,7 +22,7 @@ class CategoriesServiceImp implements CategoriesService {
   });
 
   @override
-  Future<List<BicycleModel>> getBicyclesByCategory(String categoryName) async {
+  Future<SuccessSituation> getBicyclesByCategory(String categoryName) async {
     print(
         '${AppUrl.baseUrl}/${AppUrl.getBicyclesByCategory}?category=$categoryName');
 
@@ -37,14 +40,16 @@ class CategoriesServiceImp implements CategoriesService {
         response.data['body'].length,
         (index) => BicycleModel.fromJson(response.data['body'][index]),
       );
-      return bicycles;
+      // List<BicycleEntity> bicycle =
+      //     bicycles.map<BicycleEntity>((bicycle) => bicycle).toList();
+      return DataSuccessList(data: bicycles);
     } else {
       throw ServerException();
     }
   }
 
   @override
-  Future<List<CategoryModel>> getCategories() async {
+  Future<SuccessSituation> getCategories() async {
     print('${AppUrl.baseUrl}/${AppUrl.getAllCategories}');
 
     Response response = await dio.get(
@@ -64,7 +69,10 @@ class CategoriesServiceImp implements CategoriesService {
         response.data['body'].length,
         (index) => CategoryModel.fromJson(response.data['body'][index]),
       );
-      return categories;
+      // List<CategoryEntity> categorie =
+      //     categories.map<CategoryEntity>((category) => category).toList();
+
+      return DataSuccessList(data: categories);
     } else if (response.statusCode == 403) {
       print(response.data['message']);
       throw PasswordExcetion(response.data['message']);

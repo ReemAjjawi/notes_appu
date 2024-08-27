@@ -81,7 +81,7 @@ Widget _buildGridView(
           child: Padding(
             padding: EdgeInsets.all(padding),
             child: GridView.builder(
-              itemCount: state.categories.length,
+              itemCount: state.categories.data.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: isPortrait ? 2 : 3,
                 crossAxisSpacing: screenWidth * 0.04,
@@ -93,7 +93,7 @@ Widget _buildGridView(
                 return InkWell(
                   onTap: () {
                     Navigator.pushNamed(context, '/BicyclesScreen',
-                        arguments: state.categories[index].name);
+                        arguments: state.categories.data[index].name);
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -115,7 +115,7 @@ Widget _buildGridView(
                         ),
                         SizedBox(height: screenHeight * 0.01),
                         Text(
-                          state.categories[index].name,
+                          state.categories.data[index].name,
                           style: StylesManager.subLineStyle,
                         ),
                         SizedBox(height: screenHeight * 0.01),

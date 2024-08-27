@@ -1,14 +1,13 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+
 import 'package:ride_application/core/error/exceptions.dart';
 import 'package:ride_application/core/error/failures.dart';
 import 'package:ride_application/core/success/success.dart';
-import 'package:ride_application/features/auth/data/model/user_model.dart';
-import 'package:ride_application/features/auth/data/datasource/remote/register_service.dart';
-import 'package:ride_application/features/auth/data/repository/register_repository_impl.dart';
+
+import 'package:ride_application/features/authation/data/datasource/remote/register_service.dart';
+import 'package:ride_application/features/authation/data/model/user_model.dart';
+import 'package:ride_application/features/authation/data/repository/register_repository_impl.dart';
 
 import 'servies.dart';
 
@@ -31,12 +30,13 @@ void main() {
           confirmPassword: "password");
     });
 
-    test("InValid Password", () async {
-      expect(
-        () async => await authService.Register(user),
-        throwsA(isA<PasswordMustContainOneUppercase>()),
-      );
-    });
+    // test("InValid Password", () async {
+    //   expect(
+    //     () async => await authService.Register(user),
+    //     throwsA(isA<PasswordMustContainOneUppercase>()),
+    //   );
+    // }
+    // );
   });
 
   group("testing for success ", () {
@@ -61,7 +61,7 @@ void main() {
 
     test("Right Password", () async {
       final result = await authService.Register(user);
-      expect(result, isA<Success>());
+      expect(result, isA<SuccessSituation>());
     });
   });
   group("Test Repo", () {

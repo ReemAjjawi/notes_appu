@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
+import 'package:ride_application/core/success/success.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 
@@ -13,11 +14,11 @@ class HubContenRepoImpl implements HubContenRepo {
   HubContentServiceImp hubContentServiceImp;
   HubContenRepoImpl({required this.hubContentServiceImp});
   @override
-  Future<Either<Failures, List<BicycleListModel>>> getHubContents(
+  Future<Either<Failures, SuccessSituation>> getHubContents(
       int hubId, String bicycleCategory) async {
     log('==========================================================');
     try {
-      List<BicycleListModel> bicycles =
+      final bicycles =
           await hubContentServiceImp.getHubContents(hubId, bicycleCategory);
 //List<BicycleEntity> bicycles = bicyclesList.map<BicycleEntity>((bicycle) => bicycle as BicycleEntity).toList();
       return Right(bicycles);

@@ -13,6 +13,23 @@ import '../../../../injection_file.dart';
 import '../../../../main.dart';
 import '../../data/model/login_model.dart';
 import '../login_bloc/login_bloc.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+
+// import 'package:google_sign_in/google_sign_in.dart';
+
+// Future<UserCredential> signInWithGoogle() async {
+//   final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+//   final GoogleSignInAuthentication? googleAuth =
+//       await googleUser?.authentication;
+
+//   final credential = GoogleAuthProvider.credential(
+//     accessToken: googleAuth?.accessToken,
+//     idToken: googleAuth?.idToken,
+//   );
+
+//   return await FirebaseAuth.instance.signInWithCredential(credential);
+// }
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
@@ -274,7 +291,9 @@ class _RegisterScreenState extends State<LoginScreen> {
                       color: ColorManager.titleColor,
                     ),
                     text: StringsManager.SIGNUPWITHGMAIL,
-                    onPressed: () {},
+                    onPressed: () {
+                      // signInWithGoogle();
+                    },
                     backgroundColor: ColorManager.whiteColor,
                     bordergroundColor: ColorManager.subLineColor,
                     width: screenWidth * 0.92,

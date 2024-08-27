@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quickalert/quickalert.dart';
 import 'package:ride_application/features/authation/data/model/user_model.dart';
 
+import '../../../../core/helper/build_app_bar.dart';
 import '../../../../core/helper/indicator.dart';
 import '../../../../core/resources/managers/colors_manager.dart';
 import '../../../../core/resources/managers/strings_manager.dart';
@@ -35,13 +37,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
       create: (context) => AuthBloc(sl()),
       child: Builder(builder: (context) {
         return Scaffold(
-          appBar: AppBar(),
+          appBar: buildAppBar(
+            hasLeading: true,
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
           body: Form(
             key: _formKey,
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  SizedBox(height: screenHeight * 0.01),
                   Text(
                     StringsManager.SETPASSWORD,
                     style: TextStyle(
@@ -81,8 +89,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               suffixIcon: IconButton(
                                 icon: Icon(
                                   obscureTextPassword
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
                                   color: ColorManager.hintTextColor,
                                 ),
                                 onPressed: () {
@@ -143,8 +151,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               suffixIcon: IconButton(
                                 icon: Icon(
                                   obscureTextConfirmPassword
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
                                   color: ColorManager.hintTextColor,
                                 ),
                                 onPressed: () {
@@ -201,7 +209,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ? screenHeight * 0.20
                           : screenHeight * 0.10),
                   Center(
-                    child: BlocBuilder<AuthBloc, RegisterClassState>(
+                    child: BlocConsumer<AuthBloc, RegisterClassState>(
+                      listener: (context, state) {
+                        if (state is FailureState) {
+                          QuickAlert.show(
+                            context: context,
+                            type: QuickAlertType.error,
+                            title: 'Error',
+                            text: state.message,
+                          );
+                        } else if (state is RegisterSuccessState) {
+                          QuickAlert.show(
+                            context: context,
+                            type: QuickAlertType.success,
+                            title: 'Success',
+                            text: 'Register was successful!',
+                          );
+                          Navigator.pushNamed(context, '/CategoriesScreen');
+                        } else if (state is LoadingState) {
+                          QuickAlert.show(
+                              context: context, type: QuickAlertType.loading);
+                        }
+                      },
                       builder: (context, state) {
                         if (state is InitialState) {
                           return AppButton(
@@ -216,9 +245,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 context.read<AuthBloc>().add(
                                       RegisterEvent(widget.user),
                                     );
+
                                 // Navigator.pushNamed(context, '/LoginScreen');
-                                Navigator.pushNamed(
-                                    context, '/CategoriesScreen');
                               }
                             },
                             backgroundColor: ColorManager.primaryColor,
@@ -231,7 +259,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             hasIcon: false,
                           );
                         } else if (state is LoadingState) {
-                          return Indicator();
+                          return const SizedBox();
                         } else if (state is FailureState) {
                           return SizedBox(
                             height: screenHeight / 3,
@@ -249,11 +277,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           passwordController.text;
                                       widget.user.confirmPassword =
                                           confirmPasswordController.text;
-                                      // Navigator.pushNamed(
-                                      //     context, '/LoginScreen');
-
-                                      Navigator.pushNamed(
-                                          context, '/CategoriesScreen');
                                     }
                                   },
                                   backgroundColor: ColorManager.primaryColor,
@@ -274,7 +297,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                           );
                         } else {
-                          return const SuccessWidget();
+                          return const SizedBox();
                         }
                       },
                     ),
@@ -301,10 +324,3 @@ class _RegisterScreenState extends State<RegisterScreen> {
 //   return
   
 // }
-
-
-
-
-
-
-

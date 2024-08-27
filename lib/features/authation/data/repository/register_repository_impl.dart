@@ -7,7 +7,6 @@ import 'package:ride_application/features/authation/data/model/login_model.dart'
 import 'package:ride_application/features/authation/data/model/user_model.dart';
 import 'package:ride_application/features/authation/domain/repository/register_repository.dart';
 
-
 class RegisterRepoImpl implements RegisterRepo {
   AuthServiceImp authServiceImp;
   //LocalArticleDataSource localArticleDataSource;
@@ -17,10 +16,10 @@ class RegisterRepoImpl implements RegisterRepo {
   });
 
   @override
-  Future<Either<Failures, Success>> Register(UserModel user) async {
+  Future<Either<Failures, SuccessSituation>> Register(UserModel user) async {
     print('==========================================================');
     try {
-      Success registerDone = await authServiceImp.Register(user);
+      SuccessSituation registerDone = await authServiceImp.Register(user);
 
       return Right(registerDone);
     } on ServerException {
@@ -33,10 +32,10 @@ class RegisterRepoImpl implements RegisterRepo {
     }
   }
 
-  Future<Either<Failures, Success>> LogIn(LogInModel logn) async {
+  Future<Either<Failures, SuccessSituation>> LogIn(LogInModel logn) async {
     print('==========================================================');
     try {
-      Success LogInDone = await authServiceImp.LogIn(logn);
+      SuccessSituation LogInDone = await authServiceImp.LogIn(logn);
 
       return Right(LogInDone);
     } on ServerException {

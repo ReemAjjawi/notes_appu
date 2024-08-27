@@ -11,7 +11,7 @@ class ReservationUseCase {
     required this.reservationRepoImpl,
   });
 
-  Future<Either<Failures, Success>> call(params) async {
+  Future<Either<Failures, SuccessSituation>> call(params) async {
     return await reservationRepoImpl.makeReservation(params);
   }
 }

@@ -13,7 +13,7 @@ class GetHubContentsUseCase {
     required this.hubContenRepoImpl,
   });
 
-  Future<Either<Failures, List<BicycleListModel>>> call(params, params1) async {
+  Future<Either<Failures, SuccessSituation>> call(params, params1) async {
     return await hubContenRepoImpl.getHubContents(params, params1);
   }
 }

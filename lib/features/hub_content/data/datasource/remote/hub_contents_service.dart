@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:ride_application/core/success/success.dart';
 import 'package:ride_application/features/hub_content/data/model/second_model.dart';
 
 import '../../../../../config/app_url.dart';
@@ -6,8 +7,7 @@ import '../../../../../config/header_config.dart';
 import '../../../../../core/error/exceptions.dart';
 
 abstract class HubContentService {
-  Future<List<BicycleListModel>> getHubContents(
-      int hnbId, String bicycleCategory);
+  Future<SuccessSituation> getHubContents(int hnbId, String bicycleCategory);
 }
 
 class HubContentServiceImp implements HubContentService {
@@ -17,16 +17,15 @@ class HubContentServiceImp implements HubContentService {
   });
 
   @override
-  Future<List<BicycleListModel>> getHubContents(
+  Future<SuccessSituation> getHubContents(
       int hnbId, String bicycleCategory) async {
     print(
-        '${AppUrl.baseUrl}/${AppUrl.getHubContent}/$hnbId?bicycleCategory=$bicycleCategory');
+        '${AppUrl.baseUrl}/${AppUrl.getHubContent}$hnbId?bicycleCategory=$bicycleCategory');
 
     Response response = await dio.get(
-        '${AppUrl.baseUrl}/${AppUrl.getHubContent}/$hnbId?bicycleCategory=$bicycleCategory',
+        '${AppUrl.baseUrl}/${AppUrl.getHubContent}$hnbId?bicycleCategory=$bicycleCategory',
         options: HeaderConfig.getHeader(useToken: true));
-    print(
-        '${AppUrl.baseUrl}/${AppUrl.getHubContent}/$hnbId?bicycleCategory=$bicycleCategory');
+
     if (response.statusCode == 200) {
       print(response.data);
 
@@ -36,7 +35,7 @@ class HubContentServiceImp implements HubContentService {
         (index) => BicycleListModel.fromJson(
             response.data['body']['bicycleList'][index]),
       );
-      return bicycles;
+      return DataSuccessList(data: bicycles);
     } else if (response.statusCode == 403) {
       print(response.data['message']);
       throw ServerException();

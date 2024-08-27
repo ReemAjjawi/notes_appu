@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failures.dart';
+import '../../../../core/success/success.dart';
 import '../../data/repository/category_repository_impl.dart';
-import '../entity/category_entity.dart';
 
 class CategoryUseCase{
   CategoryRepoImpl categoryRepoImpl;
@@ -10,7 +10,7 @@ class CategoryUseCase{
     required this.categoryRepoImpl,
   });
 
-  Future<Either<Failures, List <CategoryEntity> >> call() async {
+  Future<Either<Failures,SuccessSituation >> call() async {
     return await categoryRepoImpl.getCategories();
   }
 }

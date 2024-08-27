@@ -13,6 +13,10 @@ import 'features/categories/domain/usecase/bicycle_use_case.dart';
 import 'features/categories/domain/usecase/category_use_case.dart';
 import 'features/categories/presentation/bicycle_bloc/bicycle_bloc.dart';
 import 'features/categories/presentation/category_bloc/category_bloc.dart';
+import 'features/changepassword/data/datasource/remote/changepassword_service.dart';
+import 'features/changepassword/data/repository/changepassword_repository_impl.dart';
+import 'features/changepassword/domain/usecase/changepassword_use_case.dart';
+import 'features/changepassword/presentation/changepassword_bloc/changepassword_bloc.dart';
 import 'features/hub_content/data/datasource/remote/hub_contents_service.dart';
 import 'features/hub_content/data/repository/hub_contents_repository_impl.dart';
 import 'features/hub_content/domain/usecase/get_hub_contents__use_case.dart';
@@ -21,6 +25,12 @@ import 'features/map/data/datasource/remote/Hub_service.dart';
 import 'features/map/data/repository/register_repository_impl.dart';
 import 'features/map/domain/usecase/register_use_case.dart';
 import 'features/map/presentation/hub_bloc/hub_bloc.dart';
+import 'features/policy/data/datasource/remote/policy_service.dart';
+import 'features/policy/data/repository/register_repository_impl.dart';
+import 'features/policy/domain/usecase/getpolicy_use_case.dart';
+import 'features/policy/domain/usecase/putpolicy_use_case.dart';
+import 'features/policy/presentation/policy_bloc/policy_bloc.dart';
+import 'features/policy/presentation/putpolicyBloc/putpolicy_bloc.dart';
 import 'features/request_rent/data/datasource/remote/register_service.dart';
 import 'features/request_rent/data/repository/register_repository_impl.dart';
 import 'features/request_rent/domain/usecase/register_use_case.dart';
@@ -91,4 +101,26 @@ Future<void> initializeDependencies() async {
 
   sl.registerFactory<ReservationBloc>(() => ReservationBloc(sl()));
   //________________________________
+  sl.registerSingleton<policyServiceImp>(policyServiceImp(dio: sl()));
+
+  sl.registerSingleton<policyRepoImpl>(policyRepoImpl(policServiceImp: sl()));
+
+  sl.registerSingleton<policyUseCase>(policyUseCase(policRepoImpl: sl()));
+
+  sl.registerFactory<policyBloc>(() => policyBloc(sl()));
+  //====================
+  sl.registerSingleton<putpolicyUseCase>(putpolicyUseCase(policRepoImpl: sl()));
+
+  sl.registerFactory<putpolicyBloc>(() => putpolicyBloc(sl()));
+  //________________________________
+  sl.registerSingleton<changepasswordServiceImp>(
+      changepasswordServiceImp(dio: sl()));
+
+  sl.registerSingleton<changepasswordRepoImpl>(
+      changepasswordRepoImpl(changepassworServiceImp: sl()));
+
+  sl.registerSingleton<changepasswordUseCase>(
+      changepasswordUseCase(changepassworImpl: sl()));
+
+  sl.registerFactory<changepasswordBloc>(() => changepasswordBloc(sl()));
 }

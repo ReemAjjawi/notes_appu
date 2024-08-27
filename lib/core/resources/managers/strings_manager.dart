@@ -140,7 +140,7 @@ class StringsManager {
   static const String VALIDDATE = "Please enter your birth date";
 
   static const String VALIDPASSORDREG =
-      "Password must be at least 8 characters long, include an uppercase letter, a number, and a special character";
+      "least 8characters,uppercase letter,number,special character";
   static const String TIME = "Time";
   static const String SELECTPAYMENTMETHOD = "Select payment method";
   static const String VISANUMBER = "**** **** **** 8970";

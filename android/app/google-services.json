@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "776317614159",
+    "project_id": "notesappu",
+    "storage_bucket": "notesappu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776317614159:android:2247192da43e5d50ec523a",
+        "android_client_info": {
+          "package_name": "com.example.ride_application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQ2PHyPYOPA9nVpiLmqUhEiT1u38BYJQM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

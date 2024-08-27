@@ -3,10 +3,10 @@
 import 'package:dio/dio.dart';
 import 'package:ride_application/config/header_config.dart';
 
-
 import '../../../../../config/app_url.dart';
 import '../../../../../core/error/exceptions.dart';
 import '../../../../../core/service.dart';
+import '../../../../../core/success/success.dart';
 import '../../model/hub_model.dart';
 import '../../model/hubinfo_model.dart';
 
@@ -16,9 +16,8 @@ class HubServiceImp extends CoreService {
     required this.dio,
   });
 
-  Future<List<HubinfoModel>> Gethub(HubModel hub) async {
+  Future<SuccessSituation> getHub(HubModel hub) async {
     print(hub.toMap());
-    print("sssssssssssssss");
     Response response = await dio.get(
         '${AppUrl.baseUrl}/${AppUrl.getAllHubs}longtitude=${hub.longtitude}&latitude=${hub.latitude}',
         options: HeaderConfig.getHeader());
@@ -35,7 +34,7 @@ class HubServiceImp extends CoreService {
       );
       print(data);
       print("eeeeeeeeeeeeeeeeeee");
-      return data;
+      return DataSuccessList(data: data) ;
     } else if (response.statusCode == 403) {
       print(response.data['message']);
       throw PasswordExcetion(response.data['message']);

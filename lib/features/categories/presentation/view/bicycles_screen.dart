@@ -95,9 +95,9 @@ Widget _buildListView(
       if (state is Success) {
         return Expanded(
           child: ListView.builder(
-            itemCount: state.bicycles.length,
+            itemCount: state.bicycles.data.length,
             itemBuilder: (context, index) {
-              final bicycle = state.bicycles[index];
+              final bicycle = state.bicycles.data[index];
 
               final bicycleItem = bicycles[index];
               return Card(

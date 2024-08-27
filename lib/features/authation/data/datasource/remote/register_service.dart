@@ -8,10 +8,9 @@ import 'package:ride_application/core/success/success.dart';
 import 'package:ride_application/features/authation/data/model/login_model.dart';
 import 'package:ride_application/features/authation/data/model/user_model.dart';
 
-
 abstract class AuthService {
-  Future<Success> Register(UserModel user);
-  Future<Success> LogIn(LogInModel logn);
+  Future<SuccessSituation> Register(UserModel user);
+  Future<SuccessSituation> LogIn(LogInModel logn);
 }
 
 class AuthServiceImp implements AuthService {
@@ -19,7 +18,7 @@ class AuthServiceImp implements AuthService {
   AuthServiceImp({
     required this.dio,
   });
-  Future<Success> Register(UserModel user) async {
+  Future<SuccessSituation> Register(UserModel user) async {
     print(user.toMap());
     print('${AppUrl.baseUrl}/${AppUrl.signUp}');
     final _data = user.toMap();
@@ -44,7 +43,7 @@ class AuthServiceImp implements AuthService {
     }
   }
 
-  Future<Success> LogIn(LogInModel logn) async {
+  Future<SuccessSituation> LogIn(LogInModel logn) async {
     print(logn.toMap());
     print('${AppUrl.baseUrl}/${AppUrl.logIn}');
     final _data = logn.toMap();

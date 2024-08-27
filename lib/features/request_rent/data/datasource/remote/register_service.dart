@@ -5,7 +5,7 @@ import 'package:ride_application/core/success/success.dart';
 import 'package:ride_application/features/request_rent/data/model/reservation_model.dart';
 
 abstract class ReservationService {
-  Future<Success> makeReservation(ReservationModel reservationModel);
+  Future<SuccessSituation> makeReservation(ReservationModel reservationModel);
 }
 
 class ReservationServiceImp implements ReservationService {
@@ -15,7 +15,8 @@ class ReservationServiceImp implements ReservationService {
   });
 
   @override
-  Future<Success> makeReservation(ReservationModel reservationObject) async {
+  Future<SuccessSituation> makeReservation(
+      ReservationModel reservationObject) async {
     print(reservationObject.toJson());
     print('${AppUrl.baseUrl}/${AppUrl.makeReservation}');
     final _data = reservationObject.toJson();

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ride_application/main.dart';
 
@@ -30,7 +31,10 @@ class AppButton extends StatelessWidget {
     return SizedBox(
         height: height,
         width: width,
-        child: ElevatedButton(
+        child:
+            // isios?
+            // CupertinoButton( child: child, onPressed: onPressed)
+            ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: backgroundColor,
             shape: RoundedRectangleBorder(

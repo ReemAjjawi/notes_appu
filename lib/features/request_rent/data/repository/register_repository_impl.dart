@@ -15,11 +15,11 @@ class ReservationRepoImpl implements ReservationRepo {
   });
 
   @override
-  Future<Either<Failures, Success>> makeReservation(
+  Future<Either<Failures, SuccessSituation>> makeReservation(
       ReservationEntity reservation) async {
     print('==========================================================');
     try {
-      Success registerDone = await reservationServiceImp
+      SuccessSituation registerDone = await reservationServiceImp
           .makeReservation(reservation as ReservationModel);
       return Right(registerDone);
     } on ServerException {
@@ -32,6 +32,3 @@ class ReservationRepoImpl implements ReservationRepo {
     }
   }
 }
-
-
-

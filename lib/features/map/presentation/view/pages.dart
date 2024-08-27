@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'features/favourite/favourite_screen.dart';
-import 'features/map/data/model/hub_model.dart';
-import 'features/map/presentation/view/map_screen.dart';
-import 'features/wallet/wallet_screen.dart';
+import '../../../favourite/favourite_screen.dart';
+import '../../data/model/hub_model.dart';
+import 'map_screen.dart';
+import '../../../wallet/wallet_screen.dart';
 
 List<Widget> widgetOptions(HubModel hub, String categoryName) => <Widget>[
       MapScreen(hub: hub, categoryName: categoryName),

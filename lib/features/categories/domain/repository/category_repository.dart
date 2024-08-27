@@ -1,11 +1,10 @@
 import 'package:dartz/dartz.dart';
-import 'package:ride_application/features/categories/domain/entity/category_entity.dart';
 
 import '../../../../core/error/failures.dart';
-import '../entity/bicycle_entity.dart';
+import '../../../../core/success/success.dart';
 
 abstract class CategoryRepo {
-  Future<Either<Failures, List<CategoryEntity>>> getCategories();
-  Future<Either<Failures, List<BicycleEntity>>> getBicyclesByCategory(
+  Future<Either<Failures, SuccessSituation>> getCategories();
+  Future<Either<Failures, SuccessSituation>> getBicyclesByCategory(
       String categoryName);
 }

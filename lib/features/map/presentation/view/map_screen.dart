@@ -129,7 +129,7 @@ class MapScreen extends StatelessWidget {
             context.read<HubBloc>().add(HubEvent(hub));
           }
           if (state is HubSuccessState) {
-            fetchHubs(state.data);
+            fetchHubs(state.data.data);
             return Scaffold(
               body: ValueListenableBuilder<List<Marker>>(
                 valueListenable: markersNotifier,

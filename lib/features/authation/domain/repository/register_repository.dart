@@ -6,6 +6,6 @@ import '../../data/model/login_model.dart';
 import '../../data/model/user_model.dart';
 
 abstract class RegisterRepo {
-  Future<Either<Failures, Success>> Register(UserModel user);
-  Future<Either<Failures, Success>> LogIn(LogInModel user);
+  Future<Either<Failures, SuccessSituation>> Register(UserModel user);
+  Future<Either<Failures, SuccessSituation>> LogIn(LogInModel user);
 }

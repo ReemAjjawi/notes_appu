@@ -18,6 +18,7 @@ import '../../../../core/helper/indicator.dart';
 import '../../../../core/widgets/success_widget.dart';
 import '../../../../injection_file.dart';
 
+import '../../data/model/reservation_model.dart';
 import '../Reservation_bloc/Reservation_bloc.dart';
 
 class ReservationScreen extends StatelessWidget {
@@ -173,19 +174,22 @@ class ReservationScreen extends StatelessWidget {
               text: StringsManager.CONFIRMBOOKING,
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  // ReservationModel reservation = ReservationModel(
-                  //     bicycleId: bicycle.id,
-                  //     fromHubId: hubId.id,
-                  //     toHubId: hubIdto.id,
-                  //     duration: 30,
-                  //     startTime: "2024-08-09T15:00:48.928Z",
-                  //     endTime: "2024-08-09T15:30:48.928Z",
-                  //     reservationStatus: "New",
-                  //     paymentMethod: "Wallet");
-                  // print(reservation);
-                  // context.read<ReservationBloc>().add(
-                  //       ReservationEvent(reservation),
-                  //     );
+                  ReservationModel reservation = ReservationModel(
+                      // bicycleId: bicycle.id,
+                      // fromHubId: hubId.id,
+                      // toHubId: hubIdto.id,
+                      bicycleId: 1,
+                      fromHubId: 1,
+                      toHubId: 2,
+                      duration: 1,
+                      startTime: "2024-08-09T15:00:48.928Z",
+                      endTime: "2024-08-09T16:00:48.928Z",
+                      reservationStatus: "New",
+                      paymentMethod: "Wallet");
+                  print(reservation);
+                  context.read<ReservationBloc>().add(
+                        ReservationEvent(reservation),
+                      );
                   Navigator.pushNamed(
                     context,
                     '/ReservationtowScreen',
@@ -217,18 +221,18 @@ class ReservationScreen extends StatelessWidget {
                     text: StringsManager.REGISTER,
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        // ReservationModel reservation = ReservationModel(
-                        //     bicycleId: bicycle.id,
-                        //     fromHubId: hubId.id,
-                        //     toHubId: hubIdto.id,
-                        //     duration: 0,
-                        //     startTime: "2024-08-09T15:44:48.928Z",
-                        //     endTime: "2024-08-09T15:44:48.928Z",
-                        //     reservationStatus: "NEW",
-                        //     paymentMethod: "Wallet");
-                        // context.read<ReservationBloc>().add(
-                        //       ReservationEvent(reservation),
-                        //     );
+                        ReservationModel reservation = ReservationModel(
+                            bicycleId: bicycle.id,
+                            fromHubId: hubId.id,
+                            toHubId: hubIdto.id,
+                            duration: 0,
+                            startTime: "2024-08-09T15:44:48.928Z",
+                            endTime: "2024-08-09T15:44:48.928Z",
+                            reservationStatus: "NEW",
+                            paymentMethod: "Wallet");
+                        context.read<ReservationBloc>().add(
+                              ReservationEvent(reservation),
+                            );
                         Navigator.pushNamed(
                           context,
                           '/ReservationtowScreen',

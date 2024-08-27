@@ -2,8 +2,8 @@
 
 import 'package:dartz/dartz.dart';
 import '../../../../core/error/failures.dart';
+import '../../../../core/success/success.dart';
 import '../../data/repository/category_repository_impl.dart';
-import '../entity/bicycle_entity.dart';
 
 class BicycleUseCase {
   CategoryRepoImpl categoryRepoImpl;
@@ -11,7 +11,7 @@ class BicycleUseCase {
     required this.categoryRepoImpl,
   });
 
-  Future<Either<Failures, List<BicycleEntity>>> call(params) async {
+  Future<Either<Failures, SuccessSituation>> call(params) async {
     return await categoryRepoImpl.getBicyclesByCategory(params);
   }
 }

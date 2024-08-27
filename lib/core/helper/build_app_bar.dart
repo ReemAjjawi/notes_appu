@@ -14,8 +14,8 @@ AppBar buildAppBar({
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               IconButton(
-                icon: const Icon(
-                  Icons.arrow_back_ios_new_sharp,
+                icon: Icon(
+                  Icons.adaptive.arrow_back,
                   size: 20,
                 ),
                 onPressed: onPressed,

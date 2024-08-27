@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import '../resources/managers/styles_manager.dart';
+
 class MyDrawer extends StatelessWidget {
   final String textname;
   final String textnamegmail;
   final String image;
   MyDrawer({
-    Key? key, required this.textname, required this.textnamegmail, required this.image,
-   
+    Key? key,
+    required this.textname,
+    required this.textnamegmail,
+    required this.image,
   }) : super(key: key);
 
   @override
@@ -99,38 +103,46 @@ class MyDrawer extends StatelessWidget {
             const SizedBox(height: 20.0),
             Expanded(
               child: ListView(
-                children: const [
-                  listtitledrawer(
+                children: [
+                  const listtitledrawer(
                     text: "History",
                     icon: Icons.history,
                   ),
-                  Divider(),
-                  listtitledrawer(
+                  const Divider(),
+                  const listtitledrawer(
                     text: "Complain",
                     icon: Icons.comment,
                   ),
-                  Divider(),
-                  listtitledrawer(
+                  const Divider(),
+                  const listtitledrawer(
                     text: "Referral",
                     icon: Icons.read_more,
                   ),
-                  Divider(),
-                  listtitledrawer(
+                  const Divider(),
+                  const listtitledrawer(
                     text: "About",
                     icon: Icons.add_box_outlined,
                   ),
-                  Divider(),
-                  listtitledrawer(
-                    text: "Settings",
-                    icon: Icons.settings,
+                  const Divider(),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        '/SettingsScreen',
+                      );
+                    },
+                    child: const listtitledrawer(
+                      text: "Settings",
+                      icon: Icons.settings,
+                    ),
                   ),
-                  Divider(),
-                  listtitledrawer(
+                  const Divider(),
+                  const listtitledrawer(
                     text: "Help and Support",
                     icon: Icons.help,
                   ),
-                  Divider(),
-                  listtitledrawer(
+                  const Divider(),
+                  const listtitledrawer(
                     text: "Logout",
                     icon: Icons.logout,
                   ),
@@ -158,14 +170,7 @@ class listtitledrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Icon(icon),
-      title: Text(
-        text,
-        style: TextStyle(
-          fontWeight: FontWeight.w600,
-          fontSize: 12,
-          color: Colors.black,
-        ),
-      ),
+      title: Text(text, style: StylesManager.titleNotificationStyle),
     );
   }
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/helper/build_bottom_sheet.dart';
-import '../../../../pages.dart';
+import '../../../../core/widgets/app_drawer.dart';
+import 'pages.dart';
 import '../../data/model/hub_model.dart';
 
 class HomeScreenArguments {
@@ -32,6 +33,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
+      drawer: MyDrawer(
+        image: 'assets/user.png',
+        textname: "Nate Samson",
+        textnamegmail: "nate@email.con",
+      ),
       body: Center(
         child: widgetOptions(widget.hub, widget.categoryName)
             .elementAt(selectedIndex),

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/helper/build_app_bar.dart';
@@ -77,7 +78,7 @@ Widget _buildListView(double screenWidth, double screenHeight) {
               style: StylesManager.subTitleStyle,
             ),
             trailing: IconButton(
-              icon: const Icon(Icons.remove_circle,
+              icon: Icon(isIos ? CupertinoIcons.delete : Icons.delete,
                   color: ColorManager.cancelColor),
               onPressed: () {},
             ),

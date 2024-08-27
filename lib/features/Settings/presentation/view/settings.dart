@@ -26,30 +26,53 @@ class SettingsScreen extends StatelessWidget {
 
   Widget _buildBody(
       BuildContext context, double screenWidth, double screenHeight) {
-    return ListView(
-      children: [
-        _buildSettingsOption(
-            context, StringsManager.CHARGEPASSWORD, screenWidth, screenHeight),
-        SizedBox(height: screenHeight * 0.02),
-        _buildSettingsOption(
-            context, StringsManager.CHARGELANGUAGE, screenWidth, screenHeight),
-        SizedBox(height: screenHeight * 0.02),
-        _buildSettingsOption(
-            context, StringsManager.PRIVACYPOLICY, screenWidth, screenHeight),
-        SizedBox(height: screenHeight * 0.02),
-        _buildSettingsOption(
-            context, StringsManager.CONTACTUS, screenWidth, screenHeight),
-        SizedBox(height: screenHeight * 0.02),
-        _buildSettingsOption(
-            context, StringsManager.DELETEACCOUNT, screenWidth, screenHeight),
-      ],
+    return Padding(
+      padding: EdgeInsets.all(padding),
+      child: ListView(
+        children: [
+          _buildSettingsOption(() {
+            Navigator.pushNamed(
+              context,
+              '/ChangePasswordScreen',
+            );
+          }, context, StringsManager.CHARGEPASSWORD, screenWidth, screenHeight),
+          SizedBox(height: screenHeight * 0.02),
+          _buildSettingsOption(() {
+            Navigator.pushNamed(
+              context,
+              '/ChangeLanguageScreen',
+            );
+          }, context, StringsManager.CHARGELANGUAGE, screenWidth, screenHeight),
+          SizedBox(height: screenHeight * 0.02),
+          _buildSettingsOption(() {
+            Navigator.pushNamed(
+              context,
+              '/PrivacyPolicyScreen',
+            );
+          }, context, StringsManager.PRIVACYPOLICY, screenWidth, screenHeight),
+          SizedBox(height: screenHeight * 0.02),
+          _buildSettingsOption(() {
+            Navigator.pushNamed(
+              context,
+              '/ContactUsScreen',
+            );
+          }, context, StringsManager.CONTACTUS, screenWidth, screenHeight),
+          SizedBox(height: screenHeight * 0.02),
+          _buildSettingsOption(() {
+            Navigator.pushNamed(
+              context,
+              '/DeleteAccountScreen',
+            );
+          }, context, StringsManager.DELETEACCOUNT, screenWidth, screenHeight),
+        ],
+      ),
     );
   }
 
-  Widget _buildSettingsOption(BuildContext context, String title,
+  Widget _buildSettingsOption(onTap, BuildContext context, String title,
       double screenWidth, double screenHeight) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onTap,
       child: CustomListTile(
         hasrawsubtitle: false,
         borderColor: ColorManager.borderColor,

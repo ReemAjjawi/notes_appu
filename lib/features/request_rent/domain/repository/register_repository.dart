@@ -6,6 +6,6 @@ import '../../../../core/success/success.dart';
 import '../entity/reservation_entity.dart';
 
 abstract class ReservationRepo {
-  Future<Either<Failures, Success>> makeReservation(
+  Future<Either<Failures, SuccessSituation>> makeReservation(
       ReservationModel Reservation);
 }

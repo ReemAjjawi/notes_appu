@@ -95,9 +95,9 @@ Widget buildListView(hubId, hubIdto, double screenHeight, double screenWidth) {
       return ListView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: state.bicycles.length,
+        itemCount: state.bicycles.data.length,
         itemBuilder: (context, index) {
-          final bicycle = state.bicycles[index];
+          final bicycle = state.bicycles.data[index];
           return InkWell(
             onTap: () {},
             child: Card(

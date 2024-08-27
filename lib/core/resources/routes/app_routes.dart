@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import '../../../features/Settings/presentation/view/change_language.dart';
-import '../../../features/Settings/presentation/view/change_password.dart';
-import '../../../features/Settings/presentation/view/contact_us.dart';
-import '../../../features/Settings/presentation/view/delete_account.dart';
-import '../../../features/Settings/presentation/view/privacy_policy.dart';
-import '../../../features/Settings/presentation/view/settings.dart';
+import 'package:ride_application/features/map/data/model/hub_model.dart';
+import '../../../features/favourite/favourite_screen.dart';
+import '../../../features/settings/presentation/view/change_language.dart';
+import '../../../features/changepassword/presentation/view/change_password.dart';
+import '../../../features/policy/presentation/view/contact_us.dart';
+import '../../../features/settings/presentation/view/delete_account.dart';
+import '../../../features/policy/presentation/view/privacy_policy.dart';
+import '../../../features/settings/presentation/view/settings.dart';
 import '../../../features/authation/data/model/user_model.dart';
 import '../../../features/authation/presentation/view/login_screen.dart';
 import '../../../features/authation/presentation/view/set_password_screen.dart';
@@ -32,7 +34,7 @@ class AppRoutes {
         if (token != null) {
           return _materialRoute(WelcomeScreen());
         } else {
-          return _materialRoute(LoginScreen());
+          return _materialRoute(CategoriesScreen());
         }
 
       case '/BicyclesScreen':
@@ -58,6 +60,16 @@ class AppRoutes {
 
       case '/SignUp':
         return _materialRoute(SignUpScreen());
+      case '/DeleteAccountScreen':
+        return _materialRoute(DeleteAccountScreen());
+      case '/ContactUsScreen':
+        return _materialRoute(ContactUsScreen());
+      case '/PrivacyPolicyScreen':
+        return _materialRoute(PrivacyPolicyScreen());
+      case '/ChangePasswordScreen':
+        return _materialRoute(ChangePasswordScreen());
+      case '/ChangeLanguageScreen':
+        return _materialRoute(ChangeLanguageScreen());
 
       case '/ThankYouScreen':
         return _materialRoute(ThankYouScreen());
@@ -68,6 +80,8 @@ class AppRoutes {
       case '/CategoriesScreen':
         return _materialRoute(CategoriesScreen());
 
+      case '/SettingsScreen':
+        return _materialRoute(SettingsScreen());
       case '/RegisterScreen':
         return _materialRoute(
             RegisterScreen(user: settings.arguments as UserModel));

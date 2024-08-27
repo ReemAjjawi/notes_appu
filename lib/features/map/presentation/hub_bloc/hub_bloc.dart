@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../core/error/failures.dart';
+import '../../../../core/success/success.dart';
 import '../../data/model/hub_model.dart';
 import '../../data/model/hubinfo_model.dart';
 import '../../domain/usecase/register_use_case.dart';
@@ -31,10 +32,11 @@ class HubBloc extends Bloc<HubClassEvent, HubClassState> {
             break;
         }
         emit(FailureStatehub(message: message));
-      }, (data) {
-        print("cccccccccccccccccccccccccccccc");
-        
-        emit(HubSuccessState(data: data));
+      }, (success) {
+        if (success is DataSuccessList<HubinfoModel>) {
+          print("Success with data: ${success.data}");
+          emit(HubSuccessState(data: success));
+        }
       });
     });
   }

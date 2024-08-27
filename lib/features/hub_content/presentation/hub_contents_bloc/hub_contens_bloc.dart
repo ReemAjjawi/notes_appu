@@ -1,5 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ride_application/core/success/success.dart';
 import '../../../../core/error/failures.dart';
+import '../../data/model/second_model.dart';
 import '../../domain/usecase/get_hub_contents__use_case.dart';
 import 'hub_contents_event.dart';
 import 'hub_contents_state.dart';
@@ -27,10 +29,11 @@ class HubContentsBloc
             emit(FailureState(message: message));
             break;
         }
-      }, (bicycles) {
-        emit(
-          Success(bicycles: bicycles),
-        );
+      }, (success) {
+        if (success is DataSuccessList<BicycleListModel>) {
+          print("Success with data: ${success.data}");
+          emit(Success(bicycles: success));
+        }
       });
     });
   }

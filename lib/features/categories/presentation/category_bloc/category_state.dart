@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 
 import 'package:ride_application/features/categories/domain/entity/category_entity.dart';
 
+import '../../../../core/success/success.dart';
+
 
 @immutable
 sealed class CategoriesClassState {}
@@ -11,7 +13,7 @@ sealed class CategoriesClassState {}
 
 
 class Success extends CategoriesClassState {
-  final List<CategoryEntity> categories;
+  final DataSuccessList<CategoryEntity> categories;
   Success({
     required this.categories,
   });

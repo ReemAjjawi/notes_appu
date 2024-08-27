@@ -7,7 +7,7 @@ sealed class HubClassState {}
 final class InitialStatehub extends HubClassState {}
 
 class HubSuccessState extends HubClassState {
-  final List<HubinfoModel> data;
+  final DataSuccessList<HubinfoModel> data;
   HubSuccessState({
     required this.data,
   });

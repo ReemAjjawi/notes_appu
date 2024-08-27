@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ride_application/core/success/success.dart';
 
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
@@ -16,9 +17,9 @@ class HubRepoImpl implements HubRepo {
   });
 
   @override
-  Future<Either<Failures, List<HubinfoModel>>> Gethub(HubEntity hub) async {
+  Future<Either<Failures, SuccessSituation>> getHub(HubEntity hub) async {
     try {
-      final data = await hubServiceImp.Gethub(hub as HubModel);
+      final data = await hubServiceImp.getHub(hub as HubModel);
       return Right(data);
     } on ServerException {
       return Left(ServerFailure());

@@ -7,17 +7,16 @@ class SuccessWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-                        width: 200,
-                        height: 100,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.green),
-                        child: Center(
-                          child: Icon(
-                            Icons.verified,
-                            color: Colors.white,
-                          ),
-                        ),
-                      );
+      width: 200,
+      height: 100,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20), color: Colors.green),
+      child: const Center(
+        child: Icon(
+          Icons.verified,
+          color: Colors.white,
+        ),
+      ),
+    );
   }
 }

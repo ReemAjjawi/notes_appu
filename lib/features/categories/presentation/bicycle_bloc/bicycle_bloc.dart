@@ -1,4 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ride_application/core/success/success.dart';
+import 'package:ride_application/features/categories/data/model/bicycle_model.dart';
 import 'package:ride_application/features/categories/presentation/bicycle_bloc/bicycle_event.dart';
 import 'package:ride_application/features/categories/presentation/bicycle_bloc/bicycle_state.dart';
 
@@ -26,10 +28,11 @@ class BicycleBloc extends Bloc<BicyclesClassEvent, BicyclesClassState> {
             emit(FailureState(message: message));
             break;
         }
-      }, (bicycles) {
-        emit(
-          Success(bicycles: bicycles),
-        );
+      }, (success) {
+        if (success is DataSuccessList<BicycleModel>) {
+          print("Success with data: ${success.data}");
+          emit(Success(bicycles: success));
+        }
       });
     });
   }
