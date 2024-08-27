@@ -1,40 +1,59 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quickalert/quickalert.dart';
 
-import 'package:ride_application/core/helper/build_app_bar.dart';
-import 'package:ride_application/core/helper/indicator.dart';
-import 'package:ride_application/core/resources/managers/assets_manager.dart';
-import 'package:ride_application/core/resources/managers/colors_manager.dart';
-import 'package:ride_application/core/resources/managers/strings_manager.dart';
-import 'package:ride_application/core/resources/managers/styles_manager.dart';
-import 'package:ride_application/core/widgets/app_button.dart';
-import 'package:ride_application/core/widgets/app_list_tile.dart';
-import 'package:ride_application/features/hub_content/presentation/hub_contents_bloc/hub_contents_state.dart';
-import 'package:ride_application/main.dart';
-
+import '../../../../core/helper/build_app_bar.dart';
+import '../../../../core/helper/indicator.dart';
+import '../../../../core/resources/managers/assets_manager.dart';
+import '../../../../core/resources/managers/colors_manager.dart';
+import '../../../../core/resources/managers/strings_manager.dart';
+import '../../../../core/resources/managers/styles_manager.dart';
+import '../../../../core/widgets/app_button.dart';
+import '../../../../core/widgets/app_list_tile.dart';
 import '../../../../injection_file.dart';
+import '../../../../main.dart';
+import '../../../map/data/model/hubinfo_model.dart';
 import '../hub_contents_bloc/hub_contens_bloc.dart';
 import '../hub_contents_bloc/hub_contents_event.dart';
+import '../hub_contents_bloc/hub_contents_state.dart';
+import 'bicycle_details_screen.dart';
 
 class BicyclesFromCategorey extends StatelessWidget {
-  int hubId;
+  HubinfoModel hubId;
+  HubinfoModel hubIdto;
   String categoryName;
   BicyclesFromCategorey({
-    Key? key,
+    super.key,
     required this.hubId,
+    required this.hubIdto,
     required this.categoryName,
-  }) : super(key: key);
+  });
   @override
   Widget build(BuildContext context) {
     return BlocProvider<HubContentsBloc>(
-      create: (context) => sl()..add(GetHubContentsEvent(hubId, categoryName)),
+      create: (context) =>
+          sl()..add(GetHubContentsEvent(hubId.id, categoryName)),
       child: Builder(builder: (context) {
         return Scaffold(
-          appBar: _buildAppBar(context),
-          body: _buildBody(),
-        );
+            appBar: _buildAppBar(context),
+            body: _buildbady(screenHeight, screenWidth));
       }),
+    );
+  }
+
+  SingleChildScrollView _buildbady(double screenHeight, double screenWidth) {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildText(),
+          _buildSizeBox(screenHeight),
+          _buildText2(),
+          _buildSizeBox(screenHeight),
+          buildListView(hubId, hubIdto, screenHeight, screenWidth),
+        ],
+      ),
     );
   }
 }
@@ -46,57 +65,57 @@ PreferredSizeWidget _buildAppBar(BuildContext context) {
   );
 }
 
-Widget _buildBody() {
-  return SingleChildScrollView(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildText(),
-        _buildSizeBox(),
-        _buildText2(),
-        _buildSizeBox(),
-        _buildListView(),
-      ],
+Widget _buildText() {
+  return Padding(
+    padding: EdgeInsets.all(padding),
+    child: Text(
+      StringsManager.AVAIABLECARSFORRIDE,
+      style: StylesManager.titleTextStyle,
     ),
   );
 }
 
-Widget _buildText() {
-  return Text(
-    StringsManager.AVAIABLECARSFORRIDE,
-    style: StylesManager.titleTextStyle,
-  );
-}
-
-Widget _buildSizeBox() {
+Widget _buildSizeBox(double screenHeight) {
   return SizedBox(height: screenHeight * 0.02);
 }
 
 Widget _buildText2() {
-  return Text(
-    StringsManager.CARSFOUND,
-    style: StylesManager.subTitleStyle,
+  return Padding(
+    padding: EdgeInsets.all(padding),
+    child: Text(
+      StringsManager.CARSFOUND,
+      style: StylesManager.subTitleStyle,
+    ),
   );
 }
 
-Widget _buildListView() {
-
-  return BlocBuilder<HubContentsBloc, HubContentsClassState>(
-    builder: (context, state) {
-      if(state is Success){
+Widget buildListView(hubId, hubIdto, double screenHeight, double screenWidth) {
+  return BlocConsumer<HubContentsBloc, HubContentsClassState>(
+      listener: (context, state) {
+    if (state is FailureState) {
+      QuickAlert.show(
+        context: context,
+        type: QuickAlertType.error,
+        title: 'Error',
+        text: state.message,
+      );
+      Navigator.pushNamed(context, '/LocationScreen');
+    } else if (state is LoadingState) {
+      QuickAlert.show(context: context, type: QuickAlertType.loading);
+    }
+  }, builder: (context, state) {
+    if (state is Success) {
       return ListView.builder(
         shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: state.bicycles.length,
         itemBuilder: (context, index) {
           final bicycle = state.bicycles[index];
-          return InkWell(onTap: (){
-                            Navigator.pushNamed(context, '/BicycleDetailsScreen', arguments: bicycle);
-
-          },
+          return InkWell(
+            onTap: () {},
             child: Card(
               child: CustomListTile(
-                height: screenHeight * 0.35,
+                height: screenHeight * 0.25,
                 width: double.infinity,
                 backgroundColor: ColorManager.scondaryColor,
                 borderColor: ColorManager.borderColor,
@@ -111,10 +130,10 @@ Widget _buildListView() {
                   StringsManager.INFOCAR,
                   style: StylesManager.subTitleStyle,
                 ),
-                subtitle2: Text(""),
+                subtitle2: const Text(""),
                 subtitle3: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.location_on,
                       color: ColorManager.underHintTextColor,
                     ),
@@ -125,8 +144,8 @@ Widget _buildListView() {
                     ),
                   ],
                 ),
-                trailing: Container(
-                  width: screenWidth * 0.25,
+                trailing: SizedBox(
+                  width: screenWidth * 0.20,
                   height: screenHeight * 0.8,
                   child: Image.asset(
                     AssetsManager.bmwImage,
@@ -135,22 +154,28 @@ Widget _buildListView() {
                 ),
                 subtitle4: AppButton(
                   text: StringsManager.BOOKLATER,
-                  onPressed: (){
-                    
-                  },
+                  onPressed: () {},
                   backgroundColor: ColorManager.scondaryColor,
-                  width: screenWidth * 0.44,
+                  width: screenWidth * 0.27,
                   height: screenHeight / 15,
                   textStyle: StylesManager.whiteButtonStyle,
                   hasIcon: false,
                 ),
                 subtitle5: AppButton(
                   text: StringsManager.RIDENOW,
-                  onPressed: (){
-            
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/BicycleDetailsScreen',
+                      arguments: DetailArguments(
+                        bicycle: bicycle,
+                        hubId: hubId,
+                        hubIdto: hubIdto,
+                      ),
+                    );
                   },
                   backgroundColor: ColorManager.primaryColor,
-                  width: screenWidth * 0.44,
+                  width: screenWidth * 0.27,
                   height: screenHeight / 15,
                   textStyle: StylesManager.greenButtonStyle,
                   hasIcon: false,
@@ -159,22 +184,13 @@ Widget _buildListView() {
             ),
           );
         },
-      );}
-      else if(state is LoadingState){
-        return Center(
-          child: Indicator(),
-        );}
-        else 
-        {
-return Container(
-  child: Text(
-    (state as FailureState).message
-  ),
-);
-        }
-      }
-    
-  );
+      );
+    } else if (state is LoadingState) {
+      return const Center();
+    } else {
+      return Text((state as FailureState).message);
+    }
+  });
 }
 
 void _onAppBarPressed(context) {

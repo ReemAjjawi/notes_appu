@@ -1,19 +1,31 @@
 class AppUrl {
-   static const String baseUrl = "https://rideshare.devscape.online/api/v1";
-   //post
+  static const String baseUrl = "https://rideshare.devscape.online/api/v1";
+  //post
   static const String signUp = "auth/register";
- static const String getAllHubs = "hubs?";
- static const String getAllCategories = "bicycle/bicycles-categories";
+  static const String logIn = "auth/authenticate";
+  static const String getAllHubs = "hubs?";
+  static const String getAllCategories = "bicycle/bicycles-categories";
   static const String getBicyclesByCategory = "bicycle/bicycles-by-category";
+  static const String getHubContent = "hub-content";
   //post
   static const String makeReservation = "reservation";
+  static const String getWalletInfo = "wallet";
+  static const String addMoneyToWallet = "wallet";
+  //PUT
+//Add money to my wallet by code
+// {
+//   "code": "string"
+// }
+  static const String createWallet = "wallet";
 
-// id
-// bicycleCategory 
+//POST
+// {
+//   "securityCode": "string",
+//   "confirmSecurityCode": "string",
+//   "bankAccount": "string"
+// }
 
-  static const String getHubContent = "hub-content/";
-
-   
+  static const String getValidCodes = "wallet/All-valid-codes";
 }
 
 // {
@@ -35,7 +47,6 @@ class AppUrl {
 //https://rideshare.devscape.online/api/v1/hub-content/2?bicycleCategory=Mountain_bikes
 
 //
-
 
 // POST
 // /api/v1/reservation

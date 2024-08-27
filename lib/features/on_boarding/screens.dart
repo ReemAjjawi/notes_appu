@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:ride_application/features/authation/presentation/view/welcome_screen.dart';
 
 import '../../core/resources/managers/assets_manager.dart';
 import '../../core/resources/managers/strings_manager.dart';
-import '../auth/presentation/view/welcome_screen.dart';
 import 'on_borarding_screen.dart';
 
 PageController onBoardingContoller = PageController();
    List  pages = [
-    OnBoardingScreen(
+    const OnBoardingScreen(
               image: AssetsManager.taxiStartImage,
               progress: AssetsManager.startImage,
               headLine: StringsManager.ANYWHEREYOUARE,
               titleText: StringsManager.SELLHOUSES,
               index: 0),
-          OnBoardingScreen(
+          const OnBoardingScreen(
               image: AssetsManager.orderImage,
               progress: AssetsManager.middleImage,
               headLine: StringsManager.ATANYTIME,
               titleText: StringsManager.SELLHOUSES,
               index: 1),
-          OnBoardingScreen(
+          const OnBoardingScreen(
               image: AssetsManager.mapImage,
               progress: AssetsManager.completeImage,
               headLine: StringsManager.BOOKYOURCAR,
@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
         // onPageChanged: (value) {
         //   print(value);
         // },
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         children: [
       pages[0],

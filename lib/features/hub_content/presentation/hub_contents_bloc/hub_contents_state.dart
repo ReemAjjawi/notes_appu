@@ -2,7 +2,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:ride_application/features/hub_content/data/model/second_model.dart';
 
-
 @immutable
 sealed class HubContentsClassState {}
 
@@ -11,26 +10,12 @@ class Success extends HubContentsClassState {
   Success({
     required this.bicycles,
   });
-
 }
+
 class LoadingState extends HubContentsClassState {}
 
 class FailureState extends HubContentsClassState {
-   final String message;
+  final String message;
 
-   FailureState({required this.message});
-
-
+  FailureState({required this.message});
 }
-
-// class UsernameFailureState extends RegisterClassState {
-//   final String message;
-
-//   UsernameFailureState({required this.message});
-// }
-
-// class PasswordFailureState extends RegisterClassState {
-//   final String message;
-
-//   PasswordFailureState({required this.message});
-// }

@@ -1,6 +1,4 @@
-// 
-
-
+//
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
@@ -19,9 +17,8 @@ class CustomListTile extends StatelessWidget {
 
   final Widget? subtitle2;
   final Widget? subtitle3;
-    final Widget? subtitle4;
-    final Widget? subtitle5;
-
+  final Widget? subtitle4;
+  final Widget? subtitle5;
 
   final Widget? leading;
 
@@ -50,7 +47,10 @@ class CustomListTile extends StatelessWidget {
     this.title2,
     this.subtitle2,
     required this.hasrawtitle,
-    required this.hascolum, this.subtitle3, this.subtitle4, this.subtitle5,
+    required this.hascolum,
+    this.subtitle3,
+    this.subtitle4,
+    this.subtitle5,
   }) : super(key: key);
 
   @override
@@ -65,7 +65,6 @@ class CustomListTile extends StatelessWidget {
       ),
       child: ListTile(
         leading: leading,
-        
         title: hasrawtitle
             ? Row(
                 children: [
@@ -75,8 +74,6 @@ class CustomListTile extends StatelessWidget {
                 ],
               )
             : title,
-            
-            
         subtitle: hasrawsubtitle
             ? Row(
                 children: [
@@ -93,7 +90,6 @@ class CustomListTile extends StatelessWidget {
                           subtitle!,
                           SizedBox(width: 8.0),
                           subtitle2!,
-                          
                         ],
                       ),
                       Row(
@@ -101,10 +97,9 @@ class CustomListTile extends StatelessWidget {
                         children: [
                           subtitle3!,
                           SizedBox(width: 8.0),
-
                         ],
                       ),
-                       SizedBox(height: screenHeight * 0.05), 
+                      SizedBox(height: screenHeight * 0.05),
                       Row(
                         children: [
                           subtitle4!,
@@ -112,12 +107,10 @@ class CustomListTile extends StatelessWidget {
                           subtitle5!,
                         ],
                       ),
-                      
                     ],
                   )
                 : subtitle,
         trailing: trailing,
-        
         onTap: onTap,
       ),
     );

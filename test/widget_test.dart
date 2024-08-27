@@ -6,11 +6,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ride_application/core/error/exceptions.dart';
 import 'package:ride_application/core/error/failures.dart';
 import 'package:ride_application/core/success/success.dart';
-import 'package:ride_application/features/auth/data/model/user_model.dart';
-import 'package:ride_application/features/auth/data/datasource/remote/register_service.dart';
-import 'package:ride_application/features/auth/data/repository/register_repository_impl.dart';
-
-import 'service.dart';
+import 'package:ride_application/features/authation/data/datasource/remote/register_service.dart';
+import 'package:ride_application/features/authation/data/model/user_model.dart';
+import 'package:ride_application/features/authation/data/repository/register_repository_impl.dart';
+import 'servies.dart';
 
 void main() {
   group("Test Service ", () {
@@ -44,12 +43,12 @@ void main() {
     late Dio dio;
     late UserModel user;
 
-    setUp(() async{
+    setUp(() async {
       dio = Dio();
       authService = AuthServiceImp(dio: dio);
 //await Hive.initFlutter();
-  //await Hive.openBox('projectBox');
-       user = UserModel(
+      //await Hive.openBox('projectBox');
+      user = UserModel(
           firstName: "firstName",
           lastName: "lastName",
           phone: "0933457677",
@@ -61,7 +60,7 @@ void main() {
 
     test("Right Password", () async {
       final result = await authService.Register(user);
-      expect(result, isA<Success>());
+      expect(result, isA<SuccessSituation>());
     });
   });
   group("Test Repo", () {
@@ -100,7 +99,7 @@ void main() {
     });
     test("InValid category", () async {
       try {
-        String category = "Roabike";
+        String category = "Road_bike";
         await categoriesServiceImp.getBicyclesByCategory(category);
         fail('Expected an exception to be thrown');
       } catch (e) {

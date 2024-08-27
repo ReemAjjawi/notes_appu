@@ -1,17 +1,28 @@
+class ServerException implements Exception {}
 
+class ValidationException implements Exception {}
 
- class ServerException implements Exception {}
-
-class ValidationException  implements Exception {}
-class PasswordExcetion implements ValidationException {
-  String message ;
-  PasswordExcetion (this.message){}
+class PasswordException implements ValidationException {
+  String message;
+  PasswordException(this.message);
 }
-class UserNameExcetion implements ValidationException {
-    String message ;
-  UserNameExcetion (this.message){}
+
+class PhoneException implements ValidationException {
+  String? message;
+  PhoneException(this.message);
 }
-class PasswordMustContainOneUppercase implements Exception{
-  String message ;
-  PasswordMustContainOneUppercase (this.message){}
+
+class UsernameException implements ValidationException {
+  String? message;
+  UsernameException(this.message);
+}
+
+class PasswordMustContainOneUppercase implements Exception {
+  String? message;
+  PasswordMustContainOneUppercase(this.message);
+}
+
+class EmptyException implements Exception {
+  String message;
+  EmptyException(this.message);
 }
