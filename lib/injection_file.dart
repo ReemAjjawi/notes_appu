@@ -22,7 +22,7 @@ import 'features/changepassword/presentation/changepassword_bloc/changepassword_
 import 'features/get_wallet/data/datasource/remote/get_wallet_service.dart';
 import 'features/get_wallet/data/repository/wallet_creation_repository_impl.dart';
 import 'features/get_wallet/domain/usecase/wallet_info_use_case.dart';
-import 'features/get_wallet/presentation/bloc_file/wallet_info_bloc.dart';
+import 'features/get_wallet/presentation/bloc/wallet_info_bloc.dart';
 import 'features/hub_content/data/datasource/remote/hub_contents_service.dart';
 import 'features/hub_content/data/repository/hub_contents_repository_impl.dart';
 import 'features/hub_content/domain/usecase/get_hub_contents__use_case.dart';

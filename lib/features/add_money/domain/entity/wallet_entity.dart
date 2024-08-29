@@ -2,16 +2,14 @@
 import 'dart:convert';
 
 
-class WalletEntity {
+class CodeEntity {
 
 
-  String securityCode;
-   String confirmSecurityCode;
-    String bankAccount;
-  WalletEntity({
-    required this.securityCode,
-    required this.confirmSecurityCode,
-    required this.bankAccount,
+  String code;
+
+  CodeEntity({
+    required this.code,
+
   });
 
 }

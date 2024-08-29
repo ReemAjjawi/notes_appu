@@ -20,15 +20,3 @@ class FailureState extends BicyclesClassState {
 
   FailureState({required this.message});
 }
-
-// class UsernameFailureState extends RegisterClassState {
-//   final String message;
-
-//   UsernameFailureState({required this.message});
-// }
-
-// class PasswordFailureState extends RegisterClassState {
-//   final String message;
-
-//   PasswordFailureState({required this.message});
-// }

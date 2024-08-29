@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ride_application/core/success/success.dart';
 import '../../../../core/error/failures.dart';
@@ -18,17 +20,16 @@ class HubContentsBloc
       failureOrEntity.fold((failure) {
         String message = '';
         switch (failure.runtimeType) {
-          //  case PasswordFailure():
-// emit(FailurePasswordState(message: message));
-          //       break;
-//case UserNameFailure()
-// emit(FailureusernameState(message: message));
-          //       break;
           case ServerFailure():
             message = "please try again";
+            log("-------------------------------------");
             print(failure.runtimeType);
             print("iam in switch hub content bloc ");
             emit(FailureState(message: message));
+            break;
+          case EmptyFailure():
+            message = (failure as EmptyFailure).message;
+            emit(EmptyFailureState(message: message));
             break;
         }
       }, (success) {

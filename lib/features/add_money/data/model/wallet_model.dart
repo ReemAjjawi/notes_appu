@@ -3,63 +3,46 @@ import 'dart:convert';
 
 import '../../domain/entity/wallet_entity.dart';
 
-class Wallet extends WalletEntity{
-
-
-  Wallet({
-    required super.securityCode,
-    required super.confirmSecurityCode,
-    required super.bankAccount,
+class Code extends CodeEntity{
+  Code({
+    required super.code,
   });
 
-
-
-
-  Wallet copyWith({
-    String? securityCode,
-    String? confirmSecurityCode,
-    String? bankAccount,
+  Code copyWith({
+    String? code,
   }) {
-    return Wallet(
-      securityCode: securityCode ?? this.securityCode,
-      confirmSecurityCode: confirmSecurityCode ?? this.confirmSecurityCode,
-      bankAccount: bankAccount ?? this.bankAccount,
+    return Code(
+      code: code ?? this.code,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'securityCode': securityCode,
-      'confirmSecurityCode': confirmSecurityCode,
-      'bankAccount': bankAccount,
+      'code': code,
     };
   }
 
-  factory Wallet.fromMap(Map<String, dynamic> map) {
-    return Wallet(
-      securityCode: map['securityCode'] as String,
-      confirmSecurityCode: map['confirmSecurityCode'] as String,
-      bankAccount: map['bankAccount'] as String,
+  factory Code.fromMap(Map<String, dynamic> map) {
+    return Code(
+      code: map['code'] as String,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Wallet.fromJson(String source) => Wallet.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Code.fromJson(String source) => Code.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'Wallet(securityCode: $securityCode, confirmSecurityCode: $confirmSecurityCode, bankAccount: $bankAccount)';
+  String toString() => 'Code(code: $code)';
 
   @override
-  bool operator ==(covariant Wallet other) {
+  bool operator ==(covariant Code other) {
     if (identical(this, other)) return true;
   
     return 
-      other.securityCode == securityCode &&
-      other.confirmSecurityCode == confirmSecurityCode &&
-      other.bankAccount == bankAccount;
+      other.code == code;
   }
 
   @override
-  int get hashCode => securityCode.hashCode ^ confirmSecurityCode.hashCode ^ bankAccount.hashCode;
+  int get hashCode => code.hashCode;
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:ride_application/features/map/data/model/hub_model.dart';
+import '../../../features/add_money/presentation/view/add_money_to_wallet_screen.dart';
 import '../../../features/favourite/favourite_screen.dart';
+import '../../../features/get_wallet/presentation/view/get_wallet_info_screen.dart';
 import '../../../features/settings/presentation/view/change_language.dart';
 import '../../../features/changepassword/presentation/view/change_password.dart';
 import '../../../features/policy/presentation/view/contact_us.dart';
@@ -23,6 +25,7 @@ import '../../../features/map/presentation/view/map_screen.dart';
 import '../../../features/request_rent/presentation/view/Reservation1_screen.dart';
 import '../../../features/request_rent/presentation/view/Reservation_screen.dart';
 import '../../../features/thank_you/thank_you_screen.dart';
+import '../../../features/wallet/wallet_screen.dart';
 
 class AppRoutes {
   static Route onGenerateRoutes(RouteSettings settings) {
@@ -32,7 +35,7 @@ class AppRoutes {
         String? token = box.get('token');
 
         if (token != null) {
-          return _materialRoute(SignUpScreen());
+          return _materialRoute(CategoriesScreen());
         } else {
           return _materialRoute(SignUpScreen());
         }
@@ -76,6 +79,19 @@ class AppRoutes {
 
       case '/LoginScreen':
         return _materialRoute(LoginScreen());
+
+ case '/AddMoney':
+        return _materialRoute(AddMoney(code: settings.arguments as String));
+
+
+      case '/WalletCodes':
+        return _materialRoute(WalletCodes());
+
+      case '/WalletScreen':
+        return _materialRoute(WalletScreen());
+
+      // case '/WalletInfoScreen':
+      //   return _materialRoute(WalletInfoScreen());
 
       case '/CategoriesScreen':
         return _materialRoute(const CategoriesScreen());

@@ -10,7 +10,6 @@ class AppUrl {
   static const String getAllCategories = "bicycle/bicycles-categories";
   static const String getBicyclesByCategory = "bicycle/bicycles-by-category";
   static const String makeReservation = "reservation";
-
   static const String getHubContent = "hub-content";
   //post
   static const String getWalletInfo = "wallet";

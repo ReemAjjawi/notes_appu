@@ -33,7 +33,7 @@ class AuthBloc extends Bloc<RegisterClassEvent, RegisterClassState> {
             emit(FailurePhoneState(message: message));
             break;
           case ServerFailure:
-            message = "Please try again later.";
+            message = "Please try again ...";
             emit(FailureState(message: message));
             break;
           default:

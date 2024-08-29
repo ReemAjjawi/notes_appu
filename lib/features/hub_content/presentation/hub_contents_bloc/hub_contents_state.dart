@@ -20,3 +20,10 @@ class FailureState extends HubContentsClassState {
 
   FailureState({required this.message});
 }
+
+class EmptyFailureState extends HubContentsClassState {
+  final String message;
+
+  EmptyFailureState({required this.message});
+}
+

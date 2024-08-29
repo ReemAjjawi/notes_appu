@@ -206,9 +206,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           : screenHeight * 0.10),
                   Center(
                     child: BlocConsumer<AuthBloc, RegisterClassState>(
-                      listener: (context, state) {
+                      listener: (context, state) async {
                         if (state is FailureState) {
-                          QuickAlert.show(
+                          await QuickAlert.show(
                             context: context,
                             type: QuickAlertType.error,
                             title: 'Error',
@@ -217,7 +217,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                           Navigator.pushNamed(context, '/SignUp');
                         } else if (state is RegisterSuccessState) {
-                          QuickAlert.show(
+                          await QuickAlert.show(
                             context: context,
                             type: QuickAlertType.success,
                             title: 'Success',
@@ -226,7 +226,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           Navigator.pushNamed(context, '/CategoriesScreen');
                         } else if (state is LoadingState) {
                           QuickAlert.show(
-                              context: context, type: QuickAlertType.loading);
+                            context: context,
+                            type: QuickAlertType.loading,
+                          );
+                        } else if (state is FailurePhoneState) {
+                          await QuickAlert.show(
+                            context: context,
+                            type: QuickAlertType.error,
+                            title: 'Error',
+                            text: state.message,
+                          );
+                          Navigator.pushNamed(context, '/SignUp');
+                        } else if (state is FailureUsernameState) {
+                          await QuickAlert.show(
+                            context: context,
+                            type: QuickAlertType.error,
+                            title: 'Error',
+                            text: state.message,
+                          );
+                          Navigator.pushNamed(context, '/SignUp');
                         }
                       },
                       builder: (context, state) {
@@ -255,44 +273,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               fontSize: screenHeight * 0.02,
                             ),
                             hasIcon: false,
-                          );
-                        } else if (state is LoadingState) {
-                          return const SizedBox();
-                        } else if (state is FailureState) {
-                          return SizedBox(
-                            height: screenHeight / 3,
-                            child: Column(
-                              children: [
-                                AppButton(
-                                  text: StringsManager.REGISTER,
-                                  onPressed: () {
-                                    if (_formKey.currentState!.validate()) {
-                                      context.read<AuthBloc>().add(
-                                            RegisterEvent(widget.user),
-                                          );
-                                      print(widget.user.firstName);
-                                      widget.user.password =
-                                          passwordController.text;
-                                      widget.user.confirmPassword =
-                                          confirmPasswordController.text;
-                                    }
-                                  },
-                                  backgroundColor: ColorManager.primaryColor,
-                                  width: screenWidth * 0.88,
-                                  height: screenHeight / 16.5,
-                                  textStyle: TextStyle(
-                                    color: ColorManager.whiteColor,
-                                    fontSize: screenHeight * 0.02,
-                                  ),
-                                  hasIcon: false,
-                                ),
-                                Text(
-                                  state.message!,
-                                  style: const TextStyle(
-                                      fontSize: 20, color: Colors.red),
-                                )
-                              ],
-                            ),
                           );
                         } else {
                           return const SizedBox();

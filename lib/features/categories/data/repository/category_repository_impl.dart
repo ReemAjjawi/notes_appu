@@ -35,7 +35,7 @@ class CategoryRepoImpl implements CategoryRepo {
     log('==========================================================');
     try {
       final categoriesList = await categoriesServiceImp.getCategories();
-
+      print(categoriesList);
       return Right(categoriesList);
     } on ServerException {
       return Left(ServerFailure());

@@ -4,21 +4,20 @@ import 'package:dartz/dartz.dart';
 import 'package:ride_application/core/success/success.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
-
 import '../../domain/repository/wallet_creation_repository.dart';
 import '../datasource/remote/create_wallet_service.dart';
 import '../model/wallet_model.dart';
 
 
-class WalletCreationRepoImpl implements WalletCreationRepo {
-  WalletCreationServiceImp walletCreationServiceImp;
-  WalletCreationRepoImpl({required this.walletCreationServiceImp});
+class AddMoneyRepoImpl implements AddMoneyRepo {
+  AddMoneyServiceImp addMoneyServiceImp;
+  AddMoneyRepoImpl({required this.addMoneyServiceImp});
   @override
-   Future<Either<Failures, SuccessSituation>> createWallet(Wallet wallet) async {
+   Future<Either<Failures, SuccessSituation>>  addCode(Code codeModel) async {
     log('==========================================================');
     try {
-            SuccessSituation walletCreation = await walletCreationServiceImp.createWallet(wallet);
-        return Right(walletCreation);
+            SuccessSituation addedCode = await addMoneyServiceImp.addCode(codeModel);
+        return Right(addedCode);
     } on ServerException {
       return Left(ServerFailure());
     }
