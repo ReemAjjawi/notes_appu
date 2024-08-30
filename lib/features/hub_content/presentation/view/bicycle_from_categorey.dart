@@ -51,7 +51,8 @@ class BicyclesFromCategorey extends StatelessWidget {
           _buildSizeBox(screenHeight),
           _buildText2(),
           _buildSizeBox(screenHeight),
-          buildListView(hubId, hubIdto, screenHeight, screenWidth),
+          buildListView(
+              hubId, hubIdto, categoryName, screenHeight, screenWidth),
         ],
       ),
     );
@@ -89,31 +90,47 @@ Widget _buildText2() {
   );
 }
 
-Widget buildListView(hubId, hubIdto, double screenHeight, double screenWidth) {
+Widget buildListView(
+    hubId, hubIdto, categoryName, double screenHeight, double screenWidth) {
   return BlocConsumer<HubContentsBloc, HubContentsClassState>(
       listener: (context, state) async {
-    if (state is FailureState) {
-    await  QuickAlert.show(
+    if (state is FailureStatehub) {
+      await QuickAlert.show(
         context: context,
         type: QuickAlertType.error,
         title: 'Error',
         text: state.message,
       );
-      Navigator.pushNamed(context, '/LocationScreen');
-    } else if (state is LoadingState) {
-      QuickAlert.show(context: context, type: QuickAlertType.loading);
+      Navigator.pushNamed(context, '/LocationScreen', arguments: categoryName);
+    } else if (state is EmptyFailureState) {
+      await QuickAlert.show(
+        context: context,
+        type: QuickAlertType.error,
+        title: 'Error',
+        text: state.message,
+      );
+      Navigator.pushNamed(context, '/LocationScreen', arguments: categoryName);
     }
-    else   if (state is EmptyFailureState) {
-    await  QuickAlert.show(
+    if (state is UnknowStatehub) {
+      await QuickAlert.show(
         context: context,
         type: QuickAlertType.error,
         title: 'Error',
         text: state.message,
       );
-      Navigator.pushNamed(context, '/LocationScreen');
-    } 
+      Navigator.pushNamed(context, '/LocationScreen', arguments: categoryName);
+    }
+    if (state is InternetStatehub) {
+      await QuickAlert.show(
+        context: context,
+        type: QuickAlertType.error,
+        title: 'Errorinternet',
+        text: state.message,
+      );
+      Navigator.pushNamed(context, '/LocationScreen', arguments: categoryName);
+    }
   }, builder: (context, state) {
-    if (state is Success) {
+    if (state is Successhub) {
       return ListView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
@@ -194,7 +211,10 @@ Widget buildListView(hubId, hubIdto, double screenHeight, double screenWidth) {
           );
         },
       );
-    } else  {
+    } else if (state is LoadingStatehub) {
+      //  QuickAlert.show(context: context, type: QuickAlertType.loading);
+      return const Center(child: Indicator());
+    } else {
       return SizedBox();
     }
   });

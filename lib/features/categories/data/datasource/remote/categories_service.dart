@@ -24,14 +24,10 @@ class CategoriesServiceImp implements CategoriesService {
         '${AppUrl.baseUrl}/${AppUrl.getBicyclesByCategory}?category=$categoryName');
 
     print("hiiiii");
-
-    Response response = await dio.get(
-        '${AppUrl.baseUrl}/${AppUrl.getBicyclesByCategory}?category=$categoryName',
-        options: HeaderConfig.getHeader(useToken: true));
-    print("hiiiii");
-    if (response.statusCode == 200) {
-      print(response.data);
-
+    try {
+      Response response = await dio.get(
+          '${AppUrl.baseUrl}/${AppUrl.getBicyclesByCategory}?category=$categoryName',
+          options: HeaderConfig.getHeader(useToken: true));
       print("hiiiii");
       List<BicycleModel> bicycles = List.generate(
         response.data['body'].length,
@@ -40,10 +36,14 @@ class CategoriesServiceImp implements CategoriesService {
       // List<BicycleEntity> bicycle =
       //     bicycles.map<BicycleEntity>((bicycle) => bicycle).toList();
       return DataSuccessList(data: bicycles);
-    } else {
-      throw ServerException(message:"try again");
+       } on DioException catch (e) {
+      throw ServerException(message: "try again");
     }
-  }
+   
+  
+    }
+     
+  
 
   @override
   Future<SuccessSituation> getCategories() async {
@@ -59,21 +59,12 @@ class CategoriesServiceImp implements CategoriesService {
           response.data['body'].length,
           (index) => CategoryModel.fromJson(response.data['body'][index]),
         );
-        // List<CategoryEntity> categorie =
-        //     categories.map<CategoryEntity>((category) => category).toList();
 
         return DataSuccessList(data: categories);
-      } else {
-        print(response.data['message']);
-        print("error in else ");
-        throw ServerException(message:"try again");
       }
     } on DioException catch (e) {
-      print("iam in catch");
-      print(e.response!.data);
-      print("hi");
-      print((e.response!.statusCode));
-      throw ServerException(message:e.response!.data );
+      throw ServerException(message: "try again");
     }
+    throw ServerException(message: "try again");
   }
 }

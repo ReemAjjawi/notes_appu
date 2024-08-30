@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quickalert/quickalert.dart';
 import '../../../../core/helper/build_app_bar.dart';
 import '../../../../core/helper/indicator.dart';
 import '../../../../core/resources/managers/colors_manager.dart';
@@ -191,7 +192,37 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       _formKey, double screenWidth, double screenHeight, bool isMobile) {
     return Padding(
       padding: EdgeInsets.all(padding),
-      child: BlocBuilder<changepasswordBloc, changepasswordClassState>(
+      child: BlocConsumer<changepasswordBloc, changepasswordClassState>(
+        listener: (context, state) async {
+          if (state is FailureStatechangepassword) {
+            await QuickAlert.show(
+              context: context,
+              type: QuickAlertType.error,
+              title: 'Error',
+              text: state.message,
+            );
+            Navigator.pushNamed(context, '/ChangePasswordScreen');
+          }
+
+          if (state is unknowStatechangepassword) {
+            await QuickAlert.show(
+              context: context,
+              type: QuickAlertType.error,
+              title: 'Error',
+              text: state.message,
+            );
+            Navigator.pushNamed(context, '/ChangePasswordScreen');
+          }
+          if (state is internetStatechangepassword) {
+            await QuickAlert.show(
+              context: context,
+              type: QuickAlertType.error,
+              title: 'Errorinternet',
+              text: state.message,
+            );
+            Navigator.pushNamed(context, '/ChangePasswordScreen');
+          }
+        },
         builder: (context, state) {
           if (state is InitialStatechangepassword) {
             return AppButton(
@@ -215,41 +246,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               hasIcon: false,
             );
           } else if (state is LoadingStatechangepassword) {
-            return const Indicator();
-          } else if (state is FailureStatechangepassword) {
-            return SizedBox(
-              height: screenHeight / 3,
-              child: Column(
-                children: [
-                  AppButton(
-                    text: StringsManager.SAVE,
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        changepasswordModel changepassword =
-                            changepasswordModel(
-                                currentPassword: oldPasswordController.text,
-                                newPassword: newPasswordController.text,
-                                confirmPassword:
-                                    confirmPasswordController.text);
-                        print(changepassword);
-                        context.read<changepasswordBloc>().add(
-                              changepasswordEvent(changepassword),
-                            );
-                      }
-                    },
-                    backgroundColor: ColorManager.primaryColor,
-                    width: screenWidth * 0.88,
-                    height: screenHeight / 15,
-                    textStyle: StylesManager.greenButtonStyle,
-                    hasIcon: false,
-                  ),
-                  Text(
-                    state.message,
-                    style: const TextStyle(fontSize: 20, color: Colors.red),
-                  )
-                ],
-              ),
-            );
+            //  QuickAlert.show(context: context, type: QuickAlertType.loading);
+            return const Center(child: Indicator());
           } else {
             return const SuccessWidget();
           }

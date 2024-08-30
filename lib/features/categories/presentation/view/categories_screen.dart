@@ -76,19 +76,37 @@ Widget _buildGridView(
     {'iconPath': AssetsManager.taxiImage, 'label': StringsManager.TAXI},
   ];
   return BlocConsumer<CategoryBloc, CategoriesClassState>(
-      listener: (context, state) async {
-    if (state is FailureState) {
-    await  QuickAlert.show(
-        context: context,
-        type: QuickAlertType.error,
-        title: 'Error',
-        text: state.message,
-      );
-      Navigator.pushNamed(context, '/CategoriesScreen');
-    } else if (state is LoadingState) {
-      QuickAlert.show(context: context, type: QuickAlertType.loading);
-    }
-   },  builder: (context, state) {
+    listener: (context, state) async {
+      if (state is FailureStateca) {
+        await QuickAlert.show(
+          context: context,
+          type: QuickAlertType.error,
+          title: 'Error',
+          text: state.message,
+        );
+        Navigator.pushNamed(context, '/CategoriesScreen');
+      }
+
+      if (state is unknowStateca) {
+        await QuickAlert.show(
+          context: context,
+          type: QuickAlertType.error,
+          title: 'Error',
+          text: state.message,
+        );
+        Navigator.pushNamed(context, '/CategoriesScreen');
+      }
+      if (state is internetStateca) {
+        await QuickAlert.show(
+          context: context,
+          type: QuickAlertType.error,
+          title: 'Errorinternet',
+          text: state.message,
+        );
+        Navigator.pushNamed(context, '/CategoriesScreen');
+      }
+    },
+    builder: (context, state) {
       if (state is Success) {
         return Expanded(
           child: Padding(
@@ -140,6 +158,9 @@ Widget _buildGridView(
             ),
           ),
         );
+      } else if (state is LoadingStateca) {
+        //  QuickAlert.show(context: context, type: QuickAlertType.loading);
+        return const Center(child: Indicator());
       } else {
         return const Center();
       }

@@ -2,6 +2,8 @@ abstract class Failures {}
 
  class ServerFailure extends Failures {}
  class ValidationFailure extends Failures {}
+  class InternetFailure extends Failures {}
+
 
 class OfflineFailure extends Failures {}
 

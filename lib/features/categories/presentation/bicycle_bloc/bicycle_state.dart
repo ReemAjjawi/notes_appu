@@ -20,3 +20,16 @@ class FailureState extends BicyclesClassState {
 
   FailureState({required this.message});
 }
+
+
+class internetState extends BicyclesClassState {
+  final String message;
+
+  internetState ({required this.message});
+}
+
+class unknowState extends BicyclesClassState {
+  final String message;
+
+  unknowState({required this.message});
+}

@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 String nam =
-    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1MTI1NTY4ODk5IiwiaWF0IjoxNzI0NzY1NzQ1LCJleHAiOjE3MjQ4NTIxNDV9.zAzumfY6oICQ8GSprzYYgeVH1BnmvYGRsh1BW0uTHUs";
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1NDQ1NTU0NTQ1IiwiaWF0IjoxNzI1MDMzNDUxLCJleHAiOjE3MjUxMTk4NTF9.JO68zfjJpwwClNDdTR3OMbHRpH4FZdZwMlrZ3HerWD4";
 
 // box.get('token')
 class HeaderConfig {

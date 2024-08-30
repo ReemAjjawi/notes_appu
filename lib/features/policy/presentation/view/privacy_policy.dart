@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quickalert/quickalert.dart';
 import 'package:ride_application/main.dart';
 
 import '../../../../core/helper/build_app_bar.dart';
@@ -31,7 +32,27 @@ class PrivacyPolicyScreen extends StatelessWidget {
 
   Widget _buildBody(double screenWidth, double screenHeight) {
     return OrientationBuilder(builder: (context, orientation) {
-      return BlocBuilder<policyBloc, policyClassState>(
+      return BlocConsumer<policyBloc, policyClassState>(
+        listener: (context, state) async {
+          if (state is unknowStatepolicy) {
+            await QuickAlert.show(
+              context: context,
+              type: QuickAlertType.error,
+              title: 'Error',
+              text: state.message,
+            );
+            Navigator.pushNamed(context, '/PrivacyPolicyScreen');
+          }
+          if (state is internetStatepolicy) {
+            await QuickAlert.show(
+              context: context,
+              type: QuickAlertType.error,
+              title: 'Errorinternet',
+              text: state.message,
+            );
+            Navigator.pushNamed(context, '/PrivacyPolicyScreen');
+          }
+        },
         builder: (context, state) {
           if (state is SuccessStatepolicy) {
             return Padding(

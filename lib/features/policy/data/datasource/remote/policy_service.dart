@@ -21,36 +21,40 @@ class policyServiceImp extends policyService {
   @override
   Future<SuccessSituation> getPolicy() async {
     print("jjjjjjjjjjjjjjjjjjj");
+    try {
+      Response response = await dio.get('${AppUrl.baseUrl}/${AppUrl.policy}',
+          options: HeaderConfig.getHeader());
 
-    Response response = await dio.get('${AppUrl.baseUrl}/${AppUrl.policy}',
-        options: HeaderConfig.getHeader());
+      if (response.statusCode == 200) {
+        print(response.data);
+        print("dddd");
 
-    if (response.statusCode == 200) {
-      print(response.data);
-      print("dddd");
-
-      policyModel data = policyModel.fromMap(response.data['body']);
-      print("dddd");
-      print(data);
-      return DataSuccessObject(data: data);
-    } else {
+        policyModel data = policyModel.fromMap(response.data['body']);
+        print("dddd");
+        print(data);
+        return DataSuccessObject(data: data);
+      }
+    } catch (e) {
       throw ServerException(message: "try again");
     }
+    throw ServerException(message: "try again");
   }
 
   @override
   Future<SuccessSituation> putPolicy(policyModel polic) async {
     print("jjjjjjjjjjjjjjjjjjj");
+    try {
+      Response response = await dio.put('${AppUrl.baseUrl}/${AppUrl.policy}',
+          data: polic.toMap(), options: HeaderConfig.getHeader());
 
-    Response response = await dio.put('${AppUrl.baseUrl}/${AppUrl.policy}',
-        data: polic.toMap(), options: HeaderConfig.getHeader());
+      if (response.statusCode == 200) {
+        print(response.data);
 
-    if (response.statusCode == 200) {
-      print(response.data);
-
-      return DataSuccess();
-    }  else {
+        return DataSuccess();
+      }
+    } catch (e) {
       throw ServerException(message: "try again");
     }
+    throw ServerException(message: "try again");
   }
 }

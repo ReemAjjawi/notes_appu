@@ -18,28 +18,32 @@ class HubServiceImp extends CoreService {
 
   Future<SuccessSituation> getHub(HubModel hub) async {
     print(hub.toMap());
-    Response response = await dio.get(
-        '${AppUrl.baseUrl}/${AppUrl.getAllHubs}longtitude=${hub.longtitude}&latitude=${hub.latitude}',
-        options: HeaderConfig.getHeader());
+    try {
+      Response response = await dio.get(
+          '${AppUrl.baseUrl}/${AppUrl.getAllHubs}longtitude=${hub.longtitude}&latitude=${hub.latitude}',
+          options: HeaderConfig.getHeader());
 
-    print(response.data);
-
-    if (response.statusCode == 200) {
       print(response.data);
-      List<HubinfoModel> data = List.generate(
-        response.data['body'].length,
-        (index) => HubinfoModel.fromMap(
-          response.data['body'][index],
-        ),
-      );
-      print(data);
-      print("eeeeeeeeeeeeeeeeeee");
-      return DataSuccessList(data: data) ;
-    } else if (response.statusCode == 403) {
-      print(response.data['message']);
-      throw PasswordException(response.data['message']);
-    } else {
+
+      if (response.statusCode == 200) {
+        print(response.data);
+        List<HubinfoModel> data = List.generate(
+          response.data['body'].length,
+          (index) => HubinfoModel.fromMap(
+            response.data['body'][index],
+          ),
+        );
+        print(data);
+        if (data.isEmpty) {
+          print("object");
+          throw EmptyException("no hub");
+        }
+        print("eeeeeeeeeeeeeeeeeee");
+        return DataSuccessList(data: data);
+      }
+    } catch (e) {
       throw ServerException(message: "try again");
     }
+    throw ServerException(message: "try again");
   }
 }

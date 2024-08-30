@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:quickalert/quickalert.dart';
 
 import '../../../../core/helper/build_app_bar.dart';
 import '../../../../core/helper/indicator.dart';
@@ -181,7 +182,37 @@ class ContactUsScreen extends StatelessWidget {
 
   Widget _buildAppButton() {
     return Center(
-      child: BlocBuilder<putpolicyBloc, putpolicyClassState>(
+      child: BlocConsumer<putpolicyBloc, putpolicyClassState>(
+        listener: (context, state) async {
+          if (state is FailureStatepolicyput) {
+            await QuickAlert.show(
+              context: context,
+              type: QuickAlertType.error,
+              title: 'Error',
+              text: state.message,
+            );
+            Navigator.pushNamed(context, '/ContactUsScreen');
+          }
+
+          if (state is unknowStatepolicyput) {
+            await QuickAlert.show(
+              context: context,
+              type: QuickAlertType.error,
+              title: 'Error',
+              text: state.message,
+            );
+            Navigator.pushNamed(context, '/ContactUsScreen');
+          }
+          if (state is internetStatepolicyput) {
+            await QuickAlert.show(
+              context: context,
+              type: QuickAlertType.error,
+              title: 'Errorinternet',
+              text: state.message,
+            );
+            Navigator.pushNamed(context, '/ContactUsScreen');
+          }
+        },
         builder: (context, state) {
           if (state is InitialStatepolicyput) {
             return AppButton(
@@ -206,31 +237,6 @@ class ContactUsScreen extends StatelessWidget {
             );
           } else if (state is LoadingStatepolicyput) {
             return const Indicator();
-          } else if (state is FailureStatepolicyput) {
-            return SizedBox(
-              height: screenHeight / 3,
-              child: Column(
-                children: [
-                  AppButton(
-                    text: StringsManager.SAVE,
-                    onPressed: () {
-                      // if (_formKey.currentState!.validate()) {
-
-                      // }
-                    },
-                    backgroundColor: ColorManager.primaryColor,
-                    width: isPortrait ? screenWidth * 0.88 : screenWidth * 0.6,
-                    height: isPortrait ? screenHeight / 15 : screenHeight / 10,
-                    textStyle: StylesManager.greenButtonStyle,
-                    hasIcon: false,
-                  ),
-                  Text(
-                    state.message,
-                    style: const TextStyle(fontSize: 20, color: Colors.red),
-                  )
-                ],
-              ),
-            );
           } else {
             return const SuccessWidget();
           }

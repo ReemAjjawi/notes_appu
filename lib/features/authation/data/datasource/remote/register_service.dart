@@ -23,38 +23,39 @@ class AuthServiceImp implements AuthService {
   Future<SuccessSituation> Register(UserModel user) async {
     print(user.toMap());
     print('${AppUrl.baseUrl}/${AppUrl.signUp}');
-  
+
     try {
       Response response = await dio.post('${AppUrl.baseUrl}/${AppUrl.signUp}',
-        data: user.toJson());
+          data: user.toJson());
 
-    if (response.statusCode == 200) {
-      String token = response.data['body']['token'];
-      var box = Hive.box('projectBox');
-      box.put('token', token);
-      return DataSuccess();
-    } 
-  } on DioException catch (e) {
-    String? message = e.response?.data['message'];
-    print("iam in catch");
-    print(e.response?.data);
+      if (response.statusCode == 200) {
+        print(response.data);
+        String token = response.data['body']['token'];
+        var box = Hive.box('projectBox');
+        box.put('token', token);
+        return DataSuccess();
+      }
+    } on DioException catch (e) {
+      String? message = e.response?.data['message'];
+      print("iam in catch");
+      print(e.response?.data);
 
-    if (e.response?.statusCode == 400) {
-      log("iam in register");
-      if (message == 'Username already in use') {
-        throw UsernameException(message);
-      } else if (message == 'phone number already in use') {
-        throw PhoneException(message);
-      } else if (message != null && message.contains('Password must be')) {
-        throw PasswordException(message);
-      } 
+      if (e.response?.statusCode == 400) {
+        log("iam in register");
+        if (message == 'Username already in use') {
+          throw UsernameException(message);
+        } else if (message == 'phone number already in use') {
+          throw PhoneException(message);
+        } else if (message != null && message.contains('Password must be')) {
+          throw PasswordException(message);
+        }
+      }
+
+      throw ServerException(message: 'try again');
     }
-
-    throw ServerException(message: "try again");
+     throw ServerException(message: 'try again');
   }
 
-  throw ServerException(message: "try again");
-}
   Future<SuccessSituation> LogIn(LogInModel logn) async {
     print(logn.toMap());
     print('${AppUrl.baseUrl}/${AppUrl.logIn}');

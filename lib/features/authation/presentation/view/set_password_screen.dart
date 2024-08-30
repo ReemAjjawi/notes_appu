@@ -117,7 +117,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                             ),
                             style: TextStyle(
-                              color: ColorManager.hintTextColor,
+                              color: ColorManager.headLineColor,
                               fontSize: screenHeight * 0.02,
                             ),
                             validator: (value) {
@@ -177,7 +177,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                             ),
                             style: TextStyle(
-                              color: ColorManager.hintTextColor,
+                              color: ColorManager.headLineColor,
                               fontSize: screenHeight * 0.02,
                             ),
                             validator: (value) {
@@ -239,6 +239,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           );
                           Navigator.pushNamed(context, '/SignUp');
                         } else if (state is FailureUsernameState) {
+                          await QuickAlert.show(
+                            context: context,
+                            type: QuickAlertType.error,
+                            title: 'Error',
+                            text: state.message,
+                          );
+                          Navigator.pushNamed(context, '/SignUp');
+                        } else if (state is internetPhoneState) {
                           await QuickAlert.show(
                             context: context,
                             type: QuickAlertType.error,

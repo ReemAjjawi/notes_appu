@@ -109,39 +109,52 @@ class SignUpScreen extends StatelessWidget {
                   width: screenWidth * 0.92,
                   height: screenHeight / 13,
                   child: TextFormField(
-                      controller: dateController,
-                      decoration: InputDecoration(
-                        hintText: 'Enter your birth date',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                              // color: ColorManager.primaryColor,
-                              ),
-                        ),
-                        contentPadding: EdgeInsets.symmetric(
-                            vertical: screenHeight * 0.02,
-                            horizontal: screenWidth * 0.04),
-                        errorMaxLines: 1,
-                        errorStyle: const TextStyle(height: 0.5),
-                        suffixIcon: const Icon(Icons.calendar_today),
+                    controller: dateController,
+                    decoration: InputDecoration(
+                      hintText: 'Enter your birth date',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                            // color: ColorManager.primaryColor,
+                            ),
                       ),
-                      onTap: () async {
-                        FocusScope.of(context).requestFocus(FocusNode());
-                        DateTime? pickedDate = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(1900),
-                          lastDate: DateTime(2100),
-                        );
-                        if (pickedDate != null) {
-                          dateController.text =
-                              "${pickedDate.toLocal()}".split(' ')[0];
-                          print(dateController.text);
-                        }
-                      },
-                      validator: (value) {
-                        return dateValidator(value);
-                      }),
+                      contentPadding: EdgeInsets.symmetric(
+                        vertical: screenHeight * 0.02,
+                        horizontal: screenWidth * 0.04,
+                      ),
+                      errorMaxLines: 1,
+                      errorStyle: const TextStyle(height: 0.5),
+                      suffixIcon: const Icon(Icons.calendar_today),
+                    ),
+                    onTap: () async {
+                      FocusScope.of(context).requestFocus(FocusNode());
+                      DateTime? pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime(2100),
+                        builder: (BuildContext context, Widget? child) {
+                          return Theme(
+                            data: ThemeData.light().copyWith(
+                              colorScheme: const ColorScheme.light(
+                                  primary: ColorManager.primaryColor,
+                                  surface: ColorManager.whiteColor),
+                              dialogBackgroundColor: ColorManager.whiteColor,
+                            ),
+                            child: child!,
+                          );
+                        },
+                      );
+                      if (pickedDate != null) {
+                        dateController.text =
+                            "${pickedDate.toLocal()}".split(' ')[0];
+                        print(dateController.text);
+                      }
+                    },
+                    validator: (value) {
+                      return dateValidator(value);
+                    },
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.all(padding),

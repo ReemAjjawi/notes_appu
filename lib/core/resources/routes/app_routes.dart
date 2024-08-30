@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:ride_application/features/map/data/model/hub_model.dart';
+import '../../../features/Settings/presentation/view/change_language.dart';
+import '../../../features/Settings/presentation/view/delete_account.dart';
+import '../../../features/Settings/presentation/view/settings.dart';
+import '../../../features/favourite/favourite_screen.dart';
 import '../../../features/add_money/presentation/view/add_money_to_wallet_screen.dart';
 import '../../../features/favourite/favourite_screen.dart';
 import '../../../features/get_wallet/presentation/view/get_wallet_info_screen.dart';
-import '../../../features/settings/presentation/view/change_language.dart';
 import '../../../features/changepassword/presentation/view/change_password.dart';
 import '../../../features/policy/presentation/view/contact_us.dart';
-import '../../../features/settings/presentation/view/delete_account.dart';
 import '../../../features/policy/presentation/view/privacy_policy.dart';
-import '../../../features/settings/presentation/view/settings.dart';
 import '../../../features/authation/data/model/user_model.dart';
 import '../../../features/authation/presentation/view/login_screen.dart';
 import '../../../features/authation/presentation/view/set_password_screen.dart';
@@ -34,11 +35,11 @@ class AppRoutes {
       case '/':
         var box = Hive.box('projectBox');
         String? token = box.get('token');
-
+// {latitude: 51.5315, longtitude: 4.4598}
         if (token != null) {
           return _materialRoute(CreateWalletScreen());
         } else {
-          return _materialRoute(SignUpScreen());
+          return _materialRoute(WelcomeScreen());
         }
 
       case '/BicyclesScreen':

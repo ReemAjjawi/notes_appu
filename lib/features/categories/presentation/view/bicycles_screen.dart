@@ -92,20 +92,30 @@ Widget _buildListView(
     },
   ];
   return BlocConsumer<BicycleBloc, BicyclesClassState>(
-      listener: (context, state) async {
-    if (state is FailureState) {
-    await  QuickAlert.show(
-        context: context,
-        type: QuickAlertType.error,
-        title: 'Error',
-        text: state.message,
-      );
-      Navigator.pushNamed(context, '/CategoriesScreen');
-    } else if (state is LoadingState) {
-      QuickAlert.show(context: context, type: QuickAlertType.loading);
-    }
-   
-  },
+    listener: (context, state) async {
+      if (state is FailureState) {
+        await QuickAlert.show(
+          context: context,
+          type: QuickAlertType.error,
+          title: 'Error',
+          text: state.message,
+        );
+        Navigator.pushNamed(
+          context,
+          '/CategoriesScreen',
+        );
+      }
+      if (state is internetState) {
+        await QuickAlert.show(
+          context: context,
+          type: QuickAlertType.error,
+          title: 'Errorinternet',
+          text: state.message,
+        );
+        Navigator.pushNamed(context, '/BicyclesScreen',
+            arguments: categoryName);
+      }
+    },
     builder: (context, state) {
       if (state is Success) {
         return Expanded(
@@ -173,6 +183,9 @@ Widget _buildListView(
             },
           ),
         );
+      } else if (state is LoadingState) {
+        //  QuickAlert.show(context: context, type: QuickAlertType.loading);
+        return const Center(child: Indicator());
       } else {
         return const Center();
       }

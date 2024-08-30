@@ -6,19 +6,19 @@ import 'package:ride_application/features/hub_content/data/model/second_model.da
 @immutable
 sealed class HubContentsClassState {}
 
-class Success extends HubContentsClassState {
+class Successhub extends HubContentsClassState {
   final DataSuccessList<BicycleListModel> bicycles;
-  Success({
+  Successhub({
     required this.bicycles,
   });
 }
 
-class LoadingState extends HubContentsClassState {}
+class LoadingStatehub extends HubContentsClassState {}
 
-class FailureState extends HubContentsClassState {
+class FailureStatehub extends HubContentsClassState {
   final String message;
 
-  FailureState({required this.message});
+  FailureStatehub({required this.message});
 }
 
 class EmptyFailureState extends HubContentsClassState {
@@ -27,3 +27,14 @@ class EmptyFailureState extends HubContentsClassState {
   EmptyFailureState({required this.message});
 }
 
+class InternetStatehub extends HubContentsClassState {
+  final String message;
+
+  InternetStatehub({required this.message});
+}
+
+class UnknowStatehub extends HubContentsClassState {
+  final String message;
+
+  UnknowStatehub({required this.message});
+}
