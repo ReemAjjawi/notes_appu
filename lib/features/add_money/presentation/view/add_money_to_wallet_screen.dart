@@ -115,7 +115,7 @@ class AddMoneyScreen extends StatelessWidget {
           }
        else   if (state is SuccessState) {
            
-            Navigator.pushNamed(context, '/ThankYouScreen' ,arguments: state.model);
+            Navigator.pushNamed(context, '/SuccessScreen' ,arguments: state.model);
           } else if (state is LoadingState) {
             QuickAlert.show(
               context: context,
@@ -156,11 +156,13 @@ Widget _buildSizeBox(double screenHeight) {
 }
 
 Widget _buildTextFormField(code) {
-  return CustomTextFormField(
-    hintText: code,
-    colorborder: ColorManager.hintTextColor,
-    width: screenWidth * 0.88,
-    height: screenHeight / 15,
+  return Center(
+    child: CustomTextFormField(
+      hintText: code,
+      colorborder: ColorManager.hintTextColor,
+      width: screenWidth * 0.88,
+      height: screenHeight / 15,
+    ),
   );
 }
 
