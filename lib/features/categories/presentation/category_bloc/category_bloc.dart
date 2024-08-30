@@ -9,7 +9,7 @@ import 'category_event.dart';
 
 class CategoryBloc extends Bloc<CategoriesClassEvent, CategoriesClassState> {
   final CategoryUseCase categoryUseCase;
-  CategoryBloc(this.categoryUseCase) : super(LoadingState()) {
+  CategoryBloc(this.categoryUseCase) : super(LoadingStateca()) {
     on<GetCategoryEvent>((event, emit) async {
       // emit(LoadingState());
       final failureOrEntity = await categoryUseCase.call();
@@ -17,11 +17,19 @@ class CategoryBloc extends Bloc<CategoriesClassEvent, CategoriesClassState> {
       failureOrEntity.fold((failure) {
         String message = '';
         switch (failure.runtimeType) {
-
           case ServerFailure():
             message = "please try again";
-            emit(FailureState(message: message));
+            emit(FailureStateca(message: message));
             break;
+
+          case InternetFailure:
+            message = "no internet ...";
+            print(message);
+            emit(internetStateca(message: message));
+
+          default:
+            message = "An unknown error occurred.";
+            emit(unknowStateca(message: message));
         }
       }, (success) {
         if (success is DataSuccessList<CategoryModel>) {

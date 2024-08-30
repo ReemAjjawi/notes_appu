@@ -10,22 +10,19 @@ import 'package:ride_application/features/authation/domain/repository/register_r
 import '../../../../core/network/network_connection.dart';
 
 class RegisterRepoImpl implements RegisterRepo {
-  AuthServiceImp authServiceImp;
-  //LocalArticleDataSource localArticleDataSource;
-  // NetworkConnection networkConnection;
+  final AuthServiceImp authServiceImp;
+  final NetworkConnection networkConnection;
+
   RegisterRepoImpl({
     required this.authServiceImp,
-    // required this.networkConnection,
+    required this.networkConnection,
   });
 
   @override
   Future<Either<Failures, SuccessSituation>> Register(UserModel user) async {
-    print('==========================================================');
-    // print(await networkConnection.isConnected);
-    // if (await networkConnection.isConnected) {
+    if (await networkConnection.isConnected) {
       try {
-        SuccessSituation registerDone = await authServiceImp.Register(user);
-
+        final registerDone = await authServiceImp.Register(user);
         return Right(registerDone);
       } on ServerException {
         return Left(ServerFailure());
@@ -34,24 +31,22 @@ class RegisterRepoImpl implements RegisterRepo {
       } on UsernameException catch (e) {
         return Left(UserNameFailure(e.message));
       }
-    // } else {
-    //     return Left(InternetFailure());
-    // }
+    } else {
+      return Left(InternetFailure());
+    }
   }
 
+  @override
   Future<Either<Failures, SuccessSituation>> LogIn(LogInModel logn) async {
-    print('==========================================================');
     try {
-      SuccessSituation LogInDone = await authServiceImp.LogIn(logn);
-
-      return Right(LogInDone);
+      final logInDone = await authServiceImp.LogIn(logn);
+      return Right(logInDone);
     } on ServerException {
       return Left(ServerFailure());
     } on PasswordException {
-      return Left(PasswordFailure(
-          "you must put password with symbols and capital letter"));
+      return Left(PasswordFailure("You must put password with symbols and capital letter"));
     } on UsernameException {
-      return Left(UserNameFailure("you must change username"));
+      return Left(UserNameFailure("You must change username"));
     }
   }
 }

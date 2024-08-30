@@ -5,28 +5,35 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 
+import '../../../../core/network/network_connection.dart';
 import '../../../../core/success/success.dart';
-import '../../domain/entity/bicycle_entity.dart';
-import '../../domain/entity/category_entity.dart';
+
 import '../../domain/repository/category_repository.dart';
 import '../datasource/remote/categories_service.dart';
-import '../model/bicycle_model.dart';
-import '../model/category_model.dart';
 
 class CategoryRepoImpl implements CategoryRepo {
   CategoriesServiceImp categoriesServiceImp;
-  CategoryRepoImpl({required this.categoriesServiceImp});
+  final NetworkConnection networkConnection;
+
+  CategoryRepoImpl({
+    required this.categoriesServiceImp,
+    required this.networkConnection,
+  });
   @override
   Future<Either<Failures, SuccessSituation>> getBicyclesByCategory(
       String categoryName) async {
     log('==========================================================');
-    try {
-      final bicyclesList =
-          await categoriesServiceImp.getBicyclesByCategory(categoryName);
+    if (await networkConnection.isConnected) {
+      try {
+        final bicyclesList =
+            await categoriesServiceImp.getBicyclesByCategory(categoryName);
 
-      return Right(bicyclesList);
-    } on ServerException {
-      return Left(ServerFailure());
+        return Right(bicyclesList);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(InternetFailure());
     }
   }
 

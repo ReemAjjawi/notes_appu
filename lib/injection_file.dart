@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:ride_application/core/network/network_connection.dart';
 import 'package:ride_application/features/authation/data/datasource/remote/register_service.dart';
 import 'package:ride_application/features/authation/data/repository/register_repository_impl.dart';
 import 'package:ride_application/features/authation/domain/usecase/login_use_case.dart';
 import 'package:ride_application/features/authation/domain/usecase/register_use_case.dart';
 import 'package:ride_application/features/authation/presentation/auth_bloc/auth_bloc.dart';
 import 'package:ride_application/features/authation/presentation/login_bloc/login_bloc.dart';
-import 'core/network/network_connection.dart';
 import 'features/categories/data/datasource/remote/categories_service.dart';
 import 'features/categories/data/repository/category_repository_impl.dart';
 import 'features/categories/domain/usecase/bicycle_use_case.dart';
@@ -43,27 +43,36 @@ import 'features/wallet/data/datasource/remote/create_wallet_service.dart';
 import 'features/wallet/data/repository/wallet_creation_repository_impl.dart';
 import 'features/wallet/domain/usecase/wallet_creation_use_case.dart';
 import 'features/wallet/presentation/bloc/wallet_creation_bloc/wallet_creation_bloc.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 final sl = GetIt.instance;
 
 Future<void> initializeDependencies() async {
+  // Registering Dio
   sl.registerSingleton<Dio>(Dio());
 
-  // Dependencies
-  sl.registerSingleton<AuthServiceImp>(AuthServiceImp(dio: sl()));
+  // Registering InternetConnectionChecker
+  sl.registerSingleton<InternetConnectionChecker>(InternetConnectionChecker());
 
-  sl.registerSingleton<RegisterRepoImpl>(RegisterRepoImpl(
-    authServiceImp: sl(),
-    // networkConnection: NetworkConnection(
-    //   internetConnectionChecker: sl(),
-    // ),
+  // Registering NetworkConnection
+  sl.registerSingleton<NetworkConnection>(NetworkConnection(
+    internetConnectionChecker: sl<InternetConnectionChecker>(),
   ));
 
-  //UseCases
+  // Registering AuthServiceImp
+  sl.registerSingleton<AuthServiceImp>(AuthServiceImp(dio: sl()));
+
+  // Registering RegisterRepoImpl
+  sl.registerSingleton<RegisterRepoImpl>(RegisterRepoImpl(
+    authServiceImp: sl(),
+    networkConnection: sl<NetworkConnection>(),
+  ));
+
+  // Registering RegisterUseCase
   sl.registerSingleton<RegisterUseCase>(
       RegisterUseCase(registerRepoImpl: sl()));
 
-  //Blocs
+  // Registering AuthBloc
   sl.registerFactory<AuthBloc>(() => AuthBloc(sl()));
 //___________________________________
 
@@ -73,8 +82,10 @@ Future<void> initializeDependencies() async {
 
 //__________________________________
   sl.registerSingleton<CategoriesServiceImp>(CategoriesServiceImp(dio: Dio()));
-  sl.registerSingleton<CategoryRepoImpl>(
-      CategoryRepoImpl(categoriesServiceImp: sl()));
+  sl.registerSingleton<CategoryRepoImpl>(CategoryRepoImpl(
+    categoriesServiceImp: sl(),
+    networkConnection: sl<NetworkConnection>(),
+  ));
 
   sl.registerSingleton<CategoryUseCase>(
       CategoryUseCase(categoryRepoImpl: sl()));
@@ -160,5 +171,3 @@ Future<void> initializeDependencies() async {
 
   sl.registerFactory<WalletInfoBloc>(() => WalletInfoBloc(sl()));
 }
-
-class InternetConnectionChecker {}

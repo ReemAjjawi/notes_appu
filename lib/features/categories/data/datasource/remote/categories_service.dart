@@ -57,22 +57,16 @@ class CategoriesServiceImp implements CategoriesService {
           options: HeaderConfig.getHeader(useToken: true));
 
       if (response.statusCode == 200) {
-  
         List<CategoryModel> categories = List.generate(
           response.data['body'].length,
           (index) => CategoryModel.fromJson(response.data['body'][index]),
         );
-        // List<CategoryEntity> categorie =
-        //     categories.map<CategoryEntity>((category) => category).toList();
 
         return DataSuccessList(data: categories);
-      } else {
-        print(response.data['message']);
-        throw ServerException();
       }
     } on DioException catch (e) {
-   
       throw ServerException();
     }
+    throw ServerException();
   }
 }

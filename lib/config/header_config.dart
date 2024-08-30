@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+String nam =
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1NDQ1NTU0NTQ1IiwiaWF0IjoxNzI1MDMzNDUxLCJleHAiOjE3MjUxMTk4NTF9.JO68zfjJpwwClNDdTR3OMbHRpH4FZdZwMlrZ3HerWD4";
+
 // box.get('token')
 class HeaderConfig {
   static Options getHeader({useToken = true}) {
@@ -8,10 +11,7 @@ class HeaderConfig {
     //
     if (useToken) {
       return Options(
-        headers: {
-          "accept": "*/*",
-          "Authorization": "Bearer ${box.get('token')}"
-        },
+        headers: {"accept": "*/*", "Authorization": "Bearer ${nam}"},
       );
     } else {
       return Options(
