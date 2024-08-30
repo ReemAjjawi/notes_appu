@@ -12,13 +12,28 @@ class HubSuccessState extends HubClassState {
     required this.data,
   });
 }
+class EmptyFailureStamap extends HubClassState {
+  final String message;
 
+  EmptyFailureStamap({required this.message});
+}
 class LoadingStatehub extends HubClassState {}
 
 class FailureStatehub extends HubClassState {
   final String message;
 
   FailureStatehub({required this.message});
+}
+
+class internetStateh extends HubClassState {
+  final String message;
+  internetStateh({required this.message});
+}
+
+class unknowStateh extends HubClassState {
+  final String message;
+
+  unknowStateh({required this.message});
 }
 
 // class UsernameFailureState extends RegisterClassState {

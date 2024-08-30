@@ -34,11 +34,11 @@ class AppRoutes {
       case '/':
         var box = Hive.box('projectBox');
         String? token = box.get('token');
-
+// {latitude: 51.5315, longtitude: 4.4598}
         if (token != null) {
           return _materialRoute(CategoriesScreen());
         } else {
-          return _materialRoute(SignUpScreen());
+          return _materialRoute(WelcomeScreen());
         }
 
       case '/BicyclesScreen':
@@ -81,9 +81,8 @@ class AppRoutes {
       case '/LoginScreen':
         return _materialRoute(LoginScreen());
 
- case '/AddMoney':
+      case '/AddMoney':
         return _materialRoute(AddMoney(code: settings.arguments as String));
-
 
       case '/WalletCodes':
         return _materialRoute(WalletCodes());

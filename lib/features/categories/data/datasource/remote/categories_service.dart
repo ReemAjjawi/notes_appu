@@ -27,25 +27,29 @@ class CategoriesServiceImp implements CategoriesService {
         '${AppUrl.baseUrl}/${AppUrl.getBicyclesByCategory}?category=$categoryName');
 
     print("hiiiii");
-
-    Response response = await dio.get(
-        '${AppUrl.baseUrl}/${AppUrl.getBicyclesByCategory}?category=$categoryName',
-        options: HeaderConfig.getHeader(useToken: true));
-    print("hiiiii");
-    if (response.statusCode == 200) {
-      print(response.data);
-
+    try {
+      Response response = await dio.get(
+          '${AppUrl.baseUrl}/${AppUrl.getBicyclesByCategory}?category=$categoryName',
+          options: HeaderConfig.getHeader(useToken: true));
       print("hiiiii");
-      List<BicycleModel> bicycles = List.generate(
-        response.data['body'].length,
-        (index) => BicycleModel.fromJson(response.data['body'][index]),
-      );
-      // List<BicycleEntity> bicycle =
-      //     bicycles.map<BicycleEntity>((bicycle) => bicycle).toList();
-      return DataSuccessList(data: bicycles);
-    } else {
+      if (response.statusCode == 200) {
+        print(response.data);
+
+        print("hiiiii");
+        List<BicycleModel> bicycles = List.generate(
+          response.data['body'].length,
+          (index) => BicycleModel.fromJson(response.data['body'][index]),
+        );
+        // List<BicycleEntity> bicycle =
+        //     bicycles.map<BicycleEntity>((bicycle) => bicycle).toList();
+        return DataSuccessList(data: bicycles);
+      }
+    } catch (e) {
+      print("dsfs");
+
       throw ServerException();
     }
+    throw ServerException();
   }
 
   @override

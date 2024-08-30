@@ -20,3 +20,15 @@ class FailureStatepolicy extends policyClassState {
 
   FailureStatepolicy({required this.message});
 }
+
+class internetStatepolicy extends policyClassState {
+  final String message;
+
+  internetStatepolicy({required this.message});
+}
+
+class unknowStatepolicy extends policyClassState {
+  final String message;
+
+  unknowStatepolicy({required this.message});
+}

@@ -21,15 +21,19 @@ class changepasswordBloc
       failureOrEntity.fold((failure) {
         String message = 'An unknown error occurred';
         switch (failure.runtimeType) {
-          case PasswordFailure:
-            message = "You must provide a valid password";
+          case ServerFailure():
+            message = "please try again";
+            emit(FailureStatechangepassword(message: message));
             break;
-          case UserNameFailure:
-            message = "You must change the username";
-            break;
-          case ServerFailure:
-            message = "Please try again later";
-            break;
+
+          case InternetFailure:
+            message = "no internet ...";
+            print(message);
+            emit(internetStatechangepassword(message: message));
+
+          default:
+            message = "An unknown error occurred.";
+            emit(unknowStatechangepassword(message: message));
         }
         emit(FailureStatechangepassword(message: message));
       }, (data) {

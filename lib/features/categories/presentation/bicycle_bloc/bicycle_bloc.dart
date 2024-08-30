@@ -17,16 +17,22 @@ class BicycleBloc extends Bloc<BicyclesClassEvent, BicyclesClassState> {
       failureOrEntity.fold((failure) {
         String message = '';
         switch (failure.runtimeType) {
-          //  case PasswordFailure():
-// emit(FailurePasswordState(message: message));
-          //       break;
-//case UserNameFailure()
-// emit(FailureusernameState(message: message));
-          //       break;
           case ServerFailure():
             message = "please try again";
+            print(message);
             emit(FailureState(message: message));
             break;
+
+          case InternetFailure:
+            message = "no internet ...";
+            print(message);
+            emit(internetState(message: message));
+
+          default:
+            message = "An unknown error occurred.";
+            print(message);
+
+            emit(FailureState(message: message));
         }
       }, (success) {
         if (success is DataSuccessList<BicycleModel>) {

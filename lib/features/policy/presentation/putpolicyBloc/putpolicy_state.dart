@@ -15,3 +15,15 @@ class FailureStatepolicyput extends putpolicyClassState {
 
   FailureStatepolicyput({required this.message});
 }
+
+class internetStatepolicyput extends putpolicyClassState {
+  final String message;
+
+  internetStatepolicyput({required this.message});
+}
+
+class unknowStatepolicyput extends putpolicyClassState {
+  final String message;
+
+  unknowStatepolicyput({required this.message});
+}

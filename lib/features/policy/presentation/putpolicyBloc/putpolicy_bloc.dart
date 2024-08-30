@@ -19,15 +19,19 @@ class putpolicyBloc extends Bloc<putpolicyClassEvent, putpolicyClassState> {
       failureOrEntity.fold((failure) {
         String message = 'An unknown error occurred';
         switch (failure.runtimeType) {
-          case PasswordFailure:
-            message = "You must provide a valid password";
+          case ServerFailure():
+            message = "please try again";
+            emit(FailureStatepolicyput(message: message));
             break;
-          case UserNameFailure:
-            message = "You must change the username";
-            break;
-          case ServerFailure:
-            message = "Please try again later";
-            break;
+
+          case InternetFailure:
+            message = "no internet ...";
+            print(message);
+            emit(internetStatepolicyput(message: message));
+
+          default:
+            message = "An unknown error occurred.";
+            emit(unknowStatepolicyput(message: message));
         }
         emit(FailureStatepolicyput(message: message));
       }, (data) {

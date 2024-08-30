@@ -21,17 +21,24 @@ class HubBloc extends Bloc<HubClassEvent, HubClassState> {
       failureOrEntity.fold((failure) {
         String message = 'An unknown error occurred';
         switch (failure.runtimeType) {
-          case PasswordFailure:
-            message = "You must provide a valid password";
-            break;
-          case UserNameFailure:
-            message = "You must change the username";
-            break;
           case ServerFailure:
             message = "Please try again later";
+            print(message);
+            emit(FailureStatehub(message: message));
+
             break;
+
+          case InternetFailure:
+            message = "no internet ...";
+            print(message);
+            emit(internetStateh(message: message));
+
+          default:
+            message = "An unknown error occurred.";
+            print(message);
+
+            emit(unknowStateh(message: message));
         }
-        emit(FailureStatehub(message: message));
       }, (success) {
         if (success is DataSuccessList<HubinfoModel>) {
           print("Success with data: ${success.data}");

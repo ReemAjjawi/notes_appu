@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:quickalert/quickalert.dart';
 
 import '../../../../core/helper/indicator.dart';
 import '../../../../core/resources/managers/colors_manager.dart';
@@ -123,12 +124,44 @@ class MapScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => HubBloc(sl()),
-      child: BlocBuilder<HubBloc, HubClassState>(
+      child: BlocConsumer<HubBloc, HubClassState>(
+        listener: (context, state) async {
+          if (state is FailureStatehub) {
+            await QuickAlert.show(
+              context: context,
+              type: QuickAlertType.error,
+              title: 'Error',
+              text: state.message,
+            );
+            Navigator.pushNamed(context, '/LocationScreen',
+                arguments: categoryName);
+          }
+
+          if (state is unknowStateh) {
+            await QuickAlert.show(
+              context: context,
+              type: QuickAlertType.error,
+              title: 'Error',
+              text: state.message,
+            );
+            Navigator.pushNamed(context, '/LocationScreen',
+                arguments: categoryName);
+          }
+          if (state is internetStateh) {
+            await QuickAlert.show(
+              context: context,
+              type: QuickAlertType.error,
+              title: 'Errorinternet',
+              text: state.message,
+            );
+            Navigator.pushNamed(context, '/LocationScreen',
+                arguments: categoryName);
+          }
+        },
         builder: (context, state) {
           if (state is InitialStatehub) {
             context.read<HubBloc>().add(HubEvent(hub));
-          }
-          if (state is HubSuccessState) {
+          } else if (state is HubSuccessState) {
             fetchHubs(state.data.data);
             return Scaffold(
               body: ValueListenableBuilder<List<Marker>>(
@@ -159,15 +192,6 @@ class MapScreen extends StatelessWidget {
                     },
                   );
                 },
-              ),
-            );
-          } else if (state is FailureStatehub) {
-            return Scaffold(
-              body: Center(
-                child: Text(
-                  state.message,
-                  style: const TextStyle(color: Colors.red, fontSize: 18),
-                ),
               ),
             );
           }

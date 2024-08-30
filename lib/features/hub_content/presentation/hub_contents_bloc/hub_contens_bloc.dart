@@ -2,6 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ride_application/core/success/success.dart';
+import 'package:ride_application/features/add_money/presentation/bloc/wallet_creation_bloc/wallet_creation_state.dart';
+import 'package:ride_application/features/categories/presentation/bicycle_bloc/bicycle_state.dart';
+import 'package:ride_application/features/categories/presentation/category_bloc/category_state.dart';
 import '../../../../core/error/failures.dart';
 import '../../data/model/second_model.dart';
 import '../../domain/usecase/get_hub_contents__use_case.dart';
@@ -11,7 +14,7 @@ import 'hub_contents_state.dart';
 class HubContentsBloc
     extends Bloc<HubContentsClassEvent, HubContentsClassState> {
   final GetHubContentsUseCase getHubContentsUseCase;
-  HubContentsBloc(this.getHubContentsUseCase) : super(LoadingState()) {
+  HubContentsBloc(this.getHubContentsUseCase) : super(LoadingStatehub()) {
     on<GetHubContentsEvent>((event, emit) async {
       //     emit(LoadingState());
       final failureOrEntity =
@@ -25,17 +28,25 @@ class HubContentsBloc
             log("-------------------------------------");
             print(failure.runtimeType);
             print("iam in switch hub content bloc ");
-            emit(FailureState(message: message));
+            emit(FailureStatehub(message: message));
             break;
           case EmptyFailure():
             message = (failure as EmptyFailure).message;
             emit(EmptyFailureState(message: message));
             break;
+          case InternetFailure:
+            message = "no internet ...";
+            print(message);
+            emit(InternetStatehub(message: message));
+
+          default:
+            message = "An unknown error occurred.";
+            emit(UnknowStatehub(message: message));
         }
       }, (success) {
         if (success is DataSuccessList<BicycleListModel>) {
           print("Success with data: ${success.data}");
-          emit(Success(bicycles: success));
+          emit(Successhub(bicycles: success));
         }
       });
     });

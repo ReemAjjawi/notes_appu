@@ -15,3 +15,16 @@ class FailureStatechangepassword extends changepasswordClassState {
 
   FailureStatechangepassword({required this.message});
 }
+
+
+class internetStatechangepassword extends changepasswordClassState {
+  final String message;
+
+  internetStatechangepassword ({required this.message});
+}
+
+class unknowStatechangepassword extends changepasswordClassState {
+  final String message;
+
+  unknowStatechangepassword({required this.message});
+}

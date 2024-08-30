@@ -29,7 +29,8 @@ class CategoryRepoImpl implements CategoryRepo {
             await categoriesServiceImp.getBicyclesByCategory(categoryName);
 
         return Right(bicyclesList);
-      } on ServerException {
+      } on ServerException catch (e) {
+        print("ssasakljsalk");
         return Left(ServerFailure());
       }
     } else {
@@ -40,12 +41,16 @@ class CategoryRepoImpl implements CategoryRepo {
   @override
   Future<Either<Failures, SuccessSituation>> getCategories() async {
     log('==========================================================');
-    try {
-      final categoriesList = await categoriesServiceImp.getCategories();
-      print(categoriesList);
-      return Right(categoriesList);
-    } on ServerException {
-      return Left(ServerFailure());
+    if (await networkConnection.isConnected) {
+      try {
+        final categoriesList = await categoriesServiceImp.getCategories();
+        print(categoriesList);
+        return Right(categoriesList);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(InternetFailure());
     }
   }
 }

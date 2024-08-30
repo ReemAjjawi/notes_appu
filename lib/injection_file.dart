@@ -98,8 +98,10 @@ Future<void> initializeDependencies() async {
   //___________________________________
   sl.registerSingleton<HubContentServiceImp>(HubContentServiceImp(dio: sl()));
 
-  sl.registerSingleton<HubContenRepoImpl>(
-      HubContenRepoImpl(hubContentServiceImp: sl()));
+  sl.registerSingleton<HubContenRepoImpl>(HubContenRepoImpl(
+    hubContentServiceImp: sl(),
+    networkConnection: sl<NetworkConnection>(),
+  ));
 
   sl.registerSingleton<GetHubContentsUseCase>(
       GetHubContentsUseCase(hubContenRepoImpl: sl()));
@@ -108,7 +110,10 @@ Future<void> initializeDependencies() async {
 
   sl.registerSingleton<HubServiceImp>(HubServiceImp(dio: sl()));
 
-  sl.registerSingleton<HubRepoImpl>(HubRepoImpl(hubServiceImp: sl()));
+  sl.registerSingleton<HubRepoImpl>(HubRepoImpl(
+    hubServiceImp: sl(),
+    networkConnection: sl<NetworkConnection>(),
+  ));
 
   sl.registerSingleton<HubUseCase>(HubUseCase(hubRepoImpl: sl()));
 
@@ -126,7 +131,10 @@ Future<void> initializeDependencies() async {
   //________________________________
   sl.registerSingleton<policyServiceImp>(policyServiceImp(dio: sl()));
 
-  sl.registerSingleton<policyRepoImpl>(policyRepoImpl(policServiceImp: sl()));
+  sl.registerSingleton<policyRepoImpl>(policyRepoImpl(
+    policServiceImp: sl(),
+    networkConnection: sl<NetworkConnection>(),
+  ));
 
   sl.registerSingleton<policyUseCase>(policyUseCase(policRepoImpl: sl()));
 
@@ -139,8 +147,10 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<changepasswordServiceImp>(
       changepasswordServiceImp(dio: sl()));
 
-  sl.registerSingleton<changepasswordRepoImpl>(
-      changepasswordRepoImpl(changepassworServiceImp: sl()));
+  sl.registerSingleton<changepasswordRepoImpl>(changepasswordRepoImpl(
+    changepassworServiceImp: sl(),
+    networkConnection: sl<NetworkConnection>(),
+  ));
 
   sl.registerSingleton<changepasswordUseCase>(
       changepasswordUseCase(changepassworImpl: sl()));
