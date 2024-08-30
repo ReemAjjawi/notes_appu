@@ -43,7 +43,7 @@ class MyDrawer extends StatelessWidget {
                       "Back",
                       style: TextStyle(
                         fontWeight: FontWeight.w400,
-                        fontSize: 25,
+                        fontSize: 15,
                         height: 23 / 16,
                         color: Colors.black,
                       ),
@@ -104,9 +104,17 @@ class MyDrawer extends StatelessWidget {
             Expanded(
               child: ListView(
                 children: [
-                  const listtitledrawer(
-                    text: "History",
-                    icon: Icons.history,
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        '/HistoryScreen',
+                      );
+                    },
+                    child: const listtitledrawer(
+                      text: "History",
+                      icon: Icons.history,
+                    ),
                   ),
                   const Divider(),
                   const listtitledrawer(

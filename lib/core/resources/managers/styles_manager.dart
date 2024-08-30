@@ -43,6 +43,7 @@ class StylesManager {
     fontSize: screenWidth * 0.03,
     fontWeight: FontWeight.w500,
   );
+
   static TextStyle titleNotificationStyle = TextStyle(
     color: ColorManager.titleNotificationColor,
     fontSize: screenWidth * 0.03,

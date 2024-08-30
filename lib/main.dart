@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:ride_application/config/local_nafication.dart';
 import 'package:ride_application/injection_file.dart';
 import 'config/bloc_observe_config.dart';
 import 'core/resources/routes/app_routes.dart';
@@ -14,6 +15,7 @@ void main() async {
   );
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDependencies();
+  await LocalNotification.initialize();
   // FirebaseAuth.instance.authStateChanges().listen((User? user) {
   //   if (user == null) {
   //     print('User is currently signed out!');
@@ -50,9 +52,11 @@ class MyApp extends StatelessWidget {
     isMobile = screenWidth < 600;
     isIos = Theme.of(context).platform == TargetPlatform.iOS;
 
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      onGenerateRoute: AppRoutes.onGenerateRoutes,
+    return const SafeArea(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: AppRoutes.onGenerateRoutes,
+      ),
     );
   }
 }

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
+import '../../../../config/local_nafication.dart';
 import '../../../../core/helper/build_app_bar.dart';
 import '../../../../core/resources/managers/assets_manager.dart';
 import '../../../../core/resources/managers/colors_manager.dart';
 import '../../../../core/resources/managers/strings_manager.dart';
+import '../../../../core/resources/managers/styles_manager.dart';
 import '../../../../core/validators.dart';
 import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/app_text_field.dart';
@@ -41,19 +44,17 @@ class SignUpScreen extends StatelessWidget {
                   padding: EdgeInsets.all(padding),
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Text(
-                      StringsManager.SIGNUPWITH,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w100,
-                        fontSize: screenWidth * 0.06,
-                        color: ColorManager.headLineColor,
-                      ),
-                    ),
+                    child: Text(StringsManager.SIGNUPWITH,
+                        style: StylesManager.headLineStyle),
                   ),
                 ),
                 CustomTextFormField(
                   controller: firstnameController,
                   hintText: StringsManager.FIRSTNAME,
+                  textStyleHintText: TextStyle(
+                    fontSize: screenWidth * 0.04,
+                    color: ColorManager.subLineColor,
+                  ),
                   colorborder: ColorManager.subLineColor,
                   width: screenWidth * 0.92,
                   height: screenHeight / 14,
@@ -66,6 +67,10 @@ class SignUpScreen extends StatelessWidget {
                   controller: lastnameController,
                   hintText: StringsManager.LASTNAME,
                   colorborder: ColorManager.subLineColor,
+                  textStyleHintText: TextStyle(
+                    fontSize: screenWidth * 0.04,
+                    color: ColorManager.subLineColor,
+                  ),
                   width: screenWidth * 0.92,
                   height: screenHeight / 14,
                   validator: (value) {
@@ -77,6 +82,10 @@ class SignUpScreen extends StatelessWidget {
                   controller: usernameController,
                   hintText: StringsManager.USERNAME,
                   colorborder: ColorManager.subLineColor,
+                  textStyleHintText: TextStyle(
+                    fontSize: screenWidth * 0.04,
+                    color: ColorManager.subLineColor,
+                  ),
                   width: screenWidth * 0.92,
                   height: screenHeight / 14,
                   validator: (value) {
@@ -91,8 +100,9 @@ class SignUpScreen extends StatelessWidget {
                     controller: numberController,
                     decoration: InputDecoration(
                       hintText: StringsManager.YOURMOBILENUMBER,
-                      hintStyle: const TextStyle(
+                      hintStyle: TextStyle(
                         color: ColorManager.subLineColor,
+                        fontSize: screenWidth * 0.04,
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -112,6 +122,10 @@ class SignUpScreen extends StatelessWidget {
                     controller: dateController,
                     decoration: InputDecoration(
                       hintText: 'Enter your birth date',
+                      hintStyle: TextStyle(
+                        color: ColorManager.subLineColor,
+                        fontSize: screenWidth * 0.04,
+                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: const BorderSide(
@@ -178,7 +192,7 @@ class SignUpScreen extends StatelessWidget {
                                 StringsManager.BYSIGNINGUPYOUAGREETOTHE,
                                 style: TextStyle(
                                   // fontWeight: FontWeight.w400,
-                                  fontSize: screenWidth * 0.03,
+                                  fontSize: screenWidth * 0.02,
                                   color: ColorManager.subTitleColor,
                                 ),
                               ),
@@ -186,7 +200,7 @@ class SignUpScreen extends StatelessWidget {
                                 " ${StringsManager.TERMSOFSERVICE} ",
                                 style: TextStyle(
                                   // fontWeight: FontWeight.w400,
-                                  fontSize: screenWidth * 0.03,
+                                  fontSize: screenWidth * 0.02,
                                   color: ColorManager.primaryColor,
                                 ),
                               ),
@@ -194,7 +208,7 @@ class SignUpScreen extends StatelessWidget {
                                 StringsManager.AND,
                                 style: TextStyle(
                                   // fontWeight: FontWeight.w400,
-                                  fontSize: screenWidth * 0.03,
+                                  fontSize: screenWidth * 0.02,
                                   color: ColorManager.subTitleColor,
                                 ),
                               ),
@@ -204,7 +218,7 @@ class SignUpScreen extends StatelessWidget {
                             StringsManager.PRIVACYPOLICY,
                             style: TextStyle(
                               // fontWeight: FontWeight.w400,
-                              fontSize: screenWidth * 0.03,
+                              fontSize: screenWidth * 0.02,
                               color: ColorManager.primaryColor,
                             ),
                           ),
@@ -219,6 +233,30 @@ class SignUpScreen extends StatelessWidget {
                       color: ColorManager.whiteColor,
                     ),
                     text: StringsManager.SIGNUP,
+                    //  if (index == questions.length - 1)
+                    //       ElevatedButton(
+                    //         onPressed: () {
+                    //           bool allAnswered = true;
+                    //           for (var controller in controllers) {
+                    //             if (controller.text.isEmpty) {
+                    //               allAnswered = false;
+                    //               break;
+                    //             }
+                    //           }
+                    //           if (allAnswered) {
+                    //             LocalNotification.localNotification();
+                    //           } else {
+                    //             ScaffoldMessenger.of(context).showSnackBar(
+                    //               SnackBar(
+                    //                 content: Text('Please answer all questions'),
+                    //                 duration: Duration(seconds: 2),
+                    //                 backgroundColor: Colors.red,
+                    //               ),
+                    //             );
+                    //           }
+                    //         },
+                    //         child: Text('Send'),
+                    //       ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         UserModel user = UserModel(
@@ -231,6 +269,7 @@ class SignUpScreen extends StatelessWidget {
                           confirmPassword: " ",
                         );
                         print(user);
+                        LocalNotification.localNotification();
                         Navigator.pushNamed(context, '/RegisterScreen',
                             arguments: user);
                       }
@@ -242,12 +281,39 @@ class SignUpScreen extends StatelessWidget {
                 const Row(
                   children: [],
                 ),
-                Text(
-                  "______________________ or ______________________",
-                  style: TextStyle(
-                    // fontWeight: FontWeight.w400,
-                    fontSize: screenWidth * 0.04,
-                    color: ColorManager.subTitleColor,
+                Align(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: EdgeInsets.all(padding),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "______________ ",
+                          style: TextStyle(
+                            // fontWeight: FontWeight.w400,
+                            fontSize: screenWidth * 0.04,
+                            color: ColorManager.subTitleColor,
+                          ),
+                        ),
+                        Text(
+                          " or ",
+                          style: TextStyle(
+                            // fontWeight: FontWeight.w400,
+                            fontSize: screenWidth * 0.04,
+                            color: ColorManager.subTitleColor,
+                          ),
+                        ),
+                        Text(
+                          " ______________",
+                          style: TextStyle(
+                            // fontWeight: FontWeight.w400,
+                            fontSize: screenWidth * 0.04,
+                            color: ColorManager.subTitleColor,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(height: screenHeight / 50),

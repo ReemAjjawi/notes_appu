@@ -9,6 +9,7 @@ import '../../../features/add_money/presentation/view/add_money_to_wallet_screen
 import '../../../features/favourite/favourite_screen.dart';
 import '../../../features/get_wallet/presentation/view/get_wallet_info_screen.dart';
 import '../../../features/changepassword/presentation/view/change_password.dart';
+import '../../../features/history/history.dart';
 import '../../../features/policy/presentation/view/contact_us.dart';
 import '../../../features/policy/presentation/view/privacy_policy.dart';
 import '../../../features/authation/data/model/user_model.dart';
@@ -86,6 +87,9 @@ class AppRoutes {
 
       case '/WalletCodes':
         return _materialRoute(WalletCodes());
+
+      case '/HistoryScreen':
+        return _materialRoute(HistoryScreen());
 
       case '/WalletScreen':
         return _materialRoute(WalletScreen());

@@ -67,6 +67,7 @@ class CustomListTile extends StatelessWidget {
         leading: leading,
         title: hasrawtitle
             ? Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   title!,
                   SizedBox(width: 8.0),
@@ -76,6 +77,7 @@ class CustomListTile extends StatelessWidget {
             : title,
         subtitle: hasrawsubtitle
             ? Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   subtitle!,
                   SizedBox(width: 8.0),
@@ -84,6 +86,8 @@ class CustomListTile extends StatelessWidget {
               )
             : hascolum
                 ? Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [

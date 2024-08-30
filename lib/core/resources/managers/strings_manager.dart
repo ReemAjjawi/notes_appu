@@ -15,7 +15,7 @@ class StringsManager {
   static const String CREATEANACCOUNT = "Create an account";
   static const String LOGIN = "Log In";
   static const String FORGET = "Forget password?";
-
+  static const String DONE = "Done";
   static const String SIGNUPWITH = "Sign up with your email or \n phone number";
   static const String SIGNUP = "Sign up";
   static const String FIRSTNAME = "Firstname";
@@ -96,9 +96,9 @@ class StringsManager {
   static const String CYCLE = "Cycle ";
   static const String TAXI = "Taxi ";
   static const String AVAIABLECARSFORRIDE = "Avaiable cars for ride ";
-  static const String CARSFOUND = "18 cars found ";
+  static const String CARSFOUND = "cars found ";
   static const String BMWCABRIO = "BMW Cabrio ";
-  static const String INFOCAR = "Automatic   |   3 seats   |   Octane ";
+  static const String INFOCAR = "Automatic | 3 seats | Octane ";
   static const String DESTANCE = "800m (5mins away) ";
   static const String VIEWBicycleLIST = "View bicycle list ";
   static const String BOOKLATER = "Book later ";

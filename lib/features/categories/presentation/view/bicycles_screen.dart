@@ -150,12 +150,13 @@ Widget _buildListView(
                   ),
                   subtitle2: const Text(""),
                   subtitle3: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       const Icon(
                         Icons.location_on,
                         color: ColorManager.underHintTextColor,
                       ),
-                      SizedBox(width: screenWidth * 0.01),
+                      // SizedBox(width: screenWidth * 0.001),
                       Text(
                         StringsManager.DESTANCE,
                         style: StylesManager.underHintTextStyle,
@@ -169,7 +170,7 @@ Widget _buildListView(
                           arguments: categoryName);
                     },
                     backgroundColor: ColorManager.scondaryColor,
-                    width: screenWidth * 0.50,
+                    width: screenWidth * 0.45,
                     height: screenHeight / 20,
                     textStyle: const TextStyle(
                       color: ColorManager.borderColor,

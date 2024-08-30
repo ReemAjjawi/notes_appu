@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 AppBar buildAppBar({
   Widget? leadingg,
   bool hasLeading = false,
+  PreferredSize? bottom,
   Function()? onPressed,
   Widget? title,
 }) {
@@ -16,7 +17,7 @@ AppBar buildAppBar({
               IconButton(
                 icon: Icon(
                   Icons.adaptive.arrow_back,
-                  size: 20,
+                  size: 15,
                 ),
                 onPressed: onPressed,
               ),
@@ -24,7 +25,7 @@ AppBar buildAppBar({
                 "Back",
                 style: TextStyle(
                   // fontWeight: FontWeight.w400,
-                  fontSize: 20,
+                  fontSize: 15,
                   // height: 23 / 16,
                   color: Colors.black,
                 ),
@@ -34,5 +35,6 @@ AppBar buildAppBar({
         : leadingg,
     centerTitle: true,
     title: title,
+    bottom: bottom,
   );
 }

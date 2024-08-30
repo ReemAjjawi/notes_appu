@@ -6,6 +6,7 @@ import '../../../../core/helper/indicator.dart';
 import '../../../../core/resources/managers/assets_manager.dart';
 import '../../../../core/resources/managers/colors_manager.dart';
 import '../../../../core/resources/managers/strings_manager.dart';
+import '../../../../core/resources/managers/styles_manager.dart';
 import '../../../../core/validators.dart';
 import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/success_widget.dart';
@@ -68,14 +69,8 @@ class _RegisterScreenState extends State<LoginScreen> {
                     padding: EdgeInsets.all(padding),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text(
-                        StringsManager.SIGNUPWITH,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w100,
-                          fontSize: screenWidth * 0.07,
-                          color: ColorManager.headLineColor,
-                        ),
-                      ),
+                      child: Text(StringsManager.SIGNUPWITH,
+                          style: StylesManager.headLineStyle),
                     ),
                   ),
                   SizedBox(height: screenHeight * 0.01),

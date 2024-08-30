@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dash/flutter_dash.dart';
+import '../../../../config/local_nafication.dart';
 import '../../../../core/helper/build_app_bar.dart';
 import '../../../../core/resources/managers/assets_manager.dart';
 import '../../../../core/resources/managers/colors_manager.dart';
@@ -174,22 +175,23 @@ class ReservationScreen extends StatelessWidget {
               text: StringsManager.CONFIRMBOOKING,
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  ReservationModel reservation = ReservationModel(
-                      // bicycleId: bicycle.id,
-                      // fromHubId: hubId.id,
-                      // toHubId: hubIdto.id,
-                      bicycleId: 1,
-                      fromHubId: 1,
-                      toHubId: 2,
-                      duration: 1,
-                      startTime: "2024-08-09T15:00:48.928Z",
-                      endTime: "2024-08-09T16:00:48.928Z",
-                      reservationStatus: "New",
-                      paymentMethod: "Wallet");
-                  print(reservation);
-                  context.read<ReservationBloc>().add(
-                        ReservationEvent(reservation),
-                      );
+                  // ReservationModel reservation = ReservationModel(
+                  //     // bicycleId: bicycle.id,
+                  //     // fromHubId: hubId.id,
+                  //     // toHubId: hubIdto.id,
+                  //     bicycleId: 1,
+                  //     fromHubId: 1,
+                  //     toHubId: 2,
+                  //     duration: 1,
+                  //     startTime: "2024-08-09T15:00:48.928Z",
+                  //     endTime: "2024-08-09T16:00:48.928Z",
+                  //     reservationStatus: "New",
+                  //     paymentMethod: "Wallet");
+                  // print(reservation);
+                  // context.read<ReservationBloc>().add(
+                  //       ReservationEvent(reservation),
+                  //     );
+                  LocalNotification.localNotification();
                   Navigator.pushNamed(
                     context,
                     '/ReservationtowScreen',

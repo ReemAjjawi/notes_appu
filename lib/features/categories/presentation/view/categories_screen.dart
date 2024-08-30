@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quickalert/quickalert.dart';
 
+import '../../../../config/local_nafication.dart';
 import '../../../../core/helper/build_app_bar.dart';
 import '../../../../core/helper/indicator.dart';
 import '../../../../core/resources/managers/assets_manager.dart';
@@ -123,6 +124,7 @@ Widget _buildGridView(
                 final option = transportOptions[index];
                 return InkWell(
                   onTap: () {
+                    // LocalNotification.localNotification();
                     Navigator.pushNamed(context, '/BicyclesScreen',
                         arguments: state.categories.data[index].name);
                   },
