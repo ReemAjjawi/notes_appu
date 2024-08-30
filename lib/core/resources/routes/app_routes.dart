@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:ride_application/features/map/data/model/hub_model.dart';
+import 'package:ride_application/features/add_money/data/model/response_model.dart';
 import '../../../features/Settings/presentation/view/change_language.dart';
 import '../../../features/Settings/presentation/view/delete_account.dart';
 import '../../../features/Settings/presentation/view/settings.dart';
-import '../../../features/favourite/favourite_screen.dart';
 import '../../../features/add_money/presentation/view/add_money_to_wallet_screen.dart';
 import '../../../features/favourite/favourite_screen.dart';
 import '../../../features/get_wallet/presentation/view/get_wallet_info_screen.dart';
 import '../../../features/changepassword/presentation/view/change_password.dart';
 import '../../../features/history/history.dart';
+import '../../../features/payment/success_screen.dart';
 import '../../../features/policy/presentation/view/contact_us.dart';
 import '../../../features/policy/presentation/view/privacy_policy.dart';
 import '../../../features/authation/data/model/user_model.dart';
@@ -27,6 +27,7 @@ import '../../../features/map/presentation/view/map_screen.dart';
 import '../../../features/request_rent/presentation/view/Reservation1_screen.dart';
 import '../../../features/request_rent/presentation/view/Reservation_screen.dart';
 import '../../../features/thank_you/thank_you_screen.dart';
+import '../../../features/wallet/presentation/view/create_wallet_screen.dart';
 import '../../../features/wallet/wallet_screen.dart';
 
 class AppRoutes {
@@ -37,9 +38,9 @@ class AppRoutes {
         String? token = box.get('token');
 // {latitude: 51.5315, longtitude: 4.4598}
         if (token != null) {
-          return _materialRoute(CategoriesScreen());
+          return _materialRoute((SignUpScreen()));
         } else {
-          return _materialRoute(WelcomeScreen());
+          return _materialRoute(SignUpScreen());
         }
 
       case '/BicyclesScreen':
@@ -78,24 +79,27 @@ class AppRoutes {
 
       case '/ThankYouScreen':
         return _materialRoute(ThankYouScreen());
+  case '/SuccessScreen':
+        return _materialRoute(SuccessScreen(model: settings.arguments as BalanceModel));
 
       case '/LoginScreen':
         return _materialRoute(LoginScreen());
 
-      case '/AddMoney':
-        return _materialRoute(AddMoney(code: settings.arguments as String));
+      case '/CreateWalletScreen':
+        return _materialRoute(CreateWalletScreen());
 
-      case '/WalletCodes':
-        return _materialRoute(WalletCodes());
+      case '/AddMoneyScreen':
+        return _materialRoute(
+            AddMoneyScreen(code: settings.arguments as String));
+
+      // case '/WalletCodes':
+      //   return _materialRoute(WalletScreen());
 
       case '/HistoryScreen':
         return _materialRoute(HistoryScreen());
 
       case '/WalletScreen':
         return _materialRoute(WalletScreen());
-
-      // case '/WalletInfoScreen':
-      //   return _materialRoute(WalletInfoScreen());
 
       case '/CategoriesScreen':
         return _materialRoute(const CategoriesScreen());

@@ -35,9 +35,9 @@ class policyServiceImp extends policyService {
         return DataSuccessObject(data: data);
       }
     } catch (e) {
-      throw ServerException();
+      throw ServerException(message: "try again");
     }
-    throw ServerException();
+    throw ServerException(message: "try again");
   }
 
   @override
@@ -53,8 +53,8 @@ class policyServiceImp extends policyService {
         return DataSuccess();
       }
     } catch (e) {
-      throw ServerException();
+      throw ServerException(message: "try again");
     }
-    throw ServerException();
+    throw ServerException(message: "try again");
   }
 }

@@ -5,8 +5,11 @@ import '../../core/resources/managers/strings_manager.dart';
 import '../../core/resources/managers/styles_manager.dart';
 import '../../core/widgets/app_button.dart';
 import '../../main.dart';
+import '../add_money/data/model/response_model.dart';
 
 class SuccessScreen extends StatelessWidget {
+ SuccessScreen({super.key, required this.model});
+   BalanceModel model;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

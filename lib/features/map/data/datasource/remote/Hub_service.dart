@@ -42,8 +42,8 @@ class HubServiceImp extends CoreService {
         return DataSuccessList(data: data);
       }
     } catch (e) {
-      throw ServerException();
+      throw ServerException(message: "try again");
     }
-    throw ServerException();
+    throw ServerException(message: "try again");
   }
 }

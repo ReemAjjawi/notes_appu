@@ -51,10 +51,9 @@ class AuthServiceImp implements AuthService {
         }
       }
 
-      throw ServerException();
+      throw ServerException(message: 'try again');
     }
-
-    throw ServerException();
+     throw ServerException(message: 'try again');
   }
 
   Future<SuccessSituation> LogIn(LogInModel logn) async {
@@ -78,7 +77,7 @@ class AuthServiceImp implements AuthService {
       print(response.data['message']);
       throw PasswordException(response.data['message']);
     } else {
-      throw ServerException();
+      throw ServerException(message: "try again");
     }
   }
 }

@@ -34,7 +34,7 @@ class WalletInfoServiceImp implements WalletInfoService {
     } on DioException catch (e) {
       print(e.message!);
     }
-    throw ServerException();
+    throw ServerException(message: "try again");
   }
 }
 

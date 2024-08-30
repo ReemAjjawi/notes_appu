@@ -47,6 +47,6 @@ class HubContentServiceImp implements HubContentService {
       }
     }
 
-    throw ServerException();
+    throw ServerException(message: "try again");
   }
 }

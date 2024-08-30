@@ -11,6 +11,7 @@ class CategoryBloc extends Bloc<CategoriesClassEvent, CategoriesClassState> {
   final CategoryUseCase categoryUseCase;
   CategoryBloc(this.categoryUseCase) : super(LoadingStateca()) {
     on<GetCategoryEvent>((event, emit) async {
+      print("Hi bloc");
       // emit(LoadingState());
       final failureOrEntity = await categoryUseCase.call();
 

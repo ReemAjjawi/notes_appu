@@ -223,6 +223,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             title: 'Success',
                             text: 'Register was successful!',
                           );
+                          //  Navigator.pushNamed(context, '/CategoriesScreen');
                           Navigator.pushNamed(context, '/CategoriesScreen');
                         } else if (state is LoadingState) {
                           QuickAlert.show(

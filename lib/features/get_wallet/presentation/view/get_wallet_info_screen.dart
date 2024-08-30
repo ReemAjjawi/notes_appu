@@ -1,53 +1,4 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:ride_application/features/get_wallet/presentation/bloc/wallet_info_event.dart';
-// import '../../../../core/helper/indicator.dart';
-// import '../../../../injection_file.dart';
-// import '../bloc/wallet_info_bloc.dart';
-// import '../bloc/wallet_info_state.dart';
 
-// class WalletInfoScreen extends StatelessWidget {
-//   WalletInfoScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocProvider<WalletInfoBloc>(
-//       create: (context) => sl()..add(WalletInfoEvent()),
-//       child: Builder(builder: (context) {
-//         return Scaffold(
-//           body: BlocBuilder<WalletInfoBloc, WalletInfoClassState>(
-//             builder: (context, state) {
-//               if (state is SuccessState) {
-//                 return Column(
-//                   children: [
-//                     SizedBox(
-//                       height: 150,
-//                       child: Container(
-//                         child: Text(state.walletInfo.bankAccount.toString()),
-//                       ),
-//                     ),
-//                     SizedBox(
-//                       height: 150,
-//                       child: Container(
-//                         child: Text(state.walletInfo.balance.toString()),
-//                       ),
-//                     ),
-//                   ],
-//                 );
-//               } else if (state is LoadingState) {
-//                 return Indicator();
-//               } else  {
-//                 return Text("jhnj");
-
-//               }
-
-//             },
-//           ),
-//         );
-//       }),
-//     );
-//   }
-// }
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,7 +10,6 @@ import 'package:ride_application/core/resources/managers/strings_manager.dart';
 import 'package:ride_application/core/resources/managers/styles_manager.dart';
 import 'package:ride_application/core/widgets/app_button.dart';
 import 'package:ride_application/core/widgets/app_list_tile.dart';
-import 'package:ride_application/features/changepassword/presentation/changepassword_bloc/changepassword_bloc.dart';
 import 'package:ride_application/features/get_wallet/presentation/bloc/wallet_info_event.dart';
 import 'package:ride_application/main.dart';
 
@@ -70,8 +20,8 @@ import '../../../get_valid_codes/presentation/bloc/codes_list_state.dart';
 import '../bloc/wallet_info_bloc.dart';
 import '../bloc/wallet_info_state.dart';
 
-class WalletCodes extends StatelessWidget {
-  WalletCodes({super.key});
+class WalletScreen extends StatelessWidget {
+  WalletScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -287,7 +237,7 @@ class WalletCodes extends StatelessWidget {
             text: state.message,
           );
 
-          Navigator.pushNamed(context, '/WalletCodes');
+          Navigator.pushNamed(context, '/CreateWalletScreen');
         } else if (state is LoadingStateCodesList) {
           QuickAlert.show(
             context: context,
@@ -303,7 +253,8 @@ class WalletCodes extends StatelessWidget {
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
-                      Navigator.pushNamed(context, '/AddMoney',arguments: state.codesInfo[index].code);
+                    Navigator.pushNamed(context, '/AddMoneyScreen',
+                        arguments: state.codesInfo[index].code);
                   },
                   child: Card(
                     child: CustomListTile(

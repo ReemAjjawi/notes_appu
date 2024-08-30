@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ride_application/core/success/success.dart';
-import 'package:ride_application/features/add_money/presentation/bloc/wallet_creation_bloc/wallet_creation_state.dart';
 import 'package:ride_application/features/categories/presentation/bicycle_bloc/bicycle_state.dart';
 import 'package:ride_application/features/categories/presentation/category_bloc/category_state.dart';
 import '../../../../core/error/failures.dart';

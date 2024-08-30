@@ -30,8 +30,8 @@ class changepasswordServiceImp extends CoreService {
         return DataSuccess();
       }
     } catch (e) {
-      throw ServerException();
+      throw ServerException(message: "try again");
     }
-    throw ServerException();
+    throw ServerException(message: "try again");
   }
 }
