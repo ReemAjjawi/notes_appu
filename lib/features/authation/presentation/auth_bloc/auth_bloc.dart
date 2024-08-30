@@ -33,9 +33,16 @@ class AuthBloc extends Bloc<RegisterClassEvent, RegisterClassState> {
             emit(FailurePhoneState(message: message));
             break;
           case ServerFailure:
-            message = "Please try again later.";
+            message = "Please try again ...";
             emit(FailureState(message: message));
             break;
+
+          case InternetFailure:
+            message = "no internet ...";
+            print(message);
+            emit(internetPhoneState(message: message));
+            break;
+
           default:
             message = "An unknown error occurred.";
             emit(FailureState(message: message));

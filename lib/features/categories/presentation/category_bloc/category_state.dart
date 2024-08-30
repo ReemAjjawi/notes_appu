@@ -20,7 +20,6 @@ class Success extends CategoriesClassState {
 
 }
 class LoadingState extends CategoriesClassState {}
-
 class FailureState extends CategoriesClassState {
    final String message;
 
@@ -28,15 +27,3 @@ class FailureState extends CategoriesClassState {
 
 
 }
-
-// class UsernameFailureState extends RegisterClassState {
-//   final String message;
-
-//   UsernameFailureState({required this.message});
-// }
-
-// class PasswordFailureState extends RegisterClassState {
-//   final String message;
-
-//   PasswordFailureState({required this.message});
-// }

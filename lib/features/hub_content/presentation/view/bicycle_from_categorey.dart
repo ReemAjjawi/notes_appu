@@ -91,9 +91,9 @@ Widget _buildText2() {
 
 Widget buildListView(hubId, hubIdto, double screenHeight, double screenWidth) {
   return BlocConsumer<HubContentsBloc, HubContentsClassState>(
-      listener: (context, state) {
+      listener: (context, state) async {
     if (state is FailureState) {
-      QuickAlert.show(
+    await  QuickAlert.show(
         context: context,
         type: QuickAlertType.error,
         title: 'Error',
@@ -103,6 +103,15 @@ Widget buildListView(hubId, hubIdto, double screenHeight, double screenWidth) {
     } else if (state is LoadingState) {
       QuickAlert.show(context: context, type: QuickAlertType.loading);
     }
+    else   if (state is EmptyFailureState) {
+    await  QuickAlert.show(
+        context: context,
+        type: QuickAlertType.error,
+        title: 'Error',
+        text: state.message,
+      );
+      Navigator.pushNamed(context, '/LocationScreen');
+    } 
   }, builder: (context, state) {
     if (state is Success) {
       return ListView.builder(
@@ -185,10 +194,8 @@ Widget buildListView(hubId, hubIdto, double screenHeight, double screenWidth) {
           );
         },
       );
-    } else if (state is LoadingState) {
-      return const Center();
-    } else {
-      return Text((state as FailureState).message);
+    } else  {
+      return SizedBox();
     }
   });
 }

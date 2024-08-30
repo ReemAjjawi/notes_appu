@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quickalert/quickalert.dart';
 
 import '../../../../core/helper/build_app_bar.dart';
 import '../../../../core/helper/indicator.dart';
@@ -74,8 +75,20 @@ Widget _buildGridView(
     {'iconPath': AssetsManager.cycleImage, 'label': StringsManager.CYCLE},
     {'iconPath': AssetsManager.taxiImage, 'label': StringsManager.TAXI},
   ];
-  return BlocBuilder<CategoryBloc, CategoriesClassState>(
-    builder: (context, state) {
+  return BlocConsumer<CategoryBloc, CategoriesClassState>(
+      listener: (context, state) async {
+    if (state is FailureState) {
+    await  QuickAlert.show(
+        context: context,
+        type: QuickAlertType.error,
+        title: 'Error',
+        text: state.message,
+      );
+      Navigator.pushNamed(context, '/CategoriesScreen');
+    } else if (state is LoadingState) {
+      QuickAlert.show(context: context, type: QuickAlertType.loading);
+    }
+   },  builder: (context, state) {
       if (state is Success) {
         return Expanded(
           child: Padding(
@@ -127,10 +140,8 @@ Widget _buildGridView(
             ),
           ),
         );
-      } else if (state is FailureState) {
-        return Text(state.message.toString());
       } else {
-        return const Indicator();
+        return const Center();
       }
     },
   );

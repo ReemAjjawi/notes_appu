@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quickalert/quickalert.dart';
 
 import '../../../../core/helper/build_app_bar.dart';
 import '../../../../core/helper/indicator.dart';
@@ -90,7 +91,21 @@ Widget _buildListView(
       'name': StringsManager.JAGUARSILBER
     },
   ];
-  return BlocBuilder<BicycleBloc, BicyclesClassState>(
+  return BlocConsumer<BicycleBloc, BicyclesClassState>(
+      listener: (context, state) async {
+    if (state is FailureState) {
+    await  QuickAlert.show(
+        context: context,
+        type: QuickAlertType.error,
+        title: 'Error',
+        text: state.message,
+      );
+      Navigator.pushNamed(context, '/CategoriesScreen');
+    } else if (state is LoadingState) {
+      QuickAlert.show(context: context, type: QuickAlertType.loading);
+    }
+   
+  },
     builder: (context, state) {
       if (state is Success) {
         return Expanded(
@@ -158,10 +173,8 @@ Widget _buildListView(
             },
           ),
         );
-      } else if (state is FailureState) {
-        return Text(state.message);
       } else {
-        return const Center(child: Indicator());
+        return const Center();
       }
     },
   );

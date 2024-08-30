@@ -5,32 +5,32 @@ sealed class RegisterClassState {}
 
 final class InitialState extends RegisterClassState {}
 
-class RegisterSuccessState extends RegisterClassState {
+class RegisterSuccessState extends RegisterClassState {}
 
-}
 class LoadingState extends RegisterClassState {}
 
 class FailureState extends RegisterClassState {
-   final String? message;
+  final String? message;
 
-   FailureState({required this.message});
+  FailureState({required this.message});
 }
-
 
 class FailurePhoneState extends RegisterClassState {
-   final String? message;
+  final String? message;
 
-   FailurePhoneState({required this.message});
-
+  FailurePhoneState({required this.message});
 }
 
+class internetPhoneState extends RegisterClassState {
+  final String? message;
+
+  internetPhoneState({required this.message});
+}
 
 class FailureUsernameState extends RegisterClassState {
-   final String? message;
+  final String? message;
 
-   FailureUsernameState({required this.message});
-
-
+  FailureUsernameState({required this.message});
 }
 
 // class UsernameFailureState extends RegisterClassState {

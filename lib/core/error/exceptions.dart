@@ -2,6 +2,8 @@ class ServerException implements Exception {}
 
 class ValidationException implements Exception {}
 
+class InternetException implements Exception {}
+
 class PasswordException implements ValidationException {
   String message;
   PasswordException(this.message);

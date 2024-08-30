@@ -17,12 +17,7 @@ class CategoryBloc extends Bloc<CategoriesClassEvent, CategoriesClassState> {
       failureOrEntity.fold((failure) {
         String message = '';
         switch (failure.runtimeType) {
-          //  case PasswordFailure():
-// emit(FailurePasswordState(message: message));
-          //       break;
-//case UserNameFailure()
-// emit(FailureusernameState(message: message));
-          //       break;
+
           case ServerFailure():
             message = "please try again";
             emit(FailureState(message: message));

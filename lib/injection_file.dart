@@ -6,6 +6,7 @@ import 'package:ride_application/features/authation/domain/usecase/login_use_cas
 import 'package:ride_application/features/authation/domain/usecase/register_use_case.dart';
 import 'package:ride_application/features/authation/presentation/auth_bloc/auth_bloc.dart';
 import 'package:ride_application/features/authation/presentation/login_bloc/login_bloc.dart';
+import 'core/network/network_connection.dart';
 import 'features/categories/data/datasource/remote/categories_service.dart';
 import 'features/categories/data/repository/category_repository_impl.dart';
 import 'features/categories/domain/usecase/bicycle_use_case.dart';
@@ -51,8 +52,12 @@ Future<void> initializeDependencies() async {
   // Dependencies
   sl.registerSingleton<AuthServiceImp>(AuthServiceImp(dio: sl()));
 
-  sl.registerSingleton<RegisterRepoImpl>(
-      RegisterRepoImpl(authServiceImp: sl()));
+  sl.registerSingleton<RegisterRepoImpl>(RegisterRepoImpl(
+    authServiceImp: sl(),
+    // networkConnection: NetworkConnection(
+    //   internetConnectionChecker: sl(),
+    // ),
+  ));
 
   //UseCases
   sl.registerSingleton<RegisterUseCase>(
@@ -155,3 +160,5 @@ Future<void> initializeDependencies() async {
 
   sl.registerFactory<WalletInfoBloc>(() => WalletInfoBloc(sl()));
 }
+
+class InternetConnectionChecker {}

@@ -51,32 +51,27 @@ class CategoriesServiceImp implements CategoriesService {
   @override
   Future<SuccessSituation> getCategories() async {
     print('${AppUrl.baseUrl}/${AppUrl.getAllCategories}');
+    try {
+      Response response = await dio.get(
+          '${AppUrl.baseUrl}/${AppUrl.getAllCategories}',
+          options: HeaderConfig.getHeader(useToken: true));
 
-    Response response = await dio.get(
-        '${AppUrl.baseUrl}/${AppUrl.getAllCategories}',
-        options: HeaderConfig.getHeader(useToken: true));
+      if (response.statusCode == 200) {
+  
+        List<CategoryModel> categories = List.generate(
+          response.data['body'].length,
+          (index) => CategoryModel.fromJson(response.data['body'][index]),
+        );
+        // List<CategoryEntity> categorie =
+        //     categories.map<CategoryEntity>((category) => category).toList();
 
-    if (response.statusCode == 200) {
-      print(response.data['']);
-
-      print("response");
-      print(response);
-      print(response.data);
-      print(response.data['body']);
-      print("response.data['body']");
-
-      List<CategoryModel> categories = List.generate(
-        response.data['body'].length,
-        (index) => CategoryModel.fromJson(response.data['body'][index]),
-      );
-      // List<CategoryEntity> categorie =
-      //     categories.map<CategoryEntity>((category) => category).toList();
-
-      return DataSuccessList(data: categories);
-    } else if (response.statusCode == 403) {
-      print(response.data['message']);
-      throw PasswordException(response.data['message']);
-    } else {
+        return DataSuccessList(data: categories);
+      } else {
+        print(response.data['message']);
+        throw ServerException();
+      }
+    } on DioException catch (e) {
+   
       throw ServerException();
     }
   }

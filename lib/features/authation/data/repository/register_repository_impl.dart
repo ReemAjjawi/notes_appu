@@ -7,30 +7,37 @@ import 'package:ride_application/features/authation/data/model/login_model.dart'
 import 'package:ride_application/features/authation/data/model/user_model.dart';
 import 'package:ride_application/features/authation/domain/repository/register_repository.dart';
 
+import '../../../../core/network/network_connection.dart';
+
 class RegisterRepoImpl implements RegisterRepo {
   AuthServiceImp authServiceImp;
   //LocalArticleDataSource localArticleDataSource;
   // NetworkConnection networkConnection;
   RegisterRepoImpl({
     required this.authServiceImp,
+    // required this.networkConnection,
   });
 
   @override
   Future<Either<Failures, SuccessSituation>> Register(UserModel user) async {
     print('==========================================================');
-    try {
-      SuccessSituation registerDone = await authServiceImp.Register(user);
+    // print(await networkConnection.isConnected);
+    // if (await networkConnection.isConnected) {
+      try {
+        SuccessSituation registerDone = await authServiceImp.Register(user);
 
-      return Right(registerDone);
-    } on ServerException {
-      return Left(ServerFailure());
-    } on PhoneException catch (e) {
-      
-      return Left(PhoneFailure(e.message));
-    } on UsernameException catch (e) {
-      return Left(UserNameFailure(e.message));
-    }
-    }
+        return Right(registerDone);
+      } on ServerException {
+        return Left(ServerFailure());
+      } on PhoneException catch (e) {
+        return Left(PhoneFailure(e.message));
+      } on UsernameException catch (e) {
+        return Left(UserNameFailure(e.message));
+      }
+    // } else {
+    //     return Left(InternetFailure());
+    // }
+  }
 
   Future<Either<Failures, SuccessSituation>> LogIn(LogInModel logn) async {
     print('==========================================================');
