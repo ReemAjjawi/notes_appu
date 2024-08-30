@@ -25,6 +25,7 @@ import '../../../features/map/presentation/view/map_screen.dart';
 import '../../../features/request_rent/presentation/view/Reservation1_screen.dart';
 import '../../../features/request_rent/presentation/view/Reservation_screen.dart';
 import '../../../features/thank_you/thank_you_screen.dart';
+import '../../../features/wallet/presentation/view/create_wallet_screen.dart';
 import '../../../features/wallet/wallet_screen.dart';
 
 class AppRoutes {
@@ -35,7 +36,7 @@ class AppRoutes {
         String? token = box.get('token');
 
         if (token != null) {
-          return _materialRoute(CategoriesScreen());
+          return _materialRoute(CreateWalletScreen());
         } else {
           return _materialRoute(SignUpScreen());
         }
@@ -80,18 +81,18 @@ class AppRoutes {
       case '/LoginScreen':
         return _materialRoute(LoginScreen());
 
- case '/AddMoney':
-        return _materialRoute(AddMoney(code: settings.arguments as String));
+      case '/CreateWalletScreen':
+        return _materialRoute(CreateWalletScreen());
 
+      case '/AddMoneyScreen':
+        return _materialRoute(
+            AddMoneyScreen(code: settings.arguments as String));
 
-      case '/WalletCodes':
-        return _materialRoute(WalletCodes());
+      // case '/WalletCodes':
+      //   return _materialRoute(WalletScreen());
 
       case '/WalletScreen':
         return _materialRoute(WalletScreen());
-
-      // case '/WalletInfoScreen':
-      //   return _materialRoute(WalletInfoScreen());
 
       case '/CategoriesScreen':
         return _materialRoute(const CategoriesScreen());

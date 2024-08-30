@@ -39,7 +39,7 @@ class HubServiceImp extends CoreService {
       print(response.data['message']);
       throw PasswordException(response.data['message']);
     } else {
-      throw ServerException();
+      throw ServerException(message: "try again");
     }
   }
 }

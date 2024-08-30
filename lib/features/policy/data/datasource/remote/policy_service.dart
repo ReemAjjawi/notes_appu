@@ -34,7 +34,7 @@ class policyServiceImp extends policyService {
       print(data);
       return DataSuccessObject(data: data);
     } else {
-      throw ServerException();
+      throw ServerException(message: "try again");
     }
   }
 
@@ -50,7 +50,7 @@ class policyServiceImp extends policyService {
 
       return DataSuccess();
     }  else {
-      throw ServerException();
+      throw ServerException(message: "try again");
     }
   }
 }

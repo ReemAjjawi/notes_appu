@@ -4,9 +4,6 @@ import 'package:ride_application/core/success/success.dart';
 import '../../../../../config/app_url.dart';
 import '../../../../../config/header_config.dart';
 import '../../../../../core/error/exceptions.dart';
-
-import '../../../domain/entity/bicycle_entity.dart';
-import '../../../domain/entity/category_entity.dart';
 import '../../model/bicycle_model.dart';
 import '../../model/category_model.dart';
 
@@ -44,7 +41,7 @@ class CategoriesServiceImp implements CategoriesService {
       //     bicycles.map<BicycleEntity>((bicycle) => bicycle).toList();
       return DataSuccessList(data: bicycles);
     } else {
-      throw ServerException();
+      throw ServerException(message:"try again");
     }
   }
 
@@ -55,9 +52,9 @@ class CategoriesServiceImp implements CategoriesService {
       Response response = await dio.get(
           '${AppUrl.baseUrl}/${AppUrl.getAllCategories}',
           options: HeaderConfig.getHeader(useToken: true));
-
+      print('${AppUrl.baseUrl}/${AppUrl.getAllCategories}');
+      print(response);
       if (response.statusCode == 200) {
-  
         List<CategoryModel> categories = List.generate(
           response.data['body'].length,
           (index) => CategoryModel.fromJson(response.data['body'][index]),
@@ -68,11 +65,15 @@ class CategoriesServiceImp implements CategoriesService {
         return DataSuccessList(data: categories);
       } else {
         print(response.data['message']);
-        throw ServerException();
+        print("error in else ");
+        throw ServerException(message:"try again");
       }
     } on DioException catch (e) {
-   
-      throw ServerException();
+      print("iam in catch");
+      print(e.response!.data);
+      print("hi");
+      print((e.response!.statusCode));
+      throw ServerException(message:e.response!.data );
     }
   }
 }

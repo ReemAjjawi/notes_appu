@@ -8,8 +8,9 @@ import 'wallet_creation_state.dart';
 class WalletCreationBloc
     extends Bloc<WalletCreationClassEvent, WalletCreationClassState> {
   final WalletCreationUseCase walletCreationUseCase;
-  WalletCreationBloc(this.walletCreationUseCase) : super(LoadingState()) {
+  WalletCreationBloc(this.walletCreationUseCase) : super(InitialState()) {
     on<WalletCreationEvent>((event, emit) async {
+      emit(LoadingState());
       final failureOrEntity = await walletCreationUseCase.call(event.wallet);
       print("iam in bloc ");
       print(event.wallet);

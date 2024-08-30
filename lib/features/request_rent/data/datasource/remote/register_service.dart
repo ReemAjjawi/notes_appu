@@ -30,9 +30,9 @@ class ReservationServiceImp implements ReservationService {
       return DataSuccess();
     } else if (response.statusCode == 403) {
       print(response.data['message']);
-      throw ServerException();
+      throw ServerException(message: "try again");
     } else {
-      throw ServerException();
+      throw ServerException(message: "try again");
     }
   }
 }

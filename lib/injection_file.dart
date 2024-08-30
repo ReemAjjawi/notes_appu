@@ -6,9 +6,14 @@ import 'package:ride_application/features/authation/domain/usecase/login_use_cas
 import 'package:ride_application/features/authation/domain/usecase/register_use_case.dart';
 import 'package:ride_application/features/authation/presentation/auth_bloc/auth_bloc.dart';
 import 'package:ride_application/features/authation/presentation/login_bloc/login_bloc.dart';
+import 'package:ride_application/features/get_valid_codes/data/repository/wallet_creation_repository_impl.dart';
 import 'package:ride_application/features/wallet/data/datasource/remote/create_wallet_service.dart';
 import 'package:ride_application/features/wallet/data/repository/wallet_creation_repository_impl.dart';
 import 'package:ride_application/features/wallet/presentation/bloc/wallet_creation_bloc/wallet_creation_bloc.dart';
+import 'features/add_money/data/datasource/remote/add_money_service.dart';
+import 'features/add_money/data/repository/add_money_repository_impl.dart';
+import 'features/add_money/domain/usecase/add_money__use_case.dart';
+import 'features/add_money/presentation/bloc/add_money_bloc/add_money_bloc.dart';
 import 'features/categories/data/datasource/remote/categories_service.dart';
 import 'features/categories/data/repository/category_repository_impl.dart';
 import 'features/categories/domain/usecase/bicycle_use_case.dart';
@@ -19,6 +24,9 @@ import 'features/changepassword/data/datasource/remote/changepassword_service.da
 import 'features/changepassword/data/repository/changepassword_repository_impl.dart';
 import 'features/changepassword/domain/usecase/changepassword_use_case.dart';
 import 'features/changepassword/presentation/changepassword_bloc/changepassword_bloc.dart';
+import 'features/get_valid_codes/data/datasource/remote/get_wallet_service.dart';
+import 'features/get_valid_codes/domain/usecase/wallet_info_use_case.dart';
+import 'features/get_valid_codes/presentation/bloc/codes_list_bloc.dart';
 import 'features/get_wallet/data/datasource/remote/get_wallet_service.dart';
 import 'features/get_wallet/data/repository/wallet_creation_repository_impl.dart';
 import 'features/get_wallet/domain/usecase/wallet_info_use_case.dart';
@@ -154,4 +162,28 @@ Future<void> initializeDependencies() async {
       WalletInfoUseCase(walletInfoRepoImp: sl()));
 
   sl.registerFactory<WalletInfoBloc>(() => WalletInfoBloc(sl()));
+
+
+  //-------------------------------------------
+    sl.registerSingleton<CodeInfoServiceImp>(CodeInfoServiceImp(dio: sl()));
+
+  sl.registerSingleton<CodeInfoRepoImp>(
+      CodeInfoRepoImp(codeInfoServiceImp: sl()));
+
+  sl.registerSingleton<CodeInfoUseCase>(
+      CodeInfoUseCase(codeInfoRepoImp: sl()));
+
+  sl.registerFactory<CodesListBloc>(() => CodesListBloc(sl()));
+  
+  //-------------------------------------------
+    sl.registerSingleton<AddMoneyServiceImp>(AddMoneyServiceImp(dio: sl()));
+
+  sl.registerSingleton<AddMoneyRepoImpl>(
+      AddMoneyRepoImpl(addMoneyServiceImp: sl()));
+
+  sl.registerSingleton<AddMoneyUseCase>(
+      AddMoneyUseCase(addMoneyRepoImpl: sl()));
+
+  sl.registerFactory<AddMoneyBloc>(() => AddMoneyBloc(sl()));
+
 }

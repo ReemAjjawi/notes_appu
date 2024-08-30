@@ -28,7 +28,7 @@ class changepasswordServiceImp extends CoreService {
       print("Change password done successfully");
       return DataSuccess();
     } else {
-      throw ServerException();
+      throw ServerException(message: "try again");
     }
   }
 }

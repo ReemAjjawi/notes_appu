@@ -11,13 +11,13 @@ class CategoryBloc extends Bloc<CategoriesClassEvent, CategoriesClassState> {
   final CategoryUseCase categoryUseCase;
   CategoryBloc(this.categoryUseCase) : super(LoadingState()) {
     on<GetCategoryEvent>((event, emit) async {
+      print("Hi bloc");
       // emit(LoadingState());
       final failureOrEntity = await categoryUseCase.call();
 
       failureOrEntity.fold((failure) {
         String message = '';
         switch (failure.runtimeType) {
-
           case ServerFailure():
             message = "please try again";
             emit(FailureState(message: message));

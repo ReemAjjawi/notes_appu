@@ -45,7 +45,7 @@ class CategoriesServiceImp implements CategoriesService {
     } on DioException catch (e) {
       print(e.response?.data["messasge"]);
     }
-    throw ServerException();
+    throw ServerException(message: "try again");
   }
 
   @override
@@ -81,7 +81,7 @@ class CategoriesServiceImp implements CategoriesService {
       print(response.data['message']);
       throw PasswordException(response.data['message']);
     } else {
-      throw ServerException();
+      throw ServerException(message: "try again");
     }
   }
 }

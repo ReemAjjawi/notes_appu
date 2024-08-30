@@ -27,6 +27,7 @@ class CreateWalletScreen extends StatelessWidget {
       create: (context) => WalletCreationBloc(sl()),
       child: Builder(builder: (context) {
         return Scaffold(
+          backgroundColor: const Color.fromARGB(255, 44, 43, 38),
           appBar: buildAppBar(
             leadingg: Container(
               width: screenWidth * 0.1,
@@ -44,166 +45,167 @@ class CreateWalletScreen extends StatelessWidget {
             // ],
           ),
           body: BlocConsumer<WalletCreationBloc, WalletCreationClassState>(
-            listener: (context, state) async{
-               if (state is FailureState) {
-                           QuickAlert.show(
-                           context: context,
-                            type: QuickAlertType.error,
-                            title: 'Error',
-                            text: state.message,
-                          );
+            listener: (context, state) async {
+              if (state is FailureState) {
+                QuickAlert.show(
+                  context: context,
+                  type: QuickAlertType.error,
+                  title: 'Error',
+                  text: state.message,
+                );
 
-                         Navigator.pushNamed(context, '/WalletScreen');
-                        } else if (state is SuccessState) {
-                           QuickAlert.show(
-                            context: context,
-                            type: QuickAlertType.success,
-                            title: 'Success',
-                            text: 'create wallet done successfully!',
-                          
-                          );
-                          Navigator.pushNamed(context, '/AddAmountScreen');
-                        } else if (state is LoadingState) {
-                          QuickAlert.show(
-                            context: context,
-                            type: QuickAlertType.loading,
-                          );
-                        } 
-                      
+                Navigator.pushNamed(context, '/CreateWalletScreen');
+              } else if (state is SuccessState) {
+                QuickAlert.show(
+                  context: context,
+                  type: QuickAlertType.success,
+                  title: 'Success',
+                  text: 'create wallet done successfully!',
+                );
+                Navigator.pushNamed(context, '/WalletScreen');
+              } else if (state is LoadingState) {
+                QuickAlert.show(
+                  context: context,
+                  type: QuickAlertType.loading,
+                );
+              }
             },
             builder: (context, state) {
               if (state is InitialState) {
-                return Column(
-                  children: [
-                    SizedBox(
-                      width: screenWidth * 0.92,
-                      height: screenHeight / 12,
-                      child: TextFormField(
-                        controller: pass,
-                        decoration: InputDecoration(
-                          hintStyle: TextStyle(
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: screenWidth * 0.92,
+                        height: screenHeight / 12,
+                        child: TextFormField(
+                          controller: pass,
+                          decoration: InputDecoration(
+                            hintStyle: TextStyle(
+                              color: ColorManager.hintTextColor,
+                              fontSize: screenHeight * 0.02,
+                            ),
+                            border: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: ColorManager.hintTextColor),
+                            ),
+                            enabledBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: ColorManager.hintTextColor),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: ColorManager.hintTextColor),
+                            ),
+                            errorMaxLines: 1,
+                            errorStyle: const TextStyle(height: 0.4),
+                            contentPadding: EdgeInsets.symmetric(
+                              vertical: screenHeight * 0.02,
+                              horizontal: screenWidth * 0.04,
+                            ),
+                          ),
+                          style: TextStyle(
                             color: ColorManager.hintTextColor,
                             fontSize: screenHeight * 0.02,
                           ),
-                          border: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: ColorManager.hintTextColor),
-                          ),
-                          enabledBorder: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: ColorManager.hintTextColor),
-                          ),
-                          focusedBorder: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: ColorManager.hintTextColor),
-                          ),
-                          errorMaxLines: 1,
-                          errorStyle: const TextStyle(height: 0.4),
-                          contentPadding: EdgeInsets.symmetric(
-                            vertical: screenHeight * 0.02,
-                            horizontal: screenWidth * 0.04,
-                          ),
-                        ),
-                        style: TextStyle(
-                          color: ColorManager.hintTextColor,
-                          fontSize: screenHeight * 0.02,
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      width: screenWidth * 0.92,
-                      height: screenHeight / 12,
-                      child: TextFormField(
-                        controller: conf,
-                        decoration: InputDecoration(
-                          hintStyle: TextStyle(
+                      SizedBox(
+                        width: screenWidth * 0.92,
+                        height: screenHeight / 12,
+                        child: TextFormField(
+                          controller: conf,
+                          decoration: InputDecoration(
+                            hintStyle: TextStyle(
+                              color: ColorManager.hintTextColor,
+                              fontSize: screenHeight * 0.02,
+                            ),
+                            border: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: ColorManager.hintTextColor),
+                            ),
+                            enabledBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: ColorManager.hintTextColor),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: ColorManager.hintTextColor),
+                            ),
+                            errorMaxLines: 1,
+                            errorStyle: const TextStyle(height: 0.4),
+                            contentPadding: EdgeInsets.symmetric(
+                              vertical: screenHeight * 0.02,
+                              horizontal: screenWidth * 0.04,
+                            ),
+                          ),
+                          style: TextStyle(
                             color: ColorManager.hintTextColor,
                             fontSize: screenHeight * 0.02,
                           ),
-                          border: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: ColorManager.hintTextColor),
-                          ),
-                          enabledBorder: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: ColorManager.hintTextColor),
-                          ),
-                          focusedBorder: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: ColorManager.hintTextColor),
-                          ),
-                          errorMaxLines: 1,
-                          errorStyle: const TextStyle(height: 0.4),
-                          contentPadding: EdgeInsets.symmetric(
-                            vertical: screenHeight * 0.02,
-                            horizontal: screenWidth * 0.04,
-                          ),
-                        ),
-                        style: TextStyle(
-                          color: ColorManager.hintTextColor,
-                          fontSize: screenHeight * 0.02,
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      width: screenWidth * 0.92,
-                      height: screenHeight / 12,
-                      child: TextFormField(
-                        controller: str,
-                        decoration: InputDecoration(
-                          hintStyle: TextStyle(
+                      SizedBox(
+                        width: screenWidth * 0.92,
+                        height: screenHeight / 12,
+                        child: TextFormField(
+                          controller: str,
+                          decoration: InputDecoration(
+                            hintStyle: TextStyle(
+                              color: ColorManager.hintTextColor,
+                              fontSize: screenHeight * 0.02,
+                            ),
+                            border: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: ColorManager.hintTextColor),
+                            ),
+                            enabledBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: ColorManager.hintTextColor),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: ColorManager.hintTextColor),
+                            ),
+                            errorMaxLines: 1,
+                            errorStyle: const TextStyle(height: 0.4),
+                            contentPadding: EdgeInsets.symmetric(
+                              vertical: screenHeight * 0.02,
+                              horizontal: screenWidth * 0.04,
+                            ),
+                          ),
+                          style: TextStyle(
                             color: ColorManager.hintTextColor,
                             fontSize: screenHeight * 0.02,
                           ),
-                          border: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: ColorManager.hintTextColor),
-                          ),
-                          enabledBorder: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: ColorManager.hintTextColor),
-                          ),
-                          focusedBorder: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: ColorManager.hintTextColor),
-                          ),
-                          errorMaxLines: 1,
-                          errorStyle: const TextStyle(height: 0.4),
-                          contentPadding: EdgeInsets.symmetric(
-                            vertical: screenHeight * 0.02,
-                            horizontal: screenWidth * 0.04,
-                          ),
-                        ),
-                        style: TextStyle(
-                          color: ColorManager.hintTextColor,
-                          fontSize: screenHeight * 0.02,
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: AppButton(
-                        text: "Create Wallet",
-                        onPressed: () {
-                          Wallet wallet = Wallet(
-                              securityCode: pass.text,
-                              confirmSecurityCode: conf.text,
-                              bankAccount: str.text);
-                          context.read<WalletCreationBloc>().add(
-                                WalletCreationEvent(wallet: wallet),
-                              );
-                        },
-                        backgroundColor: ColorManager.whiteColor,
-                        width: screenWidth * 0.44,
-                        height: screenHeight / 15,
-                        textStyle: StylesManager.whiteButtonStyle,
-                        hasIcon: false,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: AppButton(
+                          text: "Create Wallet",
+                          onPressed: () {
+                            Wallet wallet = Wallet(
+                                securityCode: pass.text,
+                                confirmSecurityCode: conf.text,
+                                bankAccount: str.text);
+                            context.read<WalletCreationBloc>().add(
+                                  WalletCreationEvent(wallet: wallet),
+                                );
+                          },
+                          backgroundColor: ColorManager.whiteColor,
+                          width: screenWidth * 0.44,
+                          height: screenHeight / 15,
+                          textStyle: StylesManager.whiteButtonStyle,
+                          hasIcon: false,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 );
               } else {
-           return     SizedBox();
+                return const SizedBox();
               }
             },
           ),

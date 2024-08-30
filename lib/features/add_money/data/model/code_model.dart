@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import '../../domain/entity/wallet_entity.dart';
+import '../../domain/entity/code_entity.dart';
 
 class Code extends CodeEntity{
   Code({

@@ -1,24 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quickalert/quickalert.dart';
 import 'package:ride_application/core/helper/build_app_bar.dart';
 import 'package:ride_application/core/resources/managers/assets_manager.dart';
 import 'package:ride_application/core/resources/managers/colors_manager.dart';
 import 'package:ride_application/core/resources/managers/strings_manager.dart';
 import 'package:ride_application/core/resources/managers/styles_manager.dart';
-import 'package:ride_application/core/widgets/app_button.dart';
 import 'package:ride_application/core/widgets/app_list_tile.dart';
 import 'package:ride_application/core/widgets/app_text_field.dart';
+import 'package:ride_application/features/add_money/presentation/bloc/add_money_bloc/add_money_bloc.dart';
 import 'package:ride_application/main.dart';
 
-class AddMoney extends StatelessWidget {
-   AddMoney({super.key, required this.code});
+import '../../../../core/widgets/app_button.dart';
+import '../../../../injection_file.dart';
+import '../bloc/add_money_bloc/add_money_event.dart';
+import '../bloc/add_money_bloc/add_money_state.dart';
+
+class AddMoneyScreen extends StatelessWidget {
+  AddMoneyScreen({super.key, required this.code});
   String code;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: _buildAppBar(context),
-        body: _buildBody(screenWidth, screenHeight,code),
-      ),
+    return BlocProvider(
+      create: (context) => AddMoneyBloc(sl()),
+      child: Builder(builder: (context) {
+        return Scaffold(
+          appBar: _buildAppBar(context),
+          body: _buildBody(screenWidth, screenHeight, code),
+        );
+      }),
     );
   }
 
@@ -79,18 +89,64 @@ class AddMoney extends StatelessWidget {
     );
   }
 
-  Widget _buildBody(double screenWidth, double screenHeight,String code) {
+  Widget _buildBody(double screenWidth, double screenHeight, String code) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       _buildSizeBox2(screenHeight),
       _buildTextFormField(code),
       _buildSizeBox(screenHeight),
-      _buildTextButton(),
+      _buildTextButton(code),
       _buildSizeBox2(screenHeight),
       _buildText(),
       _buildSizeBox(screenHeight),
       _buildListView(screenHeight, screenWidth),
       _buildSizeBox2(screenHeight),
       _buildSizeBox2(screenHeight),
+      BlocConsumer<AddMoneyBloc, AddMoneyClassState>(
+        listener: (context, state) async {
+          if (state is FailureState) {
+            await QuickAlert.show(
+              context: context,
+              type: QuickAlertType.error,
+              title: 'Error',
+              text: state.message,
+            );
+
+            Navigator.pushNamed(context, '/AddMoneyScreen');
+          }
+       else   if (state is SuccessState) {
+           
+            Navigator.pushNamed(context, '/ThankYouScreen' ,arguments: state.model);
+          } else if (state is LoadingState) {
+            QuickAlert.show(
+              context: context,
+              type: QuickAlertType.loading,
+            );
+          }
+        },
+        builder: (context, state) {
+          if (state is InitialState) {
+            return SizedBox(
+              width: double.infinity,
+              child: AppButton(
+                text: StringsManager.CONFIRM,
+                onPressed: () {
+                  // context.read<AddMoneyBloc>().add(
+                  //       AddMoneyEvent(code:code),
+                  //
+                  //     );
+                },
+                backgroundColor: ColorManager.primaryColor,
+                width: screenWidth * 0.88,
+                height: screenHeight / 15,
+                textStyle: StylesManager.greenButtonStyle,
+                hasIcon: false,
+              ),
+            );
+          } else {
+            return SizedBox();
+          }
+        },
+      ),
     ]);
   }
 }
@@ -119,30 +175,17 @@ Widget _buildText() {
   );
 }
 
-Widget _buildTextButton() {
+Widget _buildTextButton(String code) {
   return Align(
     alignment: Alignment.topRight,
     child: TextButton(
-      onPressed: () {},
+      onPressed: () {
+        print(code);
+      },
       child: Text(
         StringsManager.ADDPAYMENTMETHOD,
         style: TextStyle(color: ColorManager.borderColor),
       ),
-    ),
-  );
-}
-
-Widget _buildAppButton() {
-  return SizedBox(
-    width: double.infinity,
-    child: AppButton(
-      text: StringsManager.CONFIRM,
-      onPressed: wiee,
-      backgroundColor: ColorManager.primaryColor,
-      width: screenWidth * 0.88,
-      height: screenHeight / 15,
-      textStyle: StylesManager.greenButtonStyle,
-      hasIcon: false,
     ),
   );
 }

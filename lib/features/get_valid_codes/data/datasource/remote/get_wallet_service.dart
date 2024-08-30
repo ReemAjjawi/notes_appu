@@ -42,6 +42,6 @@ class CodeInfoServiceImp implements CodeInfoService {
             
 
     }
-    throw ServerException();
+    throw ServerException(message: "try again");
   }
 }

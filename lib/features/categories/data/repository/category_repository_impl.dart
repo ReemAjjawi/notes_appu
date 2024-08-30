@@ -6,12 +6,9 @@ import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 
 import '../../../../core/success/success.dart';
-import '../../domain/entity/bicycle_entity.dart';
-import '../../domain/entity/category_entity.dart';
+
 import '../../domain/repository/category_repository.dart';
 import '../datasource/remote/categories_service.dart';
-import '../model/bicycle_model.dart';
-import '../model/category_model.dart';
 
 class CategoryRepoImpl implements CategoryRepo {
   CategoriesServiceImp categoriesServiceImp;

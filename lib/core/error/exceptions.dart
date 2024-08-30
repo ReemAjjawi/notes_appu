@@ -1,4 +1,7 @@
-class ServerException implements Exception {}
+class ServerException implements Exception {
+  ServerException({required this.message});
+  String message;
+}
 
 class ValidationException implements Exception {}
 
@@ -6,6 +9,11 @@ class PasswordException implements ValidationException {
   String message;
   PasswordException(this.message);
 }
+class CodeException implements ValidationException {
+  String message;
+  CodeException(this.message);
+}
+
 
 class PhoneException implements ValidationException {
   String? message;

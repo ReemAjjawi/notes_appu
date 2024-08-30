@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 
 import '../../../../../config/app_url.dart';
@@ -21,14 +20,14 @@ class WalletCreationServiceImp implements WalletCreationService {
   Future<SuccessSituation> createWallet(Wallet walletModel) async {
     try {
       print('${AppUrl.baseUrl}/${AppUrl.createWallet}');
-    print(walletModel);
+      print(walletModel);
       Response response = await dio.post(
           '${AppUrl.baseUrl}/${AppUrl.createWallet}',
           data: walletModel.toMap(),
           options: HeaderConfig.getHeader(useToken: true));
       print('${AppUrl.baseUrl}/${AppUrl.createWallet}');
       print(walletModel);
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         print(response.data);
 
         return DataSuccess();
@@ -36,6 +35,6 @@ class WalletCreationServiceImp implements WalletCreationService {
     } on DioException catch (e) {
       print(e.message!);
     }
-    throw ServerException();
+    throw ServerException(message: "try again");
   }
 }
