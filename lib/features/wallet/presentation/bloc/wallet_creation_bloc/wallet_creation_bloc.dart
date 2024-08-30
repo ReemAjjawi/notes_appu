@@ -23,7 +23,7 @@ class WalletCreationBloc
         }
       }, (successSituation) {
         emit(
-          Success(),
+          SuccessState(),
         );
       });
     });

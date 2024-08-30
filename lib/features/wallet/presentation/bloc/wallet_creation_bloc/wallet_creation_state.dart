@@ -4,7 +4,10 @@ import 'package:flutter/foundation.dart';
 @immutable
 sealed class WalletCreationClassState {}
 
-class Success extends WalletCreationClassState {
+class SuccessState extends WalletCreationClassState {
+
+}
+class InitialState extends WalletCreationClassState {
 
 }
 

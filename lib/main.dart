@@ -1,6 +1,3 @@
-// import 'package:firebase_auth/firebase_auth.dart';
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';

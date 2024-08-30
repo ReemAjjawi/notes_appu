@@ -6,9 +6,6 @@ import 'package:ride_application/features/authation/domain/usecase/login_use_cas
 import 'package:ride_application/features/authation/domain/usecase/register_use_case.dart';
 import 'package:ride_application/features/authation/presentation/auth_bloc/auth_bloc.dart';
 import 'package:ride_application/features/authation/presentation/login_bloc/login_bloc.dart';
-import 'package:ride_application/features/wallet/data/datasource/remote/create_wallet_service.dart';
-import 'package:ride_application/features/wallet/data/repository/wallet_creation_repository_impl.dart';
-import 'package:ride_application/features/wallet/presentation/bloc/wallet_creation_bloc/wallet_creation_bloc.dart';
 import 'features/categories/data/datasource/remote/categories_service.dart';
 import 'features/categories/data/repository/category_repository_impl.dart';
 import 'features/categories/domain/usecase/bicycle_use_case.dart';
@@ -22,7 +19,7 @@ import 'features/changepassword/presentation/changepassword_bloc/changepassword_
 import 'features/get_wallet/data/datasource/remote/get_wallet_service.dart';
 import 'features/get_wallet/data/repository/wallet_creation_repository_impl.dart';
 import 'features/get_wallet/domain/usecase/wallet_info_use_case.dart';
-import 'features/get_wallet/presentation/bloc_file/wallet_info_bloc.dart';
+import 'features/get_wallet/presentation/bloc/wallet_info_bloc.dart';
 import 'features/hub_content/data/datasource/remote/hub_contents_service.dart';
 import 'features/hub_content/data/repository/hub_contents_repository_impl.dart';
 import 'features/hub_content/domain/usecase/get_hub_contents__use_case.dart';
@@ -41,7 +38,10 @@ import 'features/request_rent/data/datasource/remote/register_service.dart';
 import 'features/request_rent/data/repository/register_repository_impl.dart';
 import 'features/request_rent/domain/usecase/register_use_case.dart';
 import 'features/request_rent/presentation/Reservation_bloc/Reservation_bloc.dart';
+import 'features/wallet/data/datasource/remote/create_wallet_service.dart';
+import 'features/wallet/data/repository/wallet_creation_repository_impl.dart';
 import 'features/wallet/domain/usecase/wallet_creation_use_case.dart';
+import 'features/wallet/presentation/bloc/wallet_creation_bloc/wallet_creation_bloc.dart';
 
 final sl = GetIt.instance;
 

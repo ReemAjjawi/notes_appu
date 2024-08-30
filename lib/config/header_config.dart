@@ -13,8 +13,7 @@ class HeaderConfig {
       return Options(
         headers: {
           "accept": "*/*",
-          "Authorization":
-              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwMzI4MjkxNzU2IiwiaWF0IjoxNzI0Njk4Mzc1LCJleHAiOjE3MjQ3ODQ3NzV9.QJRGEpEj23MkV3laOv6w3SflUXibqQ38Oz1DzscoJGw"
+          "Authorization": "Bearer ${box.get('token')}"
         },
       );
     } else {

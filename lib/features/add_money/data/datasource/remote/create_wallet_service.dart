@@ -1,33 +1,31 @@
 
 import 'package:dio/dio.dart';
-
 import '../../../../../config/app_url.dart';
 import '../../../../../config/header_config.dart';
 import '../../../../../core/error/exceptions.dart';
 import '../../../../../core/success/success.dart';
 import '../../model/wallet_model.dart';
 
-abstract class WalletCreationService {
-  Future<SuccessSituation> createWallet(Wallet walletModel);
+abstract class AddMoneyService {
+  Future<SuccessSituation> addCode(Code codeModel);
 }
 
-class WalletCreationServiceImp implements WalletCreationService {
+class AddMoneyServiceImp implements AddMoneyService {
   Dio dio;
-  WalletCreationServiceImp({
+  AddMoneyServiceImp({
     required this.dio,
   });
 
   @override
-  Future<SuccessSituation> createWallet(Wallet walletModel) async {
+  Future<SuccessSituation>  addCode(Code codeModel) async {
     try {
       print('${AppUrl.baseUrl}/${AppUrl.createWallet}');
-    print(walletModel);
+    print(codeModel);
       Response response = await dio.post(
-          '${AppUrl.baseUrl}/${AppUrl.createWallet}',
-          data: walletModel.toMap(),
+          '${AppUrl.baseUrl}/${AppUrl.addMoneyToWallet}',
+          data: codeModel.toMap(),
           options: HeaderConfig.getHeader(useToken: true));
-      print('${AppUrl.baseUrl}/${AppUrl.createWallet}');
-      print(walletModel);
+     
       if (response.statusCode == 200) {
         print(response.data);
 

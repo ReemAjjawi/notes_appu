@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/error/failures.dart';
+import '../../../../wallet/domain/usecase/wallet_creation_use_case.dart';
 import '../../../domain/usecase/wallet_creation_use_case.dart';
 import 'wallet_creation_event.dart';
 import 'wallet_creation_state.dart';

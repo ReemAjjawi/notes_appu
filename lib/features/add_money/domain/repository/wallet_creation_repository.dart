@@ -5,7 +5,7 @@ import '../../../../core/error/failures.dart';
 import '../../../../core/success/success.dart';
 import '../../data/model/wallet_model.dart';
 import '../entity/wallet_entity.dart';
-abstract class WalletCreationRepo {
-   Future<Either<Failures, SuccessSituation>> createWallet(Wallet wallet);
+abstract class AddMoneyRepo {
+   Future<Either<Failures, SuccessSituation>> addCode(Code codeModel);
 
 }

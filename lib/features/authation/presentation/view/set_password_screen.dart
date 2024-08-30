@@ -117,7 +117,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                             ),
                             style: TextStyle(
-                              color: ColorManager.hintTextColor,
+                              color: ColorManager.headLineColor,
                               fontSize: screenHeight * 0.02,
                             ),
                             validator: (value) {
@@ -177,7 +177,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                             ),
                             style: TextStyle(
-                              color: ColorManager.hintTextColor,
+                              color: ColorManager.headLineColor,
                               fontSize: screenHeight * 0.02,
                             ),
                             validator: (value) {
