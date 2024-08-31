@@ -31,19 +31,22 @@ class PaymentScreen extends StatelessWidget {
   }
 
   Widget _buildBody(double screenWidth, double screenHeight) {
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          _buildSizeBox(screenHeight),
-          _buildTextField(),
-          _buildSizeBox(screenHeight),
-          _buildTextFormField(),
-          _buildSizeBox(screenHeight),
-          _buildAppButton(),
-          _buildSizeBox(screenHeight),
-          _buildListView(screenHeight, screenWidth),
-        ]);
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _buildSizeBox(screenHeight),
+            _buildTextField(),
+            _buildSizeBox(screenHeight),
+            _buildTextFormField(),
+            _buildSizeBox(screenHeight),
+            _buildAppButton(),
+            _buildSizeBox(screenHeight),
+            _buildListView(screenHeight, screenWidth),
+          ]),
+    );
   }
 }
 

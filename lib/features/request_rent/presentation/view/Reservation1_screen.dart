@@ -107,7 +107,7 @@ class ReservationtowScreen extends StatelessWidget {
         onPressed: () {
           Navigator.pushNamed(
             context,
-            '/ThankYouScreen',
+            '/WalletScreen',
           );
         },
         backgroundColor: ColorManager.primaryColor,

@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quickalert/quickalert.dart';
@@ -63,19 +61,22 @@ class WalletScreen extends StatelessWidget {
   }
 
   Widget _buildBody(double screenWidth, double screenHeight, bool isPortrait) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        _buildSizeBox(screenHeight),
-        // _buildAppButton(screenWidth, screenHeight),
-        _buildSizeBox(screenHeight),
-        if (isPortrait) _buildRow(screenWidth, screenHeight),
-        if (!isPortrait) _buildRowLandscape(screenWidth, screenHeight),
-        _buildSizeBox(screenHeight),
-        _buildRow2(),
-        _buildSizeBox(screenHeight),
-        _buildListView(screenHeight),
-      ],
+    return Padding(
+      padding: EdgeInsets.all(padding),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          _buildSizeBox(screenHeight),
+          // _buildAppButton(screenWidth, screenHeight),
+          _buildSizeBox(screenHeight),
+          if (isPortrait) _buildRow(screenWidth, screenHeight),
+          if (!isPortrait) _buildRowLandscape(screenWidth, screenHeight),
+          _buildSizeBox(screenHeight),
+          _buildRow2(),
+          _buildSizeBox(screenHeight),
+          _buildListView(screenHeight),
+        ],
+      ),
     );
   }
 
@@ -225,85 +226,85 @@ class WalletScreen extends StatelessWidget {
         'date': StringsManager.TOMORROWATHOUR,
         'price': StringsManager.WELTONNUMBER
       },
-        {
+      {
         'Image': AssetsManager.upImage,
         'name': StringsManager.WELTON,
         'date': StringsManager.TOMORROWATHOUR,
         'price': StringsManager.WELTONNUMBER
       },
-        {
+      {
         'Image': AssetsManager.upImage,
         'name': StringsManager.WELTON,
         'date': StringsManager.TOMORROWATHOUR,
         'price': StringsManager.WELTONNUMBER
       },
-        {
+      {
         'Image': AssetsManager.upImage,
         'name': StringsManager.WELTON,
         'date': StringsManager.TOMORROWATHOUR,
         'price': StringsManager.WELTONNUMBER
       },
-        {
+      {
         'Image': AssetsManager.upImage,
         'name': StringsManager.WELTON,
         'date': StringsManager.TOMORROWATHOUR,
         'price': StringsManager.WELTONNUMBER
       },
-        {
+      {
         'Image': AssetsManager.upImage,
         'name': StringsManager.WELTON,
         'date': StringsManager.TOMORROWATHOUR,
         'price': StringsManager.WELTONNUMBER
       },
-        {
+      {
         'Image': AssetsManager.upImage,
         'name': StringsManager.WELTON,
         'date': StringsManager.TOMORROWATHOUR,
         'price': StringsManager.WELTONNUMBER
       },
-        {
+      {
         'Image': AssetsManager.upImage,
         'name': StringsManager.WELTON,
         'date': StringsManager.TOMORROWATHOUR,
         'price': StringsManager.WELTONNUMBER
       },
-        {
+      {
         'Image': AssetsManager.upImage,
         'name': StringsManager.WELTON,
         'date': StringsManager.TOMORROWATHOUR,
         'price': StringsManager.WELTONNUMBER
       },
-        {
+      {
         'Image': AssetsManager.upImage,
         'name': StringsManager.WELTON,
         'date': StringsManager.TOMORROWATHOUR,
         'price': StringsManager.WELTONNUMBER
       },
-        {
+      {
         'Image': AssetsManager.upImage,
         'name': StringsManager.WELTON,
         'date': StringsManager.TOMORROWATHOUR,
         'price': StringsManager.WELTONNUMBER
       },
-        {
+      {
         'Image': AssetsManager.upImage,
         'name': StringsManager.WELTON,
         'date': StringsManager.TOMORROWATHOUR,
         'price': StringsManager.WELTONNUMBER
       },
-        {
+      {
         'Image': AssetsManager.upImage,
         'name': StringsManager.WELTON,
         'date': StringsManager.TOMORROWATHOUR,
         'price': StringsManager.WELTONNUMBER
       },
-        {
+      {
         'Image': AssetsManager.upImage,
         'name': StringsManager.WELTON,
         'date': StringsManager.TOMORROWATHOUR,
         'price': StringsManager.WELTONNUMBER
       },
-        {
+      {
         'Image': AssetsManager.upImage,
         'name': StringsManager.WELTON,
         'date': StringsManager.TOMORROWATHOUR,
@@ -323,7 +324,7 @@ class WalletScreen extends StatelessWidget {
 
           Navigator.pushNamed(context, '/CreateWalletScreen');
         } else if (state is LoadingStateCodesList) {
-  await        QuickAlert.show(
+          await QuickAlert.show(
             context: context,
             type: QuickAlertType.loading,
           );

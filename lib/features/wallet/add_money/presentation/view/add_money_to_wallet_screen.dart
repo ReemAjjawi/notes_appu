@@ -27,69 +27,72 @@ class AddMoneyScreen extends StatelessWidget {
       child: Builder(builder: (context) {
         return Scaffold(
             appBar: _buildAppBar(context),
-            body:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              _buildSizeBox2(screenHeight),
-              _buildTextFormField(code),
-              _buildSizeBox(screenHeight),
-              _buildTextButton(code),
-              _buildSizeBox2(screenHeight),
-              _buildText(),
-              _buildSizeBox(screenHeight),
-              _buildListView(screenHeight, screenWidth),
-              _buildSizeBox2(screenHeight),
-              _buildSizeBox2(screenHeight),
-              BlocConsumer<AddMoneyBloc, AddMoneyClassState>(
-                listener: (context, state) async {
-                  if (state is FailureState) {
-                    await QuickAlert.show(
-                      context: context,
-                      type: QuickAlertType.error,
-                      title: 'Error',
-                      text: state.message,
-                    );
+            body: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildSizeBox2(screenHeight),
+                    _buildTextFormField(code),
+                    _buildSizeBox(screenHeight),
+                    _buildTextButton(code),
+                    _buildSizeBox2(screenHeight),
+                    _buildText(),
+                    _buildSizeBox(screenHeight),
+                    _buildListView(screenHeight, screenWidth),
+                    _buildSizeBox2(screenHeight),
+                    _buildSizeBox2(screenHeight),
+                    BlocConsumer<AddMoneyBloc, AddMoneyClassState>(
+                      listener: (context, state) async {
+                        if (state is FailureState) {
+                          await QuickAlert.show(
+                            context: context,
+                            type: QuickAlertType.error,
+                            title: 'Error',
+                            text: state.message,
+                          );
 
-                    Navigator.pushNamed(context, '/AddMoneyScreen');
-                  } else if (state is SuccessState) {
-                    Navigator.pushNamed(context, '/SuccessScreen',
-                        arguments: state.model);
-                  }
-                  else if (state is InitialState) {
-                  await   QuickAlert.show(
-                      context: context,
-                      type: QuickAlertType.loading,
-                    );
-                  } else if (state is LoadingState) {
-                 await   QuickAlert.show(
-                      context: context,
-                      type: QuickAlertType.loading,
-                    );
-                  }
-                },
-                builder: (context, state) {
-                  if (state is InitialState) {
-                    return SizedBox(
-                      width: double.infinity,
-                      child: AppButton(
-                        text: StringsManager.CONFIRM,
-                        onPressed: () {
-                          context.read<AddMoneyBloc>().add(
-                                AddMoneyEvent(code: code),
-                              );
-                        },
-                        backgroundColor: ColorManager.primaryColor,
-                        width: screenWidth * 0.88,
-                        height: screenHeight / 15,
-                        textStyle: StylesManager.greenButtonStyle,
-                        hasIcon: false,
-                      ),
-                    );
-                  } else {
-                    return SizedBox();
-                  }
-                },
-              ),
-            ]));
+                          Navigator.pushNamed(context, '/AddMoneyScreen');
+                        } else if (state is SuccessState) {
+                          Navigator.pushNamed(context, '/SuccessScreen',
+                              arguments: state.model);
+                        } else if (state is InitialState) {
+                          await QuickAlert.show(
+                            context: context,
+                            type: QuickAlertType.loading,
+                          );
+                        } else if (state is LoadingState) {
+                          await QuickAlert.show(
+                            context: context,
+                            type: QuickAlertType.loading,
+                          );
+                        }
+                      },
+                      builder: (context, state) {
+                        if (state is InitialState) {
+                          return SizedBox(
+                            width: double.infinity,
+                            child: AppButton(
+                              text: StringsManager.CONFIRM,
+                              onPressed: () {
+                                context.read<AddMoneyBloc>().add(
+                                      AddMoneyEvent(code: code),
+                                    );
+                              },
+                              backgroundColor: ColorManager.primaryColor,
+                              width: screenWidth * 0.88,
+                              height: screenHeight / 15,
+                              textStyle: StylesManager.greenButtonStyle,
+                              hasIcon: false,
+                            ),
+                          );
+                        } else {
+                          return SizedBox();
+                        }
+                      },
+                    ),
+                  ]),
+            ));
       }),
     );
   }

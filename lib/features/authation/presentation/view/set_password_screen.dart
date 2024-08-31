@@ -223,8 +223,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             title: 'Success',
                             text: 'Register was successful!',
                           );
-                          //  Navigator.pushNamed(context, '/CategoriesScreen');
-                          Navigator.pushNamed(context, '/CreateWalletScreen');
+                          Navigator.pushNamed(context, '/CategoriesScreen');
+                          // Navigator.pushNamed(context, '/CreateWalletScreen');
                         } else if (state is LoadingState) {
                           QuickAlert.show(
                             context: context,
@@ -270,6 +270,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 context.read<AuthBloc>().add(
                                       RegisterEvent(widget.user),
                                     );
+                                Navigator.pushNamed(
+                                    context, '/CategoriesScreen');
 
                                 // Navigator.pushNamed(context, '/LoginScreen');
                               }

@@ -11,12 +11,12 @@ import '../../main.dart';
 class ThankYouScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Builder(builder: (context) {
+      return Scaffold(
         appBar: _buildAppBar(context),
-        body: _buildBody(screenWidth, screenHeight),
-      ),
-    );
+        body: _buildBody(context, screenWidth, screenHeight),
+      );
+    });
   }
 }
 
@@ -27,7 +27,7 @@ PreferredSizeWidget _buildAppBar(BuildContext context) {
   );
 }
 
-Widget _buildBody(double screenWidth, double screenHeight) {
+Widget _buildBody(context, double screenWidth, double screenHeight) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
@@ -39,7 +39,7 @@ Widget _buildBody(double screenWidth, double screenHeight) {
       _buildText2(),
       _buildSpacer(),
       _buildSpacer(),
-      _buildAppButton(screenWidth, screenHeight),
+      _buildAppButton(context, screenWidth, screenHeight),
       _buildSizeBox(screenHeight),
     ],
   );
@@ -75,16 +75,21 @@ Widget _buildText2() {
   );
 }
 
-Widget _buildAppButton(double screenWidth, double screenHeight) {
+Widget _buildAppButton(context, double screenWidth, double screenHeight) {
   return Center(
-    child: AppButton(
-      text: StringsManager.CONFIRMRIDE,
-      onPressed: () {},
-      backgroundColor: ColorManager.primaryColor,
-      width: screenWidth * 0.88,
-      height: screenHeight / 16.5,
-      textStyle: const TextStyle(color: ColorManager.whiteColor),
-      hasIcon: false,
+    child: InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, '/WalletScreen');
+      },
+      child: AppButton(
+        text: StringsManager.CONFIRMRIDE,
+        onPressed: () {},
+        backgroundColor: ColorManager.primaryColor,
+        width: screenWidth * 0.88,
+        height: screenHeight / 16.5,
+        textStyle: const TextStyle(color: ColorManager.whiteColor),
+        hasIcon: false,
+      ),
     ),
   );
 }

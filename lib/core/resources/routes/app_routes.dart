@@ -6,6 +6,7 @@ import '../../../features/Settings/presentation/view/settings.dart';
 
 import '../../../features/changepassword/presentation/view/change_password.dart';
 import '../../../features/history/history.dart';
+import '../../../features/on_boarding/screens.dart';
 import '../../../features/wallet/add_money/data/model/response_model.dart';
 import '../../../features/wallet/add_money/presentation/view/add_money_to_wallet_screen.dart';
 import '../../../features/wallet/create_wallet/presentation/view/create_wallet_screen.dart';
@@ -38,9 +39,9 @@ class AppRoutes {
         String? token = box.get('token');
 // {latitude: 51.5315, longtitude: 4.4598}
         if (token != null) {
-          return _materialRoute((SignUpScreen()));
+          return _materialRoute((CategoriesScreen()));
         } else {
-          return _materialRoute(SignUpScreen());
+          return _materialRoute(HomePage());
         }
 
       case '/BicyclesScreen':
@@ -79,8 +80,9 @@ class AppRoutes {
 
       case '/ThankYouScreen':
         return _materialRoute(ThankYouScreen());
-  case '/SuccessScreen':
-        return _materialRoute(SuccessScreen(model: settings.arguments as BalanceModel));
+      case '/SuccessScreen':
+        return _materialRoute(
+            SuccessScreen(model: settings.arguments as BalanceModel));
 
       case '/LoginScreen':
         return _materialRoute(LoginScreen());
