@@ -6,15 +6,16 @@ import '../../../../../core/error/failures.dart';
 import '../../../../wallet/domain/usecase/wallet_creation_use_case.dart';
 
 import '../../../data/model/code_model.dart';
+import '../../../domain/usecase/add_money__use_case.dart';
 import 'add_money_event.dart';
 import 'add_money_state.dart';
 
 class AddMoneyBloc extends Bloc<AddMoneyClassEvent, AddMoneyClassState> {
-  final WalletCreationUseCase walletCreationUseCase;
-  AddMoneyBloc(this.walletCreationUseCase) : super(InitialState()) {
+  final AddMoneyUseCase addMoneyUseCase;
+  AddMoneyBloc(this.addMoneyUseCase) : super(InitialState()) {
     on<AddMoneyEvent>((event, emit) async {
       emit(LoadingState());
-      final failureOrEntity = await walletCreationUseCase.call(event.code);
+      final failureOrEntity = await addMoneyUseCase.call(event.code);
       print("iam in bloc ");
       print(event.code);
       failureOrEntity.fold((failure) {
