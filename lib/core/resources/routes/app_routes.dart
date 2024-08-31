@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:ride_application/features/add_money/data/model/response_model.dart';
 import '../../../features/Settings/presentation/view/change_language.dart';
 import '../../../features/Settings/presentation/view/delete_account.dart';
 import '../../../features/Settings/presentation/view/settings.dart';
-import '../../../features/add_money/presentation/view/add_money_to_wallet_screen.dart';
-import '../../../features/favourite/favourite_screen.dart';
-import '../../../features/get_wallet/presentation/view/get_wallet_info_screen.dart';
+
 import '../../../features/changepassword/presentation/view/change_password.dart';
 import '../../../features/history/history.dart';
-import '../../../features/payment/success_screen.dart';
+import '../../../features/wallet/add_money/data/model/response_model.dart';
+import '../../../features/wallet/add_money/presentation/view/add_money_to_wallet_screen.dart';
+import '../../../features/wallet/create_wallet/presentation/view/create_wallet_screen.dart';
+import '../../../features/wallet/get_wallet/presentation/view/get_wallet_info_screen.dart';
+import '../../../features/wallet/payment/success_screen.dart';
 import '../../../features/policy/presentation/view/contact_us.dart';
 import '../../../features/policy/presentation/view/privacy_policy.dart';
 import '../../../features/authation/data/model/user_model.dart';
@@ -27,7 +28,6 @@ import '../../../features/map/presentation/view/map_screen.dart';
 import '../../../features/request_rent/presentation/view/Reservation1_screen.dart';
 import '../../../features/request_rent/presentation/view/Reservation_screen.dart';
 import '../../../features/thank_you/thank_you_screen.dart';
-import '../../../features/wallet/presentation/view/create_wallet_screen.dart';
 import '../../../features/wallet/wallet_screen.dart';
 
 class AppRoutes {
