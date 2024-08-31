@@ -13,6 +13,7 @@ import 'package:ride_application/main.dart';
 
 import '../../../../core/widgets/app_button.dart';
 import '../../../../injection_file.dart';
+import '../../data/model/code_model.dart';
 import '../bloc/add_money_bloc/add_money_event.dart';
 import '../bloc/add_money_bloc/add_money_state.dart';
 
@@ -25,9 +26,64 @@ class AddMoneyScreen extends StatelessWidget {
       create: (context) => AddMoneyBloc(sl()),
       child: Builder(builder: (context) {
         return Scaffold(
-          appBar: _buildAppBar(context),
-          body: _buildBody(screenWidth, screenHeight, code),
-        );
+            appBar: _buildAppBar(context),
+            body:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              _buildSizeBox2(screenHeight),
+              _buildTextFormField(code),
+              _buildSizeBox(screenHeight),
+              _buildTextButton(code),
+              _buildSizeBox2(screenHeight),
+              _buildText(),
+              _buildSizeBox(screenHeight),
+              _buildListView(screenHeight, screenWidth),
+              _buildSizeBox2(screenHeight),
+              _buildSizeBox2(screenHeight),
+              BlocConsumer<AddMoneyBloc, AddMoneyClassState>(
+                listener: (context, state) async {
+                  if (state is FailureState) {
+                    await QuickAlert.show(
+                      context: context,
+                      type: QuickAlertType.error,
+                      title: 'Error',
+                      text: state.message,
+                    );
+
+                    Navigator.pushNamed(context, '/AddMoneyScreen');
+                  } else if (state is SuccessState) {
+                    Navigator.pushNamed(context, '/SuccessScreen',
+                        arguments: state.model);
+                  } else if (state is LoadingState) {
+                    QuickAlert.show(
+                      context: context,
+                      type: QuickAlertType.loading,
+                    );
+                  }
+                },
+                builder: (context, state) {
+                  if (state is InitialState) {
+                    return SizedBox(
+                      width: double.infinity,
+                      child: AppButton(
+                        text: StringsManager.CONFIRM,
+                        onPressed: () {
+                          context.read<AddMoneyBloc>().add(
+                                AddMoneyEvent(code: code),
+                              );
+                        },
+                        backgroundColor: ColorManager.primaryColor,
+                        width: screenWidth * 0.88,
+                        height: screenHeight / 15,
+                        textStyle: StylesManager.greenButtonStyle,
+                        hasIcon: false,
+                      ),
+                    );
+                  } else {
+                    return SizedBox();
+                  }
+                },
+              ),
+            ]));
       }),
     );
   }
@@ -89,111 +145,48 @@ class AddMoneyScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBody(double screenWidth, double screenHeight, String code) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      _buildSizeBox2(screenHeight),
-      _buildTextFormField(code),
-      _buildSizeBox(screenHeight),
-      _buildTextButton(code),
-      _buildSizeBox2(screenHeight),
-      _buildText(),
-      _buildSizeBox(screenHeight),
-      _buildListView(screenHeight, screenWidth),
-      _buildSizeBox2(screenHeight),
-      _buildSizeBox2(screenHeight),
-      BlocConsumer<AddMoneyBloc, AddMoneyClassState>(
-        listener: (context, state) async {
-          if (state is FailureState) {
-            await QuickAlert.show(
-              context: context,
-              type: QuickAlertType.error,
-              title: 'Error',
-              text: state.message,
-            );
+  Widget _buildSizeBox(double screenHeight) {
+    return SizedBox(height: screenHeight * 0.02);
+  }
 
-            Navigator.pushNamed(context, '/AddMoneyScreen');
-          }
-       else   if (state is SuccessState) {
-           
-            Navigator.pushNamed(context, '/SuccessScreen' ,arguments: state.model);
-          } else if (state is LoadingState) {
-            QuickAlert.show(
-              context: context,
-              type: QuickAlertType.loading,
-            );
-          }
-        },
-        builder: (context, state) {
-          if (state is InitialState) {
-            return SizedBox(
-              width: double.infinity,
-              child: AppButton(
-                text: StringsManager.CONFIRM,
-                onPressed: () {
-                  // context.read<AddMoneyBloc>().add(
-                  //       AddMoneyEvent(code:code),
-                  //
-                  //     );
-                },
-                backgroundColor: ColorManager.primaryColor,
-                width: screenWidth * 0.88,
-                height: screenHeight / 15,
-                textStyle: StylesManager.greenButtonStyle,
-                hasIcon: false,
-              ),
-            );
-          } else {
-            return SizedBox();
-          }
-        },
+  Widget _buildTextFormField(code) {
+    return Center(
+      child: CustomTextFormField(
+        hintText: code,
+        colorborder: ColorManager.hintTextColor,
+        width: screenWidth * 0.88,
+        height: screenHeight / 15,
       ),
-    ]);
+    );
+  }
+
+  Widget _buildSizeBox2(double screenHeight) {
+    return SizedBox(height: screenHeight * 0.05);
+  }
+
+  Widget _buildText() {
+    return Text(
+      StringsManager.SELECTPAYMENTMETHOD,
+      style: StylesManager.headLineStyle,
+    );
+  }
+
+  Widget _buildTextButton(String code) {
+    return Align(
+      alignment: Alignment.topRight,
+      child: TextButton(
+        onPressed: () {
+          print(code);
+        },
+        child: Text(
+          StringsManager.ADDPAYMENTMETHOD,
+          style: TextStyle(color: ColorManager.borderColor),
+        ),
+      ),
+    );
+  }
+
+  void _onAppBarPressed(context) {
+    Navigator.of(context).pop();
   }
 }
-
-Widget _buildSizeBox(double screenHeight) {
-  return SizedBox(height: screenHeight * 0.02);
-}
-
-Widget _buildTextFormField(code) {
-  return Center(
-    child: CustomTextFormField(
-      hintText: code,
-      colorborder: ColorManager.hintTextColor,
-      width: screenWidth * 0.88,
-      height: screenHeight / 15,
-    ),
-  );
-}
-
-Widget _buildSizeBox2(double screenHeight) {
-  return SizedBox(height: screenHeight * 0.05);
-}
-
-Widget _buildText() {
-  return Text(
-    StringsManager.SELECTPAYMENTMETHOD,
-    style: StylesManager.headLineStyle,
-  );
-}
-
-Widget _buildTextButton(String code) {
-  return Align(
-    alignment: Alignment.topRight,
-    child: TextButton(
-      onPressed: () {
-        print(code);
-      },
-      child: Text(
-        StringsManager.ADDPAYMENTMETHOD,
-        style: TextStyle(color: ColorManager.borderColor),
-      ),
-    ),
-  );
-}
-
-void _onAppBarPressed(context) {
-  Navigator.of(context).pop();
-}
-
-wiee() {}

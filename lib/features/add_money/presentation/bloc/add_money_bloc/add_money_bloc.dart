@@ -9,11 +9,11 @@ import '../../../data/model/code_model.dart';
 import 'add_money_event.dart';
 import 'add_money_state.dart';
 
-class AddMoneyBloc
-    extends Bloc<AddMoneyClassEvent, AddMoneyClassState> {
+class AddMoneyBloc extends Bloc<AddMoneyClassEvent, AddMoneyClassState> {
   final WalletCreationUseCase walletCreationUseCase;
-  AddMoneyBloc(this.walletCreationUseCase) : super(LoadingState()) {
+  AddMoneyBloc(this.walletCreationUseCase) : super(InitialState()) {
     on<AddMoneyEvent>((event, emit) async {
+      emit(LoadingState());
       final failureOrEntity = await walletCreationUseCase.call(event.code);
       print("iam in bloc ");
       print(event.code);
@@ -26,11 +26,11 @@ class AddMoneyBloc
             break;
         }
       }, (dataSuccessObject) {
-       if( dataSuccessObject is DataSuccessObject <BalanceModel>){
-        emit(
-          SuccessState(model:dataSuccessObject.data ),
-        );
-        } 
+        if (dataSuccessObject is DataSuccessObject<BalanceModel>) {
+          emit(
+            SuccessState(model: dataSuccessObject.data),
+          );
+        }
       });
     });
   }

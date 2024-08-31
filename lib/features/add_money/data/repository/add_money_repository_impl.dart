@@ -14,10 +14,10 @@ class AddMoneyRepoImpl implements AddMoneyRepo {
   AddMoneyServiceImp addMoneyServiceImp;
   AddMoneyRepoImpl({required this.addMoneyServiceImp});
   @override
-   Future<Either<Failures, DataSuccessObject<BalanceModel>>>  addCode(Code codeModel) async {
+   Future<Either<Failures, DataSuccessObject<BalanceModel>>>  addCode(String code) async {
     log('==========================================================');
     try {
-           DataSuccessObject<BalanceModel> addedCode = await addMoneyServiceImp.addCode(codeModel);
+           DataSuccessObject<BalanceModel> addedCode = await addMoneyServiceImp.addCode(code);
         return Right(addedCode);
     } on ServerException {
       return Left(ServerFailure());

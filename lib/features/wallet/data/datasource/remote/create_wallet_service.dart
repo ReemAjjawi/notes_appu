@@ -27,6 +27,7 @@ class WalletCreationServiceImp implements WalletCreationService {
           options: HeaderConfig.getHeader(useToken: true));
       print('${AppUrl.baseUrl}/${AppUrl.createWallet}');
       print(walletModel);
+      print(response.statusCode);
       if (response.statusCode == 201) {
         print(response.data);
 

@@ -9,7 +9,7 @@ import '../../../../../core/success/success.dart';
 import '../../model/code_model.dart';
 
 abstract class AddMoneyService {
-  Future<DataSuccessObject<BalanceModel>> addCode(Code codeModel);
+  Future<DataSuccessObject<BalanceModel>> addCode(String code );
 }
 
 class AddMoneyServiceImp implements AddMoneyService {
@@ -19,18 +19,18 @@ class AddMoneyServiceImp implements AddMoneyService {
   });
 
   @override
-  Future<DataSuccessObject<BalanceModel>> addCode(Code codeModel) async {
+  Future<DataSuccessObject<BalanceModel>> addCode(String code) async {
     try {
       print('${AppUrl.baseUrl}/${AppUrl.createWallet}');
-      print(codeModel);
+
       Response response = await dio.put(
           '${AppUrl.baseUrl}/${AppUrl.addMoneyToWallet}',
-          data: codeModel.toMap(),
+          data: {"code":code} ,
           options: HeaderConfig.getHeader(useToken: true));
 
       if (response.statusCode == 202) {
         print(response.data);
-      BalanceModel model = BalanceModel.fromJson(response.data['body']);
+        BalanceModel model = BalanceModel.fromJson(response.data['body']);
         return DataSuccessObject<BalanceModel>(data: model);
       }
     } on DioException catch (e) {

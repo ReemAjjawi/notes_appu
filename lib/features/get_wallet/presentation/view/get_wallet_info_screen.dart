@@ -225,6 +225,90 @@ class WalletScreen extends StatelessWidget {
         'date': StringsManager.TOMORROWATHOUR,
         'price': StringsManager.WELTONNUMBER
       },
+        {
+        'Image': AssetsManager.upImage,
+        'name': StringsManager.WELTON,
+        'date': StringsManager.TOMORROWATHOUR,
+        'price': StringsManager.WELTONNUMBER
+      },
+        {
+        'Image': AssetsManager.upImage,
+        'name': StringsManager.WELTON,
+        'date': StringsManager.TOMORROWATHOUR,
+        'price': StringsManager.WELTONNUMBER
+      },
+        {
+        'Image': AssetsManager.upImage,
+        'name': StringsManager.WELTON,
+        'date': StringsManager.TOMORROWATHOUR,
+        'price': StringsManager.WELTONNUMBER
+      },
+        {
+        'Image': AssetsManager.upImage,
+        'name': StringsManager.WELTON,
+        'date': StringsManager.TOMORROWATHOUR,
+        'price': StringsManager.WELTONNUMBER
+      },
+        {
+        'Image': AssetsManager.upImage,
+        'name': StringsManager.WELTON,
+        'date': StringsManager.TOMORROWATHOUR,
+        'price': StringsManager.WELTONNUMBER
+      },
+        {
+        'Image': AssetsManager.upImage,
+        'name': StringsManager.WELTON,
+        'date': StringsManager.TOMORROWATHOUR,
+        'price': StringsManager.WELTONNUMBER
+      },
+        {
+        'Image': AssetsManager.upImage,
+        'name': StringsManager.WELTON,
+        'date': StringsManager.TOMORROWATHOUR,
+        'price': StringsManager.WELTONNUMBER
+      },
+        {
+        'Image': AssetsManager.upImage,
+        'name': StringsManager.WELTON,
+        'date': StringsManager.TOMORROWATHOUR,
+        'price': StringsManager.WELTONNUMBER
+      },
+        {
+        'Image': AssetsManager.upImage,
+        'name': StringsManager.WELTON,
+        'date': StringsManager.TOMORROWATHOUR,
+        'price': StringsManager.WELTONNUMBER
+      },
+        {
+        'Image': AssetsManager.upImage,
+        'name': StringsManager.WELTON,
+        'date': StringsManager.TOMORROWATHOUR,
+        'price': StringsManager.WELTONNUMBER
+      },
+        {
+        'Image': AssetsManager.upImage,
+        'name': StringsManager.WELTON,
+        'date': StringsManager.TOMORROWATHOUR,
+        'price': StringsManager.WELTONNUMBER
+      },
+        {
+        'Image': AssetsManager.upImage,
+        'name': StringsManager.WELTON,
+        'date': StringsManager.TOMORROWATHOUR,
+        'price': StringsManager.WELTONNUMBER
+      },
+        {
+        'Image': AssetsManager.upImage,
+        'name': StringsManager.WELTON,
+        'date': StringsManager.TOMORROWATHOUR,
+        'price': StringsManager.WELTONNUMBER
+      },
+        {
+        'Image': AssetsManager.upImage,
+        'name': StringsManager.WELTON,
+        'date': StringsManager.TOMORROWATHOUR,
+        'price': StringsManager.WELTONNUMBER
+      },
     ];
 
     return BlocConsumer<CodesListBloc, CodesListClassState>(
